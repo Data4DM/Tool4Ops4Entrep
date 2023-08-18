@@ -1,0 +1,19 @@
+Anwell
+Based on the entrepreneurial compass framework and the Anwell case study, here is an analysis of the strategies pursued in the different stages of the company's evolution:
+
+Nail Stage (2000-2004):
+
+Period: 2000 - 2004
+State: Small startup team, developing proprietary manufacturing equipment, targeting new entrants and lower tier customers, forming the Anwell Club alliance for raw materials and distribution
+Strategy: Intellectual Property Strategy - Developing proprietary equipment and manufacturing expertise (control) while collaborating with suppliers and distributors in the Anwell Club (collaborate)
+Scale Stage (2004-2008):
+
+Period: 2004 - 2008
+State: Went public in 2004, vertical integration into disc manufacturing, gained significant market share
+Strategy: Disruption Strategy - Competing directly with established brands by selling to retailers under their own label (compete) and rapid scaling of manufacturing capabilities (execute)
+Sail Stage (2008-2013):
+
+Period: 2008 - 2013
+State: Mature integrated manufacturing business but facing disruption from new technologies
+Strategy: Architectural Strategy - Creating an integrated value chain in new industries like OLED and solar PV (architectural control) while competing with established players in these industries (compete)
+The company seems to have followed the typical evolution from IP strategy in early nail stage to disruption strategy in scale stage to architectural strategy in mature sail stage. But it shows flexibility to pivot strategies based on market conditions and opportunities.

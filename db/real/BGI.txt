@@ -1,0 +1,34 @@
+BGI
+Here is an analysis of BGI's strategies in each stage mapped to the entrepreneurial compass:
+
+Nail Stage (1999-2000):
+
+Period: 1999-2000 
+
+State: Small research team, participated in Human Genome Project, gained genomic sequencing capabilities 
+
+Strategy: Disruption - Compete & Execute
+
+BGI competed directly in the Human Genome Project to build sequencing capabilities and establish themselves as a viable player despite being a small startup. They focused on executing the sequencing rapidly.
+
+Scale Stage (2001-2012): 
+
+Period: 2001-2012
+
+State: Grew team to 300+, moved to Shenzhen, began offering sequencing services commercially 
+
+Strategy: Value Chain - Collaborate & Execute
+
+BGI began collaborating with research institutes, universities, and companies to provide genomic sequencing and bioinformatics services. They focused on executing these services rapidly and seamlessly with partners. 
+
+Sail Stage (2012-present):
+
+Period: 2012-present 
+
+State: 4000+ employees, $1.2 billion in annual funding, moved into health care services
+
+Strategy: Intellectual Property - Collaborate & Control
+
+As BGI matures, it is collaborating widely but maintaining control over its intellectual property and proprietary platforms, especially in emerging areas like health care services. The control will allow it to capture value from its innovations.
+
+In summary, BGI progressed from competing disruptively, to collaborating on services, to collaborating while controlling IP. This evolution matches its growth from scrappy startup to mature industry leader.

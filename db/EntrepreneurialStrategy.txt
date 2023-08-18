@@ -1,0 +1,521 @@
+um just to be clear as Rob already said what we're going to cover today is why active choice and strategy matters for
+startups how to balance the process of learning and experimentation with the
+need to make strategic commitments and really focusing on the most critical choices that startups face and how to
+use what we're going to call the entrepreneurial strategy Compass to sort of see how your choices fit together and
+navigate that entrepreneurial Journey um so um Rob was kind enough and the team was
+kind enough to give both Aaron and I a nice um introduction so we'll kind of dig right into it
+um so what are we going to be talking about over the next uh you know hour really about
+higher the core choices that Founders face and how do you can you turn the
+process of making those most critical choices of choosing the path for how to
+develop your idea and bring it to impact into building and scaling a successful
+Venture kind of think about that I'm going to start with a little bit of an example so here is a student that came
+to MIT almost a decade ago now this is Socrates Rosenfeld he had been a West
+Point grad and had um actually served in the military
+um as an Army Ranger and special forces in both Iraq and Afghanistan came to MIT
+took a bunch of courses with Aaron and myself uh you know as well as others
+throughout our ecosystem fantastic student went off at the end of graduation uh to McKinsey
+interestingly came about you know walked into our offices about two years later
+and he says you know what right he came actually with a group of uh some co-founders and some other students uh
+from uh Sloan and he's like you know what
+I'm going to pursue an entrepreneurial venture here's my idea we know that there is rapid legalization
+of cannabis for both medicinal and adult use and we know that that industry is kind
+of in some sense a little bit left behind it's kind of just emerging it's almost like the end of prohibition was
+in the 1930s he's going to figure out cannabis uh cannabis legalization meets
+the internet and so I know you're kind of joining us from all around the world but you know kind of what I would just kind of you
+know kind of write so so that's kind of controversial idea I couldn't I think both Aaron and I were a little shocked
+when he started talking about this but we're like okay and he had actually uh kind of come out of the military had
+sort of to deal with his anxiety and stress even though he was an extraordinary student and leader
+um he had ended up using cannabis as uh to kind of bring him into to make himself more effective but once you say
+cannabis meets the Internet it's not like you can't all of a sudden you can think of lots of different ways that you
+could turn that broad idea and make it a reality so let me just give you kind of
+right so in some sense right sock and his team were kind of thinking through those early choices they were able to
+think about multiple alternative paths that they could take their core idea
+cannabis speaks to the internet to bring that idea to Market just kind
+of put a little bit of kind of context on that right and here were some let me just I
+remember doing this in a um our offices right um sock and his team were able to
+develop at least four concrete Alternatives that help them think about
+how they could use a kind of tech Focus team to enter this new emerging and
+rapidly growing um industry so one was that there was a kind of challenge of going right so for
+the legal side of the emerging cannabis industry that state level legalization there's a big very highly regulated and
+so there were lots of challenges in what was called the seed to sale problem essentially how do you go from the actual you know plants that are grown to
+something that's in these regulated cannabis dispensaries and they could kind of Imagine a whole bunch of kind of
+deploying their technology and insight to that domain second domain they thought about was
+that there actually were already existing players um companies like Weedmaps that were
+kind of like a Yelp for cannabis they kind of gave you a broad map they didn't really interact with the stores or the
+dispensaries too much instead with the with the what the weed maps did is they kind of just gave you a kind of lay of
+the land of where you could find uh different vendors and there were reviews interestingly weed maps both allowed for
+you know the fully legal uh state level dispensaries but also more gray Market options to be included
+third some time they talked to a bunch of people said you should just go open you need to be close to the customer you
+need to just get started you should go and apply for one of these or uh licenses and you should open a state
+level a dispensary you could bring that technology in you could bring that customer experience directly to the
+final customer and then finally they knew that there were lots of these suspensaries opening up very quickly literally hundreds per
+year very few of them were very technologically savvy and they could
+become the digital storefront essentially build out the kind of web
+capability for all these emerging players in this rapidly growing marketplace now we're not going to do a
+full case discussion right now but just kind of maybe put in the chat I see some people kind of coming from all around
+the world so easy from uh uh uh from Los Angeles um maybe just put in the chat I'll try
+to follow it as we go kind of out of all those options are there any that you kind of think that you know if you were
+going to go into this industry this you you might think about you know there's about 2015 or 16 which are ones that you
+might think are most attractive as a path to build out this Venture digitization I say
+look at this we're seeing a bunch of others okay oh hello oh a little bit on the data oh
+inventory system some people oh some people go with the dispensaries and digital right so there's kind of a bunch
+of different kind of options there right and once again different people are going to be right I see the directory
+agritech right not too much love here at least in this group for the dispensary I think I only saw one of those in the
+chat but once again even reasonable people right good Founders can actually
+disagree about the way that their Venture can go once again everyone you know very often entrepreneurs face the
+challenge of is there demand for the product interestingly in the Cannabis industry that is not the main challenge
+there is demand it's already an 80 billion dollar industry it's how do we right make that a legal industry through
+the newly regulated context so right oh my goodness education and trading just
+said uh standards medical cannabis I'm loving it all so what we're going to
+talk about in the next a little while is how do you undertake a process
+of essentially not simply identifying these Alternatives but understanding the
+core choices you would make along each of these Alternatives and how those core choices fit together as part of an
+overall entrepreneurial strategy and how to undertake the learning and experimentation that's required
+to allow you to essentially kind of breakthrough the blizzard of options
+that you might face to actually bring a product or service and then to Market successfully and then scale your company
+right essentially at the core of strategy for startups is the idea that
+entrepreneur right we're at MIT there's lots of great ideas around campus and we love great ideas but the challenge of
+innovation based entrepreneurship is not only about coming up with great ideas
+kind of choosing how to implement those ideas in a way that creates value in the
+market and allows that venture to capture some value a meaningful value on
+a sustainable basis so kind of in some sense what strategy
+for startups is is about the choice among alternative visions for your idea and Company alternative
+paths that you might it's choosing among the alternative paths that your company
+can go down give you kind of you know as we were kind of preparing for this particular
+webinar Aaron and I were sort of thinking about you know you know lots of the founders that we're currently working with
+um all across campus and around the world kind of right one of the big problems right challenges that you as a
+potential founder face right now is we are in you know for a number of years more Venture Capital was being expended
+than ever before fundraising was actually not the main barrier all of a sudden over the past six months and even
+more accelerated in just the fast few few months there's been a tremendous
+increase in the bar that needs to be reached to sort of attract the capital required to really build out and scale
+an entrepreneurial venture and what we're finding is that the role of being
+super clear about how you went and rigorous and disciplined about how you
+undertook the learning and experimentation to validate your key hypotheses
+and then how you take that validation to formulate and Implement an overall
+entrepreneurial strategy is kind of really in some sense among the most critical
+um elements that's really driving the scaling of the ability of companies to to sort of attract capital in this more
+rigorous environment how do we do that no it says I'm going to step one step back
+and kind of say well right now Ventures are kind of getting all right particularly in this kind of kind of heightened environment
+entrepreneurs are getting all sorts of advice and kind of advice kind of comes in two basic categories on the one hand
+a lot of the advice that Founders get from you know well-meaning advisors and mentors or even financiers it's very
+extraordinary that's great we love action-oriented advice here's Richard Branson if you're looking to become an
+entrepreneur don't waste your time going to University or business school just got on and do it right it doesn't quite
+tell you the it to do but the idea is that you already know where you want to go right right you're you know where you
+want to go we need a little bit of a kick in the pants and get going I'm going to be clear that's really important type of advice I'm sure many
+of us have uh Teenage children occasionally just telling them go do it that's actually a pretty darn good advice
+on the other hand this different kind of advice is when you give people a framework essentially planning and right
+a lot of little kind of those of you can come from more traditional management backgrounds or even traditional strategy
+backgrounds the idea is that we can sort of undertake very careful cost-benefit analysis it's kind of rank and sort of
+identify the ideal option right undertake cost benefit analysis to figure out what's the right thing to do
+before we have to commit to anything but what do you do
+right what do you do when as sock Rosenfeld and his team
+faced as most entrepreneurs face there's a lot of different options can see still
+a lot of kind of interest there um in in cannabis in the chat there's lots of potential roots
+your startup so you can't do them all you face a lot of uncertainty
+right entrepreneurship is more of a hypothesis to be tested right then right you're going to have to
+learn and experiment and there's only so much learning you
+can do before you inevitably start to commit to some paths over others
+how essentially the kind of core question or the core first question you have to face is how do we undertake the
+process of learning and experimentation in a way that lets us learn enough about
+the alternative past to figure out what strategy to choose I'm just gonna put a right essentially
+what entrepreneurial strategy is is essentially tries to resolve that kind
+of trade-off between learning and experimentation and the necessity of commitment as you scale out your company
+it's the sequence of choices you make to test specific value creation and value
+capture hypotheses what experimentation requires partial commitment
+right what are the kind of key tools that we talked about one of the kind of key insights that are working with
+startups as well as the work that we research that we've done in this area has kind of illuminated is that this
+kind there's no one right answer in entrepreneurship there's no one particular path that's necessarily going
+to be better than all the others if you have a good idea they're going to be multiple paths that
+you're going to be able to surface some of those Paths of course as you undertake learning experimentation are
+probably not going to work but you're probably going to be able to identify multiple potential paths to
+value recognizing that you can't do them all and we kind of kind of developed a kind
+of way of kind of making those choices that we call test two choose one in which the role that you undertake in
+learning experimentation is to surface alternatives and then what you do is once you've
+surfaced multiple meaningful paths that Each of which could potentially succeed
+that's the time when you have to actually choose one path and potentially leave other paths behind at least for
+the time being just kind of put a little kind of content on that right so this is uh
+there's part of a very broad kind of uh body work that we have uh both Aaron and myself as well as our collaborator Josh
+Gans kind of three principles that come out of this test two choose one idea are
+first that your choices matter that kind of which path you choose is
+going to be consequential for the kind of venture you build the second that your choices in
+particular domains matter and Aaron's going to talk about that in just a little bit your choice of customer technology your team your path to the
+marketplace and then those choices also all come together as part of an overall
+entrepreneurial strategy and Aaron's going to talk about some of the work we've done to in developing an
+entrepreneurial strategy compass that helps you navigate those concrete alternative strategic paths
+what kind of as I said before one of the kind of key elements that enables that
+choice process is the kind of the first step is being really clear about what
+kind of experiments what kind of learning we want to undertake to prioritize right we could prioritize
+um particular right paths to the marketplace and I see Michael is worth is still working absolutely you know the
+tobacco industry alcohol industry so on and so forth so we'll come back to that in a little while and so one of the
+things we do is really take a ton of choice-based approach to entrepreneurial experimentation and learning so what
+does an ideal experiment look like so an ideal experiment you want to test your most critical hypothesis very often
+startups do a lot of learning but they may not be exactly on the on the most critical hypothesis that says is this
+idea fundamentally worth pursuing and is this particular strategic approach that
+I'm exploring likely to lead to a viable business now of course we can maybe
+State what those most critical hypotheses are but then we have to design experiments that can kind of give
+us information allow us to learn with high fidelity allow us to learn right not be with bias
+but kind of do that kind of in a way that gives us a good read on the validity or not of our core hypothesis
+and we want to do both of those things highly critical experiments at right High Fidelity at relatively low
+opportunity cost right so if we kind of decide that we can you know figure this all out but
+it's going to cost you know 20 million dollars to figure out you give it's a good idea that may be a little bit
+expensive to even get started right for
+right we actually understand whether or not this is a venture worth pursuing just over the last two years actually we
+had a group of fantastic students um let me actually do this at this order
+um we had a group of fantastic students uh who built out a company called taxi relatively narrow project very cool
+where what they did is they recognized this is about two years ago they recognized because I agree with you
+Michael Wright we'll come back to that right they recognized there was this opportunity where
+ride share companies like uber and Lyft were offering
+kind of Premium prices for Tesla vehicles for right if people were
+driving kind of clean energy higher end vehicles on the other hand actually well that was
+a a premium for those that owned a Tesla there was no real ability for most
+people who are in the gig economy to actually access those vehicles and it was not a priority of either
+Uber or Lyft nor was there a priority of Tesla to really make that happen and so
+this group of students came together and they're like that actually would solve a bunch of problems all at the same time
+be better for the drivers better for the environment better for the Rideshare experience and the final customer
+good idea they weren't they undertook and this was literally as they were students they
+went from that as an idea to an extremely efficient way of learning if
+it was a good idea a good enough idea to actually pursue as a meaningful Venture they actually bought a Tesla and went
+through all the kind of legal hassle of figuring how to get it insured and so on and so forth for this purpose and while
+they were in school they were actually basically built out a two-car Fleet that
+allowed them to go from not knowing anything about that to within basically nine months having
+what would be the kind of you know what would be the underlying Revenue boost for the drivers validated what would be
+the depreciation on the vehicle these are going to be very highly used vehicles does that kind of depreciate
+things is there in fact extra demand for these kinds of services what happens in terms of kind of the driver experience
+how often do they kind of how do drivers kind of want to interact with a company that's leasing them a vehicle that gives
+them a premium price and they were actually able to turn that from just a discussion into hard numbers
+and actually upon graduation they were actually able the these you know someone off the PHD programs some went off to uh
+autonomous vehicle companies right they're actually able to sell that company and actually uh for the main
+founder Roku most of the cost of the um most of the cost of
+um his underlying um MBA okay kind of that kind of experience right
+where right a venture is able to go from just being an idea to being a series of validated
+hypotheses or not give some broad principles for entrepreneurial experimentation
+take a peek before walking through a one-way door right so in other words really
+prioritizing this goes back to Michael you know as Michael Ward's comment right so often startups don't think about
+opportunity costs and one thing we try to do is give a kind of rigorous framework and practical like a practical
+approach that lets a Founder actually kind of prioritize their experiments
+test fault to choose pick something can't be true in general unless it's true somewhere in particular
+the taxi team were able to figure out kind of what was true right with a two
+vehicle Fleet they were able to figure out the basic economics of what it would
+mean to kind of work in that domain at relatively low cost
+and they understood that that they would be able to achieve economies of scale if they then went bought 100 or 500
+vehicles and became a major player in the industry and then they could kind of think about what that would mean for
+those economics and it but the kind of basic learning that they had to do of understanding
+what premium they could get and what would be the underlying business model they were able to surface through iterative experimentation during their
+during their time they learned enough to know what they're uncertain about so they were able to
+quickly divide into things that they were going to be able to learn very quickly and things they weren't really
+able to learn about until they had scaled for example how quickly would it be before big rental car companies Avis
+and Hertz got in the game well that's a variable that you can get a little bit of competitive intelligence but
+interestingly that's not under their control so that has to be something that kind of they're uncertain about and how
+much you choose to learn depends on what you choose to test okay
+what we do is we bring that kind of high focus on validating hypotheses about our
+most critical choices to each of the most critical Choice domains facing a startup
+choosing your customer choosing your technology and Innovation choosing how you organize in your team
+and choosing how choosing how you compete and kind of with whom and how to
+compete and how you can get your idea into the marketplace so what I want to do is I want to hand it over to my great
+colleague Aaron Scott who's going to take you along from here kind of dig a little bit more deeply into those
+choices and how they fit together as an overall entrepreneurial strategy
+great thank you Scott all right so what we wanted to do is is show you a little bit about what this
+looks like uh in these in these dimensions of choice before we bring it together into these different strategies
+and we're going to start with the choice of customer the choice of customer is often the most Salient choice that
+entrepreneurs make and many entrepreneurs are very familiar with that the beachhead that choice that
+initial Market that you're going to go after is incredibly powerful and useful and in particular that an ideal
+beachhead is really something that allows you to ride that market S curve into the Main Street Market and there's
+a number of incredibly useful tools including our colleagues Bill all that who is a great course also at exec ad uh
+really thinking about those steps that you need to make as you go from that beachhead to the mainstream market
+but we want you to think about today is also this element of choice that plays into that and to do so we want to look
+at another great startup and Innovative startup founded um I think about a decade ago now uh 23andMe really founded
+on on really leveraging the innovations that were coming out of the Human Genome Project to enable patients to really
+take um a lot of information uh to their
+in engagement in their own health and really manage that and they were thinking about the many different Beach
+heads that they could choose as moving it forward you know how where would they start within this
+and so they saw kind of two different options that really quickly were both viable and and of interest to them and
+so as much as we just did if you guys want to drop in the chat you know which beachhead would you really recommend for
+them one was to really focus on consumer focused ancestry research including
+unknown relatives and surprising traits so you know learn if you can spell your
+pee for instance after uh you eat asparagus another was to to work with
+physicians in the FDA to enhance prenatal genetic screening which you
+know I think parents in the room know is incredibly valuable within this let's
+just start to see you know which would you recommend is it the ideal starting point for a research constrained a
+startup leveraging this emerging technology
+let me just give it a second here absolutely I love that people are are suggesting and we can do some
+experimentation and and learning uh within us but so what's interesting is
+is much like we saw with the other right you can take a reasonable set of people that are well informed and you will see
+this tension in this debate about these alternative paths you know both are viable options
+what they saw very quickly though is is these choices of initial Market of
+initial beachhead had some ramifications on the mainstream market that they would build it would include you know not only
+what that first product would be but the team that you would hire and those follow-on uh products that you would
+release and how different stakeholders knew the value you created and in the
+ecosystem itself and so really we wanted you guys to think about is that this choice of
+beachhead is not just the one that really allows you to move to the mainstream market but is it in fact a
+choice of which mainstream market you're going to go after we get within that
+and so that allows us to really be even more strategic and thinking about this early choice of customers we'd
+absolutely want a customer that we agree value for otherwise they won't buy they won't be a customer
+but there's also in really thinking about and we have a Playbook to kind of go through this and we go through it in the course is thinking about how you can
+pick that mainstream that beach had customer to really optimize your learning and experimentation within that
+as well as your ability to build and make it to the the mainstream market and then that evolution of your company
+itself and so really is this process of as Scott nicely walked through uh really
+being concrete about what can you test really early on to help you understand uh both what are options that are
+non-viable but also really understanding the different trade-offs and the different choices that will be important
+among different viable options so that you can choose one and ultimately leave behind others at least temporarily to be
+really focused in moving forward and so we see this in the choice of
+customer but we also see these in these other core dimensions of choice as well and so this choice of Technology this
+choice of innovation and how your company will leverage that is also where you need to be really concrete and
+resurfacing what are your different options but then Focus ultimately so you can really make that uh a success and so
+Mariana and nusha founded biobot analytics incredible company here out of
+MIT and what they their hypothesis on how they created value is there's an
+incredible amount of information in our sewers in fact There Was You Know hundreds of of things that they can
+measure and they could catalog and so really an early choice for them was what
+are we going to measure how are we going to make that accessible who are we going to make that accessible to individuals
+community and governments how are we going to be going to really interface within those and ultimately they decided
+very much to focus and those choices that they may about how they were going to develop that technology turned out to
+be really instrumental in the pandemic and really monitoring the different levels of community spread of covet 19.
+and so we want us to really think about those choice of technology so that you can be incredibly focused so you give
+your idea and your Innovation the best chance of success especially important in these times where many Ventures are
+more resource constrained than in the past words perhaps another core choice is your choice of
+organization you can think of this as not only kind of your choice of co-founder but also your choice of which
+capabilities and resources you're going to build and what you're going to access in the market more broadly and so you
+know for gimlet which is really I think one of the many uh that have revolutionized uh you know the podcast
+industry and particularly the long form of that uh Alex you know it was very
+thoughtful in thinking about what capabilities he wanted to bring in as a co-founder um and really looking for that and
+having honest conversations uh with Matt lever who we would go on to recruit
+um as well as them both thinking about kind of those really how they would build out that organization that it
+allowed it to be this leader in this space and ultimately their acquisition by Spotify within that
+and then this last choice is this choice of competition where Scott and I often get folks saying wait a second you get
+to choose your competition well you don't get to choose whether you have competition or I guess there's one way
+not to have competition which is to have something no one wants to buy but good ideas involve competition and so
+thinking about how you can really choose with whom you compete and the nature of that competition how you're going to
+compete with them is something a choice that that entrepreneurs in fact have to spend a little bit of time on this
+before you can bring it together into this entrepreneurial strategy compass and that that is that for a good idea
+you can really consider this choice of with whom and how you're going to compete are you
+going to orient more towards collaborating or more towards direct competition with the established players
+are you going to invest in control or are you going to invest in execution and so your idea is really Center Stage here
+and for most ideas you're able to really think along this full Compass this full Escape
+and so let's look at that a little bit more another great MIT startup is pill pack
+and pillpack really had this wonderful design Innovation that made it easier for folks to take their prescriptions
+and one playbook in fact the Playbook advocated by many individuals was that they should they should focus on
+licensing this to CVS and establish pharmacies like that is a well-worn path that brings success
+but they ultimately decided in fact to compete and to build their own Pharmacy and those are very different types of
+choices not only on the top level but also on the other complementary choices that you would need to make and so being
+very concrete can be very Illuminating on the other dimension of this is this
+control versus execution is saying you know early on are we going to really focus on controlling our ideas
+uh through uh secrecy through uh patent protection and other avenues of
+protection are we going to kind of get out there and really focus first and foremost on learning and execution and
+Rapid iteration with our customers and with other stakeholders and so pale when
+she was founding class pass actually really focused on this method of execution and learning that Contin it
+kind of getting ahead and staying ahead and continuing to iterate and learn from her customers so that she could really
+build out something that despite having you know the ability for others to enter and compete you were able to do and she
+was able to build a billion dollar company that continues to create uh value for for gym goers but also gyms
+around the world and so these two axises of collaborate
+and compete and execution for control they come together as our organizing principle around thinking about strategy
+for startups and with these there are other choices really take center stage and we see
+these four bundles of choices uh these four strategy for startups and what's
+really important here is that your idea is center stage and so your idea is not
+necessarily confined to one strategy but as Scott has mentioned for most ideas
+you're able to really consider multiple routes to commercialization and so just wanted to really introduce these
+different strategies for startups today and so the first strategy is this intellectual property strategy this is
+the ideas Factory this Innovation and continuing Innovation process think of
+Dolby here and here you're going to invest in control and Orient through collaboration so you want to really gain
+control through those patents trademarks Etc of these novel Innovations and then
+use those control rights to really facilitate a trade in the market for ideas and to reduce commercialization
+costs and Community competitive pressure so often you're not actually making the
+final product you're collaborating with others to do in fact this is the The Playbook of Dolby was quite successful
+in that process the next strategy very popular strategy
+is the disruption strategy the hustlers or the creative destruction strategy and
+this strategy is you know really where you're orienting towards competition but you're investing heavily in execution
+and so in that initial customer group that you want to work with is for actually customer segments that are
+currently underserved or poorly served by those existing firm's offers offering
+so very different from partnering with an established firm and you want to use this process of iteration and learning
+to really get ahead and stay ahead stay close to your your customer and and then slowly expand using those learnings uh
+to mainstream customer segments and this is a Playbook that we've seen quite successful with Rent the Runway as well
+as Salesforce and then the next strategy and this is
+my my favorite strategy because I think it's the unsung hero of strategies for startups is the value stream strategy
+and so here you're really focusing on this core competency you're just this partner with with your uh in this value
+chain itself and so you're going to orient towards collaboration and invest heavily in execution within this and so
+instead of A disruption strategy where you're investing in execution but you're going to the you know you're competing
+against the established player here you're the you want to work to be their preferred partner right you want to
+bring to market the best solution for this slice of the value chain and really find partners that are your
+have a reputation for treating startups fairly and well and then continue through execution to own that slice of
+the value chain and this is something that we've seen you know Infosys from their founding and then you know now
+many decades later continue to really own and build out and maintain competitive advantage in that slice of
+their value chain and then last but certainly not least is the architectural strategy this is kind
+of the builders or the zero to one and here you're going to focus on orienting
+towards competition and invest in control this is the most ambitious of strategies for startups and what you're
+doing here is you're architecting an entirely new value Chain by coordinating with multiple stakeholders to provide
+compelling new value for consumers within us and as you're architecting that new
+strategy you want to really control a key resource or interface that will have enduring value where there's multiple
+stakeholders itself and so this is something that we see you certainly see with open table that is
+continued to really uh create value but also capture value uh by working with
+restaurants and us as consumers when we need reservations to create value for both reportings
+and so as you've probably seen as we go through this is you're starting to get a sense of not only are these different
+orientations with respect to competition but that they implicitly involve different choices around your which
+customer you're going to serve how you're going to serve them how you're going to innovate but also the organization that you're going to need
+to build and so this is where the strategy Compass is really useful to think about those alternative routes to
+commercialization and in particular especially these days more than ever you
+need to be incredibly focused about what are the choices that we're going to have not only outward facing but externally
+within that and be very concrete As you move forward I'm within this and so you know we see
+this uh you know I think most sharply and when we see think about these different strategies really explicitly
+on what those choices are right this value chain for instance very much about this partnership model uh with those
+collaborators we're A disruption model is very very different early on
+um focusing on entirely different customers uh within that moving forward and so it's by this early process of
+experimentation that we're able to surface multiple Alternatives uh within
+this we want to use that process of experimentation learning to leave behind certainly alternative routes that are
+not viable But ultimately making a choice as to which one to focus on at least temporarily and then move forward
+and so Scott's going to walk you through a startup that's done that yep so thank you so much Aaron
+um so so you know we could well once again we really would love to work with you know anyone on the uh webinar here
+you know you know we're going to offer this uh two-day course we have lots of materials um in these areas just to give
+you a little bit of a flavor I know there's a lot here just to kind of break it really concrete let me just kind of give you a a very concrete example
+um of a company that both Aaron and I have worked with quite uh closely since founding called rapid SOS uh here are
+the founders of Michael Martin and Nick warlick um Michael was actually an HBS student
+um you know everyone to make a mistake uh no that's not true we love HBS uh but uh and Nick corlick was a student here
+at MIT um and they developed uh they kind of
+focused on the need for mobile first emergency response so there's about six
+seven years ago they were thinking about right there was a time when if you kind
+of called on your mobile phone 9-1-1 for emergency response you might be the the
+emergency response wouldn't know where you were I wouldn't be able to access any of the functionality of your
+smartphone of your mobile phone they figured out a way to break through that technologically
+they knew there was a lot of new technology they could bring to bear on that problem they weren't the first
+people to recognize this problem but they had a kind of concrete advance that
+said they kind of identified a potential solution to a problem that had previously evaded and then the question
+is kind of right what should they do and so we started to work with them and
+so um here was a a kind of little uh you know there's actually down in there this
+was the entire company in their office uh down in New York at that time kind of as you can see you know very similar
+kind of piece we were working with them at the time and their team kind of surfaced a bunch of alternative
+strategies four nine one one just to kind of give you some examples right so on the one
+hand maybe they should work with the big players in the industry such as Motorola
+right Motorola has a dominant even though Motorola is a cell phone company kind of not as big but right Motorola
+has so a dominant player in that emergency response space they went around to some Silicon Valley venture
+capitals and they're like oh this is Uber for ambulances you should essentially replace the existing
+government provided emergency response some insurance companies came to them
+pretty much that value chain strategy and said we would love to see kind of people use this within our app that
+could actually be cost saving to us because it kind of enhances emergency response which is cost you'll kind of
+enhances our cost effectiveness and actually you know actually be a kind of
+valuated feature of you know the apps right the kind of insurance company app
+and finally I thought they started to start to talk to domestic violence agencies uh uh non-profits the American
+Heart Association American epilepsy Association who sort of had kind of essentially a burning platform type
+customer and they were actually able to use this process to kind of actually say you know
+actually some of those options are really good down the line but aren't
+good for us right now or if we start working with insurance companies right now who are willing to
+put money on the table so we can keep the business afloat and not lose a lot of equity well that's actually going to
+divert us from really kind of solving this at scale for the entire industry
+and so they were able to use that process over time to really settle in this particular case they focus first on
+that disruption strategy focusing on those um burning platform customers
+that became a stepping stone to begin to grow and scale the company
+um this is a technology that they are um is on every cell phone that uh you uh you might have on both they are the uh
+lead of uh kind of Technology both within emergency response for the iPhone
+um as well as with Android just give you a sort of sense of the impact that you
+see right they had this idea does it actually save does it actually
+have the impact they want and so let me just kind of play a little short video
+courtesy of Apple
+not no longer emergency car and I can't get out
+what is your emergency
+okay do not hang up
+you by yourself yes have you tried to get out have you tried to bust the window or something it's a pretty torn
+off and you don't change my cell phone I'm talking about Apple watch try to
+keep talking to me okay okay
+please hurry I'm hurting real bad you're gonna take help okay foreign
+so all those are real stories right you know drawn very carefully by
+Apple but really at scale what they were able to do was move that idea from just
+being an idea that maybe existed in a research lab or was talked about in a
+government report but they but Michael and Nick and their team were able to make those core
+choices just as Aaron talked about organize them as part of an overall entrepreneurial strategy and use that as
+a basis of scaling an impactful Venture I'm gonna hand it back to Aaron to kind
+of do one more little Deep dive on how we kind of think about this and then and then we'll be and then we'll open up to
+the Q a great thank you Scott um and so I just as we wrap up one and
+tell a little bit about the course which is as much the same process actually that we work with uh with Nick and
+Michael which is to really uh focus on really understanding these core choices that are facing as startup innovators I
+really think about both that experimentation and learning as well as that implementation process of these
+different strategies um and then ultimately to scale them and so that you can move forward and really
+creating that impact that you want in the world with your idea um the folks that join are are folks
+that have an idea that they are working on at all stages of Entrepreneurship um and those uh you know corporate
+entrepreneurs investors and other stakeholders really wanting to understand this process the first day we
+go through those core dimensions of Choice customer organization Tech and competition and then day two we start to
+put these together with real live cases written on these entrepreneurs such as the ones we've highlighted today we're
+really capturing those key moments of choice themselves and really how those choices really among those different
+strategy strategies reflect their ecosystem but as others have mentioned in chat also their their perspective on
+the impact that they want to create and their personality as I saw someone um in in the chat Mansion as well really
+thinking through those because entrepreneurship is ultimately very a personal across apps
+um and so just as we wrap up you know the power of Entrepreneurship is incredibly powerful I think is as Rob
+started us with and it's not only to really start and identify these opportunities but it's really to move
+those into the world and that requires making active Choice through the create value but also capture that value and
+the more exciting The Innovation the more important in fact it is for strategy for your ability to really
+commercialize that and build out that new company with competitive advantage and ultimately that process of choosing
+an entrepreneurial strategy really forces you to come to terms with the core value that you'll be you'll create
+um and especially in these times to be very disciplined in how you'll Focus uh to capture that value on a sustainable
+basis so thank you guys so much we've been enjoyed uh seeing the chat so active and and hopefully we have some
+time to take a few questions as well Aaron and Scott thank you so much it's
+amazing how you were able to condense your material from your program into this short webinar and still provide
+enough I think key details and information clearly from the chat uh the stream in the chat it's been useful for
+a lot of our viewers today to learn more about your Frameworks and your research so thank you for doing that and to those
+of you that have joined uh for the chat I've noticed several requests for this a recording of this we will make a
+recording available in fact we have a whole library of similar this webinar
+and similar similar webinars on our exec Ed website you'll have access to this webinar and many more through our
+website as well we do have a lot of questions there has been great engagement I think the first one I'd
+start with and this is open to either of you uh how to avoid test two choose to
+as you're looking at this approach yeah so uh so thank you thank you so
+much Robin thank you Aaron for everything the um so part of what you know you know one of the kind of key
+insights I think that we had working with startups both in our on our research but also just working with
+companies working with Founders is exactly they needed a framework that
+they were poorly served by existing tools that did not focus them on the
+importance of actual choice and so this choice-based approach what it does is it kind of identifies the
+condition under which it's time to move forward down One path and leave those other
+paths behind at least temporarily and gives a kind of methodology for doing so
+what does it mean to actually go down a path means to actually undertake
+learning and experimentation that involves more commitment than that
+commitment free learning where all you are doing with surfacing possibilities and what and as I think Aaron already
+kind of hinted at in the gimlet case what you tend to see is that those
+almost right your first customers and your first employees
+the first people who you start to bring on board all of a sudden they shoot the
+path that you walk down and making that a choice rather than a something that happens to you and all of a sudden you
+realize you're in a different place than you intended is very key to what we think allows for success
+and even more important I think keeps entrepreneurs in sort of full control of
+the choices they make and the impact they're likely to have I'm sure if you want to add on to that Aaron absolutely
+I think you know one dimension that's incredibly important here and I've seen it in working with startups around
+strategy is oftentimes we as particularly when we're co-founders we think we're implicitly building to the
+same North Star and being very concrete about which strategy we're going after
+actually helps prevent that test to choose two because you can start to really surface those conversations about
+really concretely what do we want to build um and what are we leaving behind and so
+often I've seen that some of the tensions and sometimes where the startup was making choices that weren't coherent
+actually reflected two different visions of the company two different strategies and once those Founders were able to
+have that concrete discussion the company uh not only just the founders but also the team and the other
+stakeholders were able to more concretely build and more successfully build to that future
+great thank you both and just uh we're approaching the top of the hour I do want to just call attention to the slide
+that's presented right now uh the next running of this program will be on March 23rd and March 24th as you see the
+format for this delivery will be live online which we've become very Adept at running these programs live online and
+making them very interactive with breakout groups and polling and functionality like that one thing that
+we've discovered over the past few years is by offering these programs live online it enables people to attend uh
+more openly from around the world they don't have to travel to Cambridge and they can log in from their own desks or
+home and participate fully in the program but we do anticipate that we'll be running additional dates in in 2023
+actually I see this is 2022. in 2023 we'll be running this first program live online and expect to add other programs
+that will run here on the MIT campus as well so whether you're joining us here on campus or online we certainly hope to
+see you and would welcome you to uh to join us in one of our MIT classrooms I guess with with just probably about time
+enough for one final question um Aaron Scott I wanted to get your thoughts on kind of the Tipping Point
+for strategy for startups is there a point I think of so often how we have startups here in the Kendall Square area
+that are at local accelerators or incubators and they outgrow their their startup space and then kind of move into
+established more established office space or physical presence is there an equivalent for strategy for startups do
+you get to a point in an organization where you need to take a different approach to strategy and if so what what
+point is that so so the so really you know I know
+we're at the top of the hour and thank you Rob so one point I would make is that you know we've worked with lots of
+uh former students companies that find some of these tools valuable for
+corporate entrepreneurship for new initiatives for even just kind of surfacing New Alternatives
+um within existing business but one of the things that I would say you know the the compass and the kind of core tools
+provide is they they let you kind of get to the
+point where you have the resources and capabilities you have the reputation and
+commitments that allow some of those more traditional Strategic Management tools
+right kind of your very traditional tools that do involve very often kind of you know should I go Global how should I
+think about expanding to an adjacent Market what does it mean to kind of build out you know a multi-net you know
+a a multi-site Workforce whatever that might be all of those core tools of
+strategic management at some point come into play to me that crystallization comes from
+strategy for startups is fundamentally about choosing the path and undertaking
+the initial rounds of scale once you've scaled a viable business
+now is the time that then some of those other tools can also be brought on board
+make sure if you want to add up onto that Aaron I agree you know and I see this a bit in
+the in a chat about evolving strategies yeah and go into this in the course
+um much more detail but is thinking about how you lay up that initial entrepreneurial strategy sometimes into
+a into what we call more of a success pivot into another entrepreneurial strategy and then moving into
+competitive strategy and it's really thinking about an entrepreneurial strategy a strategy for startups is
+really laying that foundation on which you're going to build that competitive advantage and that broader impact as
+your organization and your Venture grows foreign and I see that we've just reached the
+top of the hour so Aaron Scott thank you again thank you to all my colleagues here on the marketing team at MIT Sloan
+Executive Education that helped organize and run this event today thank you to all of you that have connected from
+around the world to join us for the past hour I hope that you found that the content and information both useful and
+and relevant to the work that you're doing as entrepreneurs innovators and anybody that's in this wonderful startup
