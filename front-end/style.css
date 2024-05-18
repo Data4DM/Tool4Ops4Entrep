@@ -1,0 +1,20 @@
+/* Additional styles to align the sections side by side */
+#introChoices {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#introduction {
+    flex: 1;
+}
+
+#diagramContainer {
+    flex: 1;
+    text-align: center; /* Center the diagram if the container is wider */
+}
+
+#decisionDiagram {
+    max-width: 100%;
+    height: auto;
+}
