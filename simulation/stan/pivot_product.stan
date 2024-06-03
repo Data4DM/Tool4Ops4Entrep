@@ -1,20 +1,23 @@
 data {
-  real profit_obs; // Signals from sample_profit_r function
+  real profit_obs; // Observations from sample_profit_obs function
   int<lower=1> market; // Market index
   int<lower=1> product; // Product index
-  real mu_m2a_b_mean;
-  real mu_f2s_b;
-  real mu_pf_b;
-  real sigma_obs;
+  real mu_a_mean;
+  real mu_b_b_mean;
+  real mu_c_b; // Kept constant during updates in this model
+  // real sigma_mu;
 }
 
 parameters {
-  real mu_m2a_b;
+  real mu_a;
+  real mu_b_b;
+  real sigma_mu;
 }
 
 model {
-  real mu;
-  mu_m2a_b ~ normal(mu_m2a_b_mean, .1);
-  profit_obs ~ normal(mu_pf_b + pow(-1, product) * mu_m2a_b + pow(-1, market) * mu_f2s_b, sigma_obs); 
+  sigma_mu ~ exponential(10);
+  mu_a ~ normal(mu_a_mean, .1);
+  mu_b_b ~ normal(mu_b_b_mean, .1);
+  // Model uses fixed mu_c_b and updates mu_a and mu_b_b
+  profit_obs ~ normal(mu_a + pow(-1, product) * mu_b_b + pow(-1, market) * mu_c_b, sigma_mu); 
 }
-
