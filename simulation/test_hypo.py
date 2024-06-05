@@ -4,6 +4,7 @@ import xarray as xr
 from fit_pm import experiment
 import os
 import arviz as az
+import matplotlib.patches as patches
 
 #theory-A: higher mu_a -> faster scale
 # in:  mu_a / (mu_b_r + mu_c_r)
@@ -17,12 +18,12 @@ import arviz as az
 # in: mu_a
 # TODO out: ratio of cells whose mu_b, mu_c exceed lowbar (b or r)?? 
 
-def brute_force(mu_b_d_range = np.linspace(-0.2, 0.2, 3), mu_c_d_range = np.linspace(-0.2, 0.2, 3), E=10, sigma_obs = .1, product='man', market='b2c'):
+def brute_force(mu_b_d_range = np.linspace(-0.2, 0.2, 3), mu_c_d_range = np.linspace(-0.2, 0.2, 3), T=4, sigma_profit = .1, product='man', market='b2c'):
     
     mu_a= [.1]
     mu_b_r=.3
     mu_c_r=.3
-    theory_name = f"bB{mu_b_d_range}_cC{mu_c_d_range}_a{mu_a}_b{mu_b_r}_c{mu_c_r}_s{sigma_obs}_E{E}_{product}_{market}"
+    theory_name = f"bB{mu_b_d_range}_cC{mu_c_d_range}_a{mu_a}_b{mu_b_r}_c{mu_c_r}_s{sigma_profit}_T{T}_{product}_{market}"
     file_path = f"data/theory/{theory_name}.nc"
     if os.path.exists(file_path):
         theory = xr.open_dataset(file_path)
@@ -47,33 +48,33 @@ def brute_force(mu_b_d_range = np.linspace(-0.2, 0.2, 3), mu_c_d_range = np.lins
         for mu_b_d in mu_b_d_range:
             for mu_c_d in mu_c_d_range:
 
-                exPMN = experiment(np.round(mu_b_d,1),np.round(mu_c_d,1), mu_b_r, mu_c_r, mu_a)
-                plot_beliefs(exPMN)
-                if exPMN is not None:
-                    theory['time_to_first_scale'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_first_scale_time(exPMN)
-                    theory['pivot_ratio'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_pivot_ratio(exPMN)
-                    theory['experiments_above_lowbar'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = count_experiments_above_lowbar(exPMN)
+                em = experiment(np.round(mu_b_d,1),np.round(mu_c_d,1), mu_b_r, mu_c_r, mu_a)
+                plot_layer0_belief(em)
+                if em is not None:
+                    theory['time_to_first_scale'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_first_scale_time(em)
+                    theory['pivot_ratio'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_pivot_ratio(em)
+                    theory['experiments_above_lowbar'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = count_experiments_above_lowbar(em)
     theory.to_netcdf(f"data/theory/{theory.theory_name.values}.nc")
     return theory
 
 
-def compute_first_scale_time(exPMN):
+def compute_first_scale_time(em):
     first_scale_time = None
-    for e in range(exPMN.dims['E']):
-        if exPMN['action'][e].item() == 'scale':
-            first_scale_time = e
+    for t in range(em.dims['P']):
+        if em['action'][t].item() == 'scale':
+            first_scale_time = t
             break
     return first_scale_time
 
 
-def compute_pivot_ratio(exPMN):
+def compute_pivot_ratio(em):
     first_pivot_product = None
     first_pivot_market = None
 
-    for e in range(exPMN.dims['E']):
-        if exPMN['action'][e].item() == 'pivot_product' and first_pivot_product is None:
+    for e in range(em.dims['E']):
+        if em['action'][e].item() == 'pivot_product' and first_pivot_product is None:
             first_pivot_product = e + 1
-        if exPMN['action'][e].item() == 'pivot_market' and first_pivot_market is None:
+        if em['action'][e].item() == 'pivot_market' and first_pivot_market is None:
             first_pivot_market = e + 1
 
     if first_pivot_product is not None and first_pivot_market is not None:
@@ -82,10 +83,10 @@ def compute_pivot_ratio(exPMN):
         return None
 
 
-def count_experiments_above_lowbar(exPMN, lowbar=0.2):
+def count_experiments_above_lowbar(em, lowbar=0.2):
     count = 0
-    for e in range(exPMN.dims['E']):
-        if exPMN['profit_obs'][e].item() > lowbar:
+    for e in range(em.dims['E']):
+        if em['profit_obs'][e].item() > lowbar:
             count += 1
     return count
 
@@ -117,149 +118,6 @@ def plot_theory_given_experiment(theory):
                 plt.close(fig)
     plot_actions_and_ratios_from_nc_files()
 
-# def plot_beliefs(exPMN):
-#     """
-#     Plots BTC (Belief by Time and Component) and BTS (Belief by Time and Space) using the exPMN xarray dataset.
-    
-#     Parameters:
-#     - exPMN: xarray dataset containing the required variables
-#     """
-#     time_points = [f'Time{i}' for i in range(exPMN.dims['E'])]
-
-#     # Extracting belief values from the exPMN dataset
-#     mu_b_b = exPMN['mu_b_b'].values
-#     mu_c_b = exPMN['mu_c_b'].values
-#     mu_a = exPMN['mu_a'].values
-    
-#     # Extracting ground truth values from the exPMN dataset
-#     mu_b_r = exPMN['mu_b_r'].values[0]
-#     mu_c_r = exPMN['mu_c_r'].values[0]
-    
-#     # Extracting profit values from the exPMN dataset
-#     profits_updated = exPMN['profit_b'].values
-
-#     # Reordered for BTS plot
-#     profits_updated_reordered = [
-#         profits_updated[3],  # no-AI-b2c (Dark Green)
-#         profits_updated[1],  # AI-b2c (Lime Green)
-#         profits_updated[2],  # no-AI-b2b (Yellow)
-#         profits_updated[0]   # AI-b2b (Orange)
-#     ]
-
-#     # Colors for BTS plot
-#     bts_colors = ['#006400', '#32CD32', '#FFD700', '#FFA500']  # Dark Green, Lime Green, Yellow, Orange
-
-#     # Create subplots to put the plots side by side
-#     fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-
-#     # Plotting the parameter updates with ground truth on the first subplot (BTC: belief by time and component)
-#     axes[0].plot(time_points, mu_b_b, marker='o', label='Updated $\mu_{b}$ (production cost gap)', color='green')
-#     axes[0].axhline(y=mu_b_r, color='green', linestyle='--', label='Ground Truth $\mu_{b}$')
-#     axes[0].plot(time_points, mu_c_b, marker='o', label='Updated $\mu_{c}$ (market revenue gap)', color='purple')
-#     axes[0].axhline(y=mu_c_r, color='purple', linestyle='--', label='Ground Truth $\mu_{c}$')
-#     axes[0].plot(time_points, mu_a, marker='o', label='Updated $\mu_{a}$ (baseline profit)', color='red')
-#     # axes[0].axhline(y=mu_a, color='red', linestyle='--', label='Ground Truth $\mu_{a}$')
-#     axes[0].set_title('BTC: Belief by Time and Component')
-#     axes[0].set_xlabel('Time')
-#     axes[0].set_ylabel('Belief on Profit Component')
-#     axes[0].legend()
-#     axes[0].grid(True)
-
-#     bar_width = 0.2
-#     x = np.arange(len(time_points))  # the label locations
-
-#     axes[1].bar(x - 1.5*bar_width, profits_updated_reordered[0], bar_width, label='no-AI-b2c', color=bts_colors[0])
-#     axes[1].bar(x - 0.5*bar_width, profits_updated_reordered[1], bar_width, label='AI-b2c', color=bts_colors[1])
-#     axes[1].bar(x + 0.5*bar_width, profits_updated_reordered[2], bar_width, label='no-AI-b2b', color=bts_colors[2])
-#     axes[1].bar(x + 1.5*bar_width, profits_updated_reordered[3], bar_width, label='AI-b2b', color=bts_colors[3])
-
-#     axes[1].set_xlabel('Time')
-#     axes[1].set_ylabel('Belief on Profit')
-#     axes[1].set_title('BTS: Belief by Time and Space')
-#     axes[1].set_xticks(x)
-#     axes[1].set_xticklabels(time_points)
-#     axes[1].legend()
-#     plt.tight_layout()    
-#     fig_name = f"data/figure/bseq_{exPMN.exPMN_name.values}.png"
-#     plt.savefig(fig_name)
-#     plt.close(fig)
-
-def plot_beliefs(exPMN):
-    """
-    Plots BTC (Belief by Time and Component) and BTS (Belief by Time and Space) using the exPMN xarray dataset.
-    
-    Parameters:
-    - exPMN: xarray dataset containing the required variables
-    """
-    num_time_points = exPMN.dims['P']
-    time_points = np.arange(num_time_points)
-    products = ["man", "ai"]
-    markets = ["b2c", "b2b"]
-
-    # Extracting belief values from the exPMN dataset
-    mu_b_b = exPMN['mu_b_b'].values
-    mu_c_b = exPMN['mu_c_b'].values
-    mu_a = exPMN['mu_a'].values
-    
-    # Extracting ground truth values from the exPMN dataset
-    mu_b_r = exPMN['mu_b_r'].values[0]
-    mu_c_r = exPMN['mu_c_r'].values[0]
-    
-    # Extracting posterior samples from the exPMN dataset
-    mu_a_post = exPMN['mu_a_post'].values.T  # Transpose to match the expected shape
-    mu_b_b_post = exPMN['mu_b_b_post'].values.T  # Transpose to match the expected shape
-    mu_c_b_post = exPMN['mu_c_b_post'].values.T  # Transpose to match the expected shape
-
-    # Extracting profit values from the exPMN dataset
-    profits_updated = exPMN['profit_b'].values
-
-    # Create subplots to put the plots side by side
-    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-
-    # Plotting the parameter updates with ground truth on the first subplot (BTC: belief by time and component)
-    az.plot_hdi(time_points[:-1], mu_b_b_post, ax=axes[0], color='green', hdi_prob=0.94, fill_kwargs={'alpha': 0.3})
-    az.plot_hdi(time_points[:-1], mu_c_b_post, ax=axes[0], color='purple', hdi_prob=0.94, fill_kwargs={'alpha': 0.3})
-    az.plot_hdi(time_points[:-1], mu_a_post, ax=axes[0], color='red', hdi_prob=0.94, fill_kwargs={'alpha': 0.3})
-    
-    axes[0].plot(time_points, mu_b_b, marker='o', label='Updated $\mu_{b}$ (production cost gap)', color='green')
-    axes[0].axhline(y=mu_b_r, color='green', linestyle='--', label='Ground Truth $\mu_{b}$')
-
-    axes[0].plot(time_points, mu_c_b, marker='o', label='Updated $\mu_{c}$ (market revenue gap)', color='purple')
-    axes[0].axhline(y=mu_c_r, color='purple', linestyle='--', label='Ground Truth $\mu_{c}$')
-
-    axes[0].plot(time_points, mu_a, marker='o', label='Updated $\mu_{a}$ (baseline profit)', color='red')
-    # axes[0].axhline(y=mu_a, color='red', linestyle='--', label='Ground Truth $\mu_{a}$')
-
-    axes[0].set_title('BTC: Belief by Time and Component')
-    axes[0].set_xlabel('Time')
-    axes[0].set_ylabel('Belief on Profit Component')
-    axes[0].legend()
-    axes[0].grid(True)
-
-    bar_width = 0.2
-    x = np.arange(num_time_points)  # the label locations
-
-    profits_updated_reordered = np.zeros((4, num_time_points))
-    for i, product in enumerate(products):
-        for j, market in enumerate(markets):
-            s = i * len(markets) + j
-            profits_updated_reordered[s] = profits_updated[i, j, :]
-
-    axes[1].bar(x - 1.5*bar_width, profits_updated_reordered[0], bar_width, label='man-b2c', color='#006400')
-    axes[1].bar(x - 0.5*bar_width, profits_updated_reordered[1], bar_width, label='ai-b2c', color='#32CD32')
-    axes[1].bar(x + 0.5*bar_width, profits_updated_reordered[2], bar_width, label='man-b2b', color='#FFD700')
-    axes[1].bar(x + 1.5*bar_width, profits_updated_reordered[3], bar_width, label='ai-b2b', color='#FFA500')
-
-    axes[1].set_xlabel('Time')
-    axes[1].set_ylabel('Belief on Profit')
-    axes[1].set_title('BTS: Belief by Time and Space')
-    axes[1].set_xticks(x)
-    axes[1].set_xticklabels(time_points)
-    axes[1].legend()
-    plt.tight_layout()    
-    fig_name = f"data/figure/bseq_{exPMN.exPMN_name.values}.png"
-    plt.savefig(fig_name)
-    plt.close(fig)
 def extract_mu_values_from_filename(filename):
     parts = filename.split('_')
     mu_a_str = [p for p in parts if p.startswith('a')][0]
@@ -328,20 +186,19 @@ def plot_actions_and_ratios_from_nc_files(directory='data/experiment'):
     plt.savefig(fig_name)
     plt.close(fig)
 
-# Call the function to plot the actions and ratios
-
 
 if __name__ == "__main__":
-    exPMN = xr.open_dataset("data/experiment/bB0.1_cC-0.1_B0.3_C0.1_a0.2_s0.1_T3_man_b2c.nc")
-    # theory = brute_force()
+    # em = xr.open_dataset("data/experiment/bB-0.3_cC-0.1_B0.3_C0.1_a0.2_s0.1_T2_man_b2c.nc")
+    theory = brute_force()
     # # theory = xr.open_dataset("data/theory/bB[-0.2  0.   0.2]_cC[-0.2  0.   0.2]_a[0.4]_b0.2_c0.1_s0.1_cash4_E5_man_b2c")
     # plot_theory_given_experiment(theory)
-    plot_beliefs(exPMN)
+    # plot_beliefs(em)
+    plot_layer0_belief(em)
     # for mu_c_d in mu_c_d_range:
 
     # for mu_a_d in mu_a_d_range:
 
-    #             act_seq = exPMN.action.values.flatten()
+    #             act_seq = em.action.values.flatten()
     #             exp_end = np.where((act_seq == 'scale') | (act_seq == 'fail'))[0][0] if (('scale' in act_seq) | ('fail' in act_seq)) else len(act_seq)
     #             filtered_actions = act_seq[:exp_end]
 
@@ -447,7 +304,7 @@ if __name__ == "__main__":
  
 
 
-    #             act_seq = exPMN.action.values.flatten()
+    #             act_seq = em.action.values.flatten()
     #             exp_end = np.where((act_seq == 'scale') | (act_seq == 'fail'))[0][0] if (('scale' in act_seq) | ('fail' in act_seq)) else len(act_seq)
     #             filtered_actions = act_seq[:exp_end]
 
