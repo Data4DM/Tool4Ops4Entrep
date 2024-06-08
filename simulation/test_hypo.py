@@ -5,164 +5,178 @@ from fit_pm import experiment
 import os
 import arviz as az
 import matplotlib.patches as patches
+from interact_tool import plot_layer0_belief, plot_layer1_profit
 
-#theory-A: higher mu_a -> faster scale
+#th-A: higher mu_a -> faster scale
 # in:  mu_a / (mu_b_r + mu_c_r)
 # out: time to first scale
 
-#theory-bBcC: higher mu_b_d - mu_c_d -> higher product pivot ratio
+#th-bBcC: higher mu_b_d - mu_c_d -> higher product pivot ratio
 # in: mu_b_d - mu_c_d
 # out: ratio of first pivot_product to first pivot_market
 
-#theory-A|BC: scott's idea on higher mu_a -> (b, c) combination that exceeds lowbar
+#th-A|BC: scott's idea on higher mu_a -> (b, c) combination that exceeds lowbar
 # in: mu_a
-# TODO out: ratio of cells whose mu_b, mu_c exceed lowbar (b or r)?? 
+# TODO out: ratio of cells whose mu_b, mu_c exceed lowbar (b or r)??  
 
-def brute_force(mu_b_d_range = np.linspace(-0.2, 0.2, 3), mu_c_d_range = np.linspace(-0.2, 0.2, 3), T=4, sigma_profit = .1, product='man', market='b2c'):
-    
-    mu_a= [.1]
-    mu_b_r=.3
-    mu_c_r=.3
-    theory_name = f"bB{mu_b_d_range}_cC{mu_c_d_range}_a{mu_a}_b{mu_b_r}_c{mu_c_r}_s{sigma_profit}_T{T}_{product}_{market}"
-    file_path = f"data/theory/{theory_name}.nc"
+# def brute_force(mu_diff_range=np.linspace(-2, -2, 1), mu_sum_range=np.linspace(-4, 0, 2), sigma_profit_range = np.linspace(1, 2, 10), T=2,  product='man', market='b2c'):
+def brute_force(mu_diff_range=np.linspace(-4, 4, 5), mu_sum_range=np.linspace(-4, 0, 5), sigma_profit_range = np.linspace(.5, 3, 5), k_range =np.linspace(.5, 3, 5), T=3,  product='man', market='b2c'):    
+    mu_b_r=1
+    mu_c_r=3
+    th_name = f"mu_diff{mu_diff_range[0]}to{mu_diff_range[0]}l{len(mu_diff_range)}_mu_sum{mu_sum_range[0]}to{mu_sum_range[-1]}l{len(mu_sum_range)}_B{mu_b_r}_C{mu_c_r}_s{sigma_profit_range[0]}{sigma_profit_range[-1]}_k{k_range[0]}to{k_range[-1]}l{len(sigma_profit_range)}_T{T}_{product}_{market}"
+    file_path = f"data/theory/{th_name}.nc"
     if os.path.exists(file_path):
-        theory = xr.open_dataset(file_path)
-        print(f"File {theory_name} already exists. Skipping experiment.")
-        return theory
+        th = xr.open_dataset(file_path)
+        print(f"File {th_name} already exists. Skipping experiment.")
+        return th
     
-    theory = xr.Dataset(
+    th = xr.Dataset(
         coords={
-            'mu_a': mu_a,
-            'mu_b_d': mu_b_d_range,
-            'mu_c_d': mu_c_d_range
+            'mu_diff': mu_diff_range,
+            'mu_sum': mu_sum_range,
+            'sigma_profit': sigma_profit_range,
+            'k': k_range,
         },
         data_vars={
-            'time_to_first_scale': (('mu_a', 'mu_b_d', 'mu_c_d'), np.full((len(mu_a), len(mu_b_d_range), len(mu_c_d_range)), np.nan)),
-            'pivot_ratio': (('mu_a', 'mu_b_d', 'mu_c_d'), np.full((len(mu_a), len(mu_b_d_range), len(mu_c_d_range)), np.nan)),
-            'experiments_above_lowbar': (('mu_a', 'mu_b_d', 'mu_c_d'), np.full((len(mu_a), len(mu_b_d_range), len(mu_c_d_range)), np.nan)),
-            'theory_name': ((), theory_name),
+            'pivot_ratio': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
+            'reach_optimality': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
+            'time_to_reach_optimality': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
+            'th_name': ((), th_name),
         }
     )
+    
+    for mu_diff in mu_diff_range:
+        for mu_sum in mu_sum_range:  
+            for sigma_profit in sigma_profit_range:
+                for k in k_range:  
+                    mu_b_d = (mu_sum + mu_diff) / 2
+                    mu_c_d = (mu_sum - mu_diff) / 2
+                    em = experiment(mu_b_d, mu_c_d, mu_b_r, mu_c_r, sigma_profit, k, T, product, market)
+                    plot_layer0_belief(em)
+                    plot_layer1_profit(em)
+                    if em is not None:     
+                        th['pivot_ratio'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_pivot_ratio(em)
+                        th['reach_optimality'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_reach_optimality(em)
+                        th['time_to_reach_optimality'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_time_to_reach_optimality(em)
+    th.to_netcdf(f"data/theory/{th.th_name.values}.nc")
 
-    for mu_a in mu_a:
-        for mu_b_d in mu_b_d_range:
-            for mu_c_d in mu_c_d_range:
-
-                em = experiment(np.round(mu_b_d,1),np.round(mu_c_d,1), mu_b_r, mu_c_r, mu_a)
-                plot_layer0_belief(em)
-                if em is not None:
-                    theory['time_to_first_scale'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_first_scale_time(em)
-                    theory['pivot_ratio'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = compute_pivot_ratio(em)
-                    theory['experiments_above_lowbar'].loc[dict(mu_a=mu_a, mu_b_d=mu_b_d, mu_c_d=mu_c_d)] = count_experiments_above_lowbar(em)
-    theory.to_netcdf(f"data/theory/{theory.theory_name.values}.nc")
-    return theory
-
-
-def compute_first_scale_time(em):
-    first_scale_time = None
-    for t in range(em.dims['P']):
-        if em['action'][t].item() == 'scale':
-            first_scale_time = t
-            break
-    return first_scale_time
-
+    plot_theory_given_experiment(th)  # Call the plotting function after running the experiments
+    return th
 
 def compute_pivot_ratio(em):
-    first_pivot_product = None
-    first_pivot_market = None
+    actions = em['action'].values
+    pivot_product_count = 0
+    pivot_market_count = 0
 
-    for e in range(em.dims['E']):
-        if em['action'][e].item() == 'pivot_product' and first_pivot_product is None:
-            first_pivot_product = e + 1
-        if em['action'][e].item() == 'pivot_market' and first_pivot_market is None:
-            first_pivot_market = e + 1
+    for action in actions:
+        if action == 'scale' or action == 'fail':
+            break
+        if action == 'pivot_product':
+            pivot_product_count += 1
+        if action == 'pivot_market':
+            pivot_market_count += 1
 
-    if first_pivot_product is not None and first_pivot_market is not None:
-        return first_pivot_product / first_pivot_market 
-    else:
-        return None
+    if pivot_market_count == 0:
+        return em.dims['ACT_PRED']+1 # Avoid division by zero
+    return pivot_product_count / pivot_market_count
 
+def compute_reach_optimality(em):
+    products = em['product'].values
+    markets = em['market'].values
 
-def count_experiments_above_lowbar(em, lowbar=0.2):
-    count = 0
-    for e in range(em.dims['E']):
-        if em['profit_obs'][e].item() > lowbar:
-            count += 1
-    return count
+    for product, market in zip(products, markets):
+        if product == 'ai' and market == 'b2b':
+            return 1
+    return 0
 
+def compute_time_to_reach_optimality(em):
+    products = em['product'].values
+    markets = em['market'].values
 
-def plot_theory_given_experiment(theory):
-    # Plot for theory A
-    for mu_a in theory['mu_a'].values:
-        for mu_b_d in theory['mu_b_d'].values:
-            for mu_c_d in theory['mu_c_d'].values:
-                fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+    for idx, (product, market) in enumerate(zip(products, markets)):
+        if product == 'ai' and market == 'b2b':
+            return idx  # Return the first index where the condition is met
 
-                # Plot for theory A
-                ax[0].plot(theory['mu_b_d'].values, theory['time_to_first_scale'].sel(mu_a=mu_a, mu_c_d=mu_c_d), label=f'mu_a={mu_a}, mu_c_d={mu_c_d}')
-                ax[0].set_xlabel('mu_b_d')
-                ax[0].set_ylabel('Time to First Scale')
-                ax[0].set_title('theory A: Time to First Scale vs. mu_b_d')
-                ax[0].legend()
+    return em.dims['ACT_PRED'] + 1  # Return this value if the condition is never met
 
-                # Plot for theory BC
-                ax[1].plot(theory['mu_b_d'].values, theory['pivot_ratio'].sel(mu_a=mu_a, mu_c_d=mu_c_d), label=f'mu_a={mu_a}, mu_c_d={mu_c_d}')
-                ax[1].set_xlabel('mu_b_d')
-                ax[1].set_ylabel('Pivot Ratio')
-                ax[1].set_title('theory BC: Pivot Ratio vs. mu_b_d')
-                ax[1].legend()
+def plot_theory_given_experiment(th):
+    fig, axs = plt.subplots(1, 4, figsize=(20, 5))  # Changed to 1 row and 4 columns
+    fig.suptitle(th['th_name'].item())
 
-                # Save the figure
-                fig_name = f"data/figure/bB{np.round(mu_b_d,1)}_cC{mu_c_d}_a_{mu_a}.png"
-                plt.savefig(fig_name)
-                plt.close(fig)
-    plot_actions_and_ratios_from_nc_files()
+    def plot_metrics(ax, x_values, pivot_ratio, reach_optimality, time_to_reach_optimality, x_label, title):
+        ax.plot(x_values, pivot_ratio, label='Pivot Ratio', color='blue')
+        ax.plot(x_values, reach_optimality, label='Reach Optimality', color='green')
+        ax.plot(x_values, time_to_reach_optimality, label='Time to Reach Optimality', color='red')
+        ax.set_xlabel(x_label)
+        ax.set_ylabel('Metrics')
+        ax.set_title(title)
+        ax.grid(True)
+        ax.axhline(0, color='black', linewidth=0.5)
+        ax.axvline(0, color='black', linewidth=0.5)
+        ax.legend()
 
+    # Extracting values
+    mu_diff = th['mu_diff'].values
+    mu_sum = th['mu_sum'].values
+    sigma_profit = th['sigma_profit'].values
+    k = th['k'].values
+
+    pivot_ratio_mu_diff = th['pivot_ratio'].mean(dim=['mu_sum', 'sigma_profit', 'k']).values
+    reach_optimality_mu_diff = th['reach_optimality'].mean(dim=['mu_sum', 'sigma_profit', 'k']).values
+    time_to_reach_optimality_mu_diff = th['time_to_reach_optimality'].mean(dim=['mu_sum', 'sigma_profit', 'k']).values
+
+    pivot_ratio_mu_sum = th['pivot_ratio'].mean(dim=['mu_diff', 'sigma_profit', 'k']).values
+    reach_optimality_mu_sum = th['reach_optimality'].mean(dim=['mu_diff', 'sigma_profit', 'k']).values
+    time_to_reach_optimality_mu_sum = th['time_to_reach_optimality'].mean(dim=['mu_diff', 'sigma_profit', 'k']).values
+
+    pivot_ratio_sigma_profit = th['pivot_ratio'].mean(dim=['mu_diff', 'mu_sum', 'k']).values
+    reach_optimality_sigma_profit = th['reach_optimality'].mean(dim=['mu_diff', 'mu_sum', 'k']).values
+    time_to_reach_optimality_sigma_profit = th['time_to_reach_optimality'].mean(dim=['mu_diff', 'mu_sum', 'k']).values
+
+    pivot_ratio_k = th['pivot_ratio'].mean(dim=['mu_diff', 'mu_sum', 'sigma_profit']).values
+    reach_optimality_k = th['reach_optimality'].mean(dim=['mu_diff', 'mu_sum', 'sigma_profit']).values
+    time_to_reach_optimality_k = th['time_to_reach_optimality'].mean(dim=['mu_diff', 'mu_sum', 'sigma_profit']).values
+
+    plot_metrics(axs[0], mu_diff, pivot_ratio_mu_diff, reach_optimality_mu_diff, time_to_reach_optimality_mu_diff, 'mu_diff', 'Metrics by mu_diff')
+    plot_metrics(axs[1], mu_sum, pivot_ratio_mu_sum, reach_optimality_mu_sum, time_to_reach_optimality_mu_sum, 'mu_sum', 'Metrics by mu_sum')
+    plot_metrics(axs[2], sigma_profit, pivot_ratio_sigma_profit, reach_optimality_sigma_profit, time_to_reach_optimality_sigma_profit, 'sigma_profit', 'Metrics by sigma_profit')
+    plot_metrics(axs[3], k, pivot_ratio_k, reach_optimality_k, time_to_reach_optimality_k, 'k', 'Metrics by k')
+
+    plt.tight_layout()
+    figure_title = th['th_name'].item() + ".png"
+    figure_path = os.path.join("data/figure/th", figure_title)
+    plt.savefig(figure_path)
+
+    
 def extract_mu_values_from_filename(filename):
     parts = filename.split('_')
-    mu_a_str = [p for p in parts if p.startswith('a')][0]
     mu_b_d_str = [p for p in parts if p.startswith('bB')][0]
     mu_c_d_str = [p for p in parts if p.startswith('cC')][0]
-    mu_a = float(mu_a_str[1:])
     mu_b_d = float(mu_b_d_str[2:].strip('[]').split()[0])
     mu_c_d = float(mu_c_d_str[2:].strip('[]').split()[0])
-    return mu_a, mu_b_d, mu_c_d
+    return mu_b_d, mu_c_d
 
 def plot_actions_and_ratios_from_nc_files(directory='data/experiment'):
     # Collect all .nc files in the directory
     nc_files = [f for f in os.listdir(directory) if f.endswith('.nc')]
     
     action_colors = {'pivot_product': 'green', 'pivot_market': 'purple', 'scale': 'red'}
-    mu_a_values = []
     mu_b_d_values = []
     mu_c_d_values = []
     actions = []
 
-    # Read through each .nc file and extract mu_a, mu_b_d, mu_c_d and actions
+    # Read through each .nc file and extract mu_b_d, mu_c_d and actions
     for nc_file in nc_files:
         file_path = os.path.join(directory, nc_file)
         ds = xr.open_dataset(file_path)
         
-        mu_a, mu_b_d, mu_c_d = extract_mu_values_from_filename(nc_file)
-        mu_a_values.append(mu_a)
+        mu_b_d, mu_c_d = extract_mu_values_from_filename(nc_file)
         mu_b_d_values.append(mu_b_d)
         mu_c_d_values.append(mu_c_d)
         actions.append(ds['action'].values)
     
     # Create subplots
     fig, ax = plt.subplots(2, 1, figsize=(12, 12))
-
-    # Plot for mu_a
-    for i, mu_a in enumerate(mu_a_values):
-        y_values = actions[i]
-        x_values = np.full(len(y_values), mu_a)
-        colors = [action_colors[action] for action in y_values if action in action_colors]
-        ax[0].scatter(x_values[:len(colors)], np.arange(len(colors)), c=colors, label=f'mu_a={mu_a}')
-
-    ax[0].set_xlabel('mu_a')
-    ax[0].set_ylabel('Action Sequence')
-    ax[0].set_title('Action Sequence vs mu_a')
-    ax[0].legend()
 
     # Plot for mu_b_d and mu_c_d (Ratio of pivot_product to pivot_market)
     pivot_ratios = []
@@ -188,12 +202,12 @@ def plot_actions_and_ratios_from_nc_files(directory='data/experiment'):
 
 
 if __name__ == "__main__":
-    # em = xr.open_dataset("data/experiment/bB-0.3_cC-0.1_B0.3_C0.1_a0.2_s0.1_T2_man_b2c.nc")
-    theory = brute_force()
-    # # theory = xr.open_dataset("data/theory/bB[-0.2  0.   0.2]_cC[-0.2  0.   0.2]_a[0.4]_b0.2_c0.1_s0.1_cash4_E5_man_b2c")
-    # plot_theory_given_experiment(theory)
-    # plot_beliefs(em)
-    plot_layer0_belief(em)
+    th = brute_force()
+    # th = xr.open_dataset("data/theory/mu_diff-4.0to-4.0_mu_sum-4.0to0.0_B3_C1_s1.01.0_k1.0to1.0_T3_man_b2c.nc")
+    # th = xr.open_dataset("data/theory/mu_diff-4.0to-4.0_mu_sum-4.0to0.0_B3_C1_s1.03.0_k1.0to3.0_T3_man_b2c.nc")
+    plot_theory_given_experiment(th)
+    # test_hypothesis_1
+    
     # for mu_c_d in mu_c_d_range:
 
     # for mu_a_d in mu_a_d_range:
