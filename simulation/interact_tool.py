@@ -85,90 +85,116 @@ def plot_layer1_profit(em):
     
     num_exp = np.where(em['action'].values == "scale")[0][0] + 1 if "scale" in em['action'].values else em['action'].shape[0]
     experiments = np.arange(1, num_exp+1)
-    fig, axs = plt.subplots(1, num_exp+2, figsize=(4 * (num_exp+2), 3))
+    fig = plt.figure(figsize=(4 * num_exp, 9))
     fig.suptitle(em['em_name'].item())
-    profit_b = em['profit_b'].values[:num_exp]
+    gs = fig.add_gridspec(3, num_exp * 2, height_ratios=[1, 1, 1])  # Making the grid spec with more columns
+
+    profit_prior = em['profit_prior'][:num_exp, :4]  # Adjusting shape to be (num_exp, 4)
     low_profit_b = em['low_profit_b'].values[:num_exp]
     high_profit_b = em['high_profit_b'].values[:num_exp]
 
     profit_obs = em['profit_obs'].values[:num_exp]
     actions = em['action'].values[:num_exp]
 
-    # Plot posterior distributions
-    for t in experiments:
-        profit_b_prior = em['profit_prior'][t-1].values
-        profit_b_posterior = em['profit_post'][t-1].values
-        
-        axs[t-1].hist(profit_b_prior, bins=30, alpha=0.5, color='skyblue', edgecolor='white')
-        axs[t-1].hist(profit_b_posterior, bins=30, alpha=0.3, color='#7B68EE', edgecolor='white')
-
-        axs[t-1].axvline(x=em['profit_b'][e2p[em['product'][t-1].item()], e2m[em['market'][t-1].item()], t-1].item(), color='blue', linestyle=':', label='expected')
-        axs[t-1].axvline(x=em['profit_obs'][t-1].item(), color=mcolors.to_rgba('purple', alpha=0.8), linestyle='-', label='observed')
-        
-        axs[t-1].axvline(x=profit_b_prior.mean(), color='blue', linestyle='--', label='prior mean')
-        axs[t-1].axvline(x=profit_b_posterior.mean(), color='#7B68EE', linestyle='--', label='posterior mean')
-        
-        axs[t-1].set_title(f'time {t} profit experiment')
-        axs[t-1].legend(prop={'size': 4})
-        axs[t-1].set_xlim(-3, 3)
-        axs[t-1].set_ylim(0, 500)
-
-    # Initial plot for profit feedback with action dots
-    
-    predicted_profits = [profit_b[e2p[em['product'][0].item()], e2m[em['market'][0].item()], 0]]
+    # Create subplots
+    axs = np.empty((3, num_exp), dtype=object)
+    axs[0, 0] = fig.add_subplot(gs[0, :])  # Span the first row across all columns
+    for col in range(num_exp):
+        axs[1, col] = fig.add_subplot(gs[1, col * 2:(col + 1) * 2])  # Second row
+        axs[2, col] = fig.add_subplot(gs[2, col * 2:(col + 1) * 2], projection='3d')  # Third row
+                
+    # Initial plot for profit feedback with action dots in the first row
+    predicted_profits = [em['profit_b'][e2p[em['product'][0].item()], e2m[em['market'][0].item()], 0]]
     for t in range(1, num_exp):
-        predicted_profits.append(profit_b[e2p[em['product'][t].item()], e2m[em['market'][t].item()], t])                                                        
+        predicted_profits.append(em['profit_b'][e2p[em['product'][t].item()], e2m[em['market'][t].item()], t])                                                        
     
-    axs[num_exp].scatter(np.array(range(1, num_exp + 1)), list(profit_obs), color=mcolors.to_rgba('purple', alpha=0.8), label='observed', marker='o')
-    axs[num_exp].plot(list(range(1, num_exp + 1)), predicted_profits, color='blue', label='expected', linestyle='--')
-    axs[num_exp].fill_between(list(range(1, num_exp + 1)), list(low_profit_b), list(high_profit_b), color='skyblue', alpha=0.3, label='low-high bar')
+    axs[0, 0].scatter(np.array(range(1, num_exp + 1)), list(profit_obs), color=mcolors.to_rgba('purple', alpha=0.8), label='observed', marker='o')
+    axs[0, 0].plot(list(range(1, num_exp + 1)), predicted_profits, color='blue', label='expected', linestyle='--')
+    axs[0, 0].fill_between(list(range(1, num_exp + 1)), list(low_profit_b), list(high_profit_b), color='skyblue', alpha=0.3, label='low-high bar')
     
     ACT_PVT_markers = {'pivot_product': 'P', 'pivot_market': 'M', 'scale': 'S'}
     for i in range(ACT_PVT):
         markers = [ACT_PVT_markers.get(action, 'o') for action in actions]
         for j, marker in enumerate(markers):
-            axs[num_exp].scatter(j + 1.2, -0.25, color='red', s=50, marker=f'${marker}$')
+            axs[0, 0].scatter(j + 1.2, -0.25, color='red', s=50, marker=f'${marker}$')
 
-    axs[num_exp].set_title('expected profit')
-    axs[num_exp].set_ylim(-3, 3)
-    axs[num_exp].legend(loc='upper left', prop={'size': 4})
-    axs[num_exp].set_xlabel('Experiment')
-    axs[num_exp].set_xticks(experiments)
+    axs[0, 0].set_title('Expected Profit')
+    axs[0, 0].set_ylim(-3, 3)
+    axs[0, 0].legend(loc='upper left', prop={'size': 4})
+    axs[0, 0].set_xlabel('Experiment')
+    axs[0, 0].set_xticks(experiments)
 
-    bar_width = 0.2
-    x = np.arange(len(experiments))  # the label locations
-    profit_b = np.zeros((4, len(experiments)))
-    profit_r = np.zeros((4, len(experiments)))
+    # Plot posterior distributions in the second row
+    for t in experiments:
+        profit_b_prior = em['profit_prior'][t-1].values
+        profit_b_posterior = em['profit_post'][t-1].values
+        
+        axs[1, t-1].hist(profit_b_prior, bins=30, alpha=0.5, color='skyblue', edgecolor='white')
+        axs[1, t-1].hist(profit_b_posterior, bins=30, alpha=0.3, color='#7B68EE', edgecolor='white')
+        axs[1, t-1].axvline(x=em['profit_obs'][t-1].item(), color=mcolors.to_rgba('purple', alpha=0.8), linestyle='-', label='observed')
+        
+        axs[1, t-1].axvline(x=profit_b_prior.mean(), color='blue', linestyle='--', label='prior mean') # = em['profit_b'][e2p[em['product'][t-1].item()], e2m[em['market'][t-1].item()], t-1].item()
+        axs[1, t-1].axvline(x=profit_b_posterior.mean(), color='#7B68EE', linestyle='--', label='posterior mean')
+        
+        axs[1, t-1].set_title(f'Time {t} Profit Experiment')
+        axs[1, t-1].legend()
+        axs[1, t-1].set_xlim(-3, 3)
+        axs[1, t-1].set_ylim(0, 500)
 
-    index = 0
-    for p in em.coords['PD'].values:           
-        for m in em.coords['MK'].values:
-            profit_b[index] = em['profit_b'].loc[dict(PD=p, MK=m)].values[:num_exp]
-            profit_r[index] = em['profit_r'].loc[dict(PD=p, MK=m)].values[:num_exp]
-            index += 1
+    # Define colors for each cell
+    colors = ['gray', 'green', 'purple', 'orange']
+    labels = ['man-b2c', 'ai-b2c', 'man-b2b', 'ai-b2b']
     
-    axs[num_exp + 1].scatter(x - 1.5*bar_width, profit_b[0], label='man-b2c', color='#006400')
-    axs[num_exp + 1].scatter(x - 0.5*bar_width, profit_b[1], label='ai-b2c', color='#32CD32')
-    axs[num_exp + 1].scatter(x + 0.5*bar_width, profit_b[2], label='man-b2b', color='#FFD700')
-    axs[num_exp + 1].scatter(x + 1.5*bar_width, profit_b[3], label='ai-b2b', color='#FFA500')
+    for t in range(num_exp):
+        ax = axs[2, t]
+        # Create 2x2 grids for each experiment
+        x_positions = np.array([1, 0, 1, 0])
+        y_positions = np.array([0, 0, 1, 1])
+        dx = dy = 0.1  # Width and depth of the bars
+        z_positions_b = profit_prior[t, :]
+        z_positions_t = em['profit_r'].values.flatten()
 
-    axs[num_exp + 1].scatter(x - 1.5*bar_width, profit_r[0], label='man-b2c', color='#006400', alpha=0.2)
-    axs[num_exp + 1].scatter(x - 0.5*bar_width, profit_r[1], label='ai-b2c', color='#32CD32', alpha=0.2)
-    axs[num_exp + 1].scatter(x + 0.5*bar_width, profit_r[2], label='man-b2b', color='#FFD700', alpha=0.2)
-    axs[num_exp + 1].scatter(x + 1.5*bar_width, profit_r[3], label='ai-b2b', color='#FFA500', alpha=0.2)
+        # Plot bars for beliefs
+        ax.bar3d(x_positions, y_positions, np.zeros_like(x_positions), dx, dy, z_positions_b, color=colors, alpha=0.8, edgecolor='black')
 
-    axs[num_exp + 1].set_xlabel('Experiment')
-    axs[num_exp + 1].set_ylabel('Belief on Profit')
-    axs[num_exp + 1].set_title('BTS: Belief by Time and Space')
-    axs[num_exp + 1].set_xticks(x)
-    axs[num_exp + 1].set_xticklabels(experiments)
-    axs[num_exp + 1].legend(prop={'size': 4})
+        # Plot bars for truth
+        ax.bar3d(x_positions, y_positions, np.zeros_like(x_positions), dx, dy, z_positions_t, color=colors, alpha=0.2, edgecolor='black')
 
-    plt.tight_layout()
+        # Add text annotations for beliefs
+        for i in range(4):
+            ax.text(x_positions[i], y_positions[i], z_positions_b[i], f'{z_positions_b[i]:.2f}', color='black', ha='right', va='bottom', fontsize=10)
+
+        # Add text annotations for truth
+        for i in range(4):
+            ax.text(x_positions[i], y_positions[i], z_positions_t[i], f'{z_positions_t[i]:.2f}', color='black', ha='right', va='top', fontsize=10)
+
+        # Remove gray grid and set background to white
+        ax.xaxis.pane.fill = False
+        ax.yaxis.pane.fill = False
+        ax.zaxis.pane.fill = False
+        ax.set_facecolor('white')
+
+        # Remove grid lines
+        ax.grid(False)
+
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_zticks(np.arange(-2, 3, 1))
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_zticklabels(['', '', '', '', ''])
+        
+        ax.set_title(f'exp{t + 1}', fontsize=10, pad=20)
+
+        # Add custom labels
+        for i, (x, y) in enumerate(zip(x_positions, y_positions)):
+            ax.text(x, y, max(z_positions_b[i], z_positions_t[i]) + 0.3, f'{labels[i]}', color=colors[i], ha='center', va='bottom', fontsize=10)
+
+    plt.subplots_adjust(wspace=0.5, hspace=0.3)
     figure_title = em['em_name'].item() + "_L1.png"
     figure_path = os.path.join("data/figure/em/l1", figure_title)
     plt.savefig(figure_path)
-    # plt.show()
+    plt.show()
     plt.close()
 
 from ipywidgets import FloatSlider, IntSlider, Output
@@ -180,6 +206,7 @@ def interact_tool():
     mu_sum_slider = FloatSlider(min=-4, max=0, step=1, value=-2, continuous_update=False, description="mu_sum")
     sigma_slider = IntSlider(min=1, max=4, step=1, value=1, continuous_update=False, description="sigma")
     k_slider = IntSlider(min=1, max=4, step=1, value=1, continuous_update=False, description="k")
+    t_slider = IntSlider(min=2, max=4, step=1, value=2, continuous_update=False, description="experiment#")
     output = Output()
 
     def func(mu_b_d, mu_c_d, mu_b_r, mu_c_r, sigma_profit, k, T, product='man', market='b2c'):
@@ -201,7 +228,7 @@ def interact_tool():
             mu_c_r=1,
             sigma_profit=sigma_slider.value,
             k=k_slider.value,
-            T=2  # Assuming T is a constant or you can add a slider for T if needed
+            T=t_slider.value  # Assuming T is a constant or you can add a slider for T if needed
         )
         with output:
             output.clear_output()
@@ -209,14 +236,14 @@ def interact_tool():
             plt.show(fig1)
 
     # Link the sliders to the on_value_change function
-    for slider in [mu_diff_slider, mu_sum_slider, sigma_slider, k_slider]:
+    for slider in [mu_diff_slider, mu_sum_slider, sigma_slider, k_slider, t_slider]:
         slider.observe(on_value_change, names='value')
     
     # Arrange sliders and output in a VBox layout
     interactive_simulation = VBox([
         HTML("<h1>Pivot Game</h1>"),
         HBox([
-            VBox([HTML("<b>Parameters</b>"), mu_diff_slider, mu_sum_slider, sigma_slider, k_slider]),
+            VBox([HTML("<b>Parameters</b>"), mu_diff_slider, mu_sum_slider, sigma_slider, k_slider,]),
         ]),
         output
     ])

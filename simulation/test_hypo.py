@@ -6,6 +6,7 @@ import os
 import arviz as az
 import matplotlib.patches as patches
 from interact_tool import plot_layer0_belief, plot_layer1_profit
+from collections import Counter
 
 #th-A: higher mu_a -> faster scale
 # in:  mu_a / (mu_b_r + mu_c_r)
@@ -20,9 +21,9 @@ from interact_tool import plot_layer0_belief, plot_layer1_profit
 # TODO out: ratio of cells whose mu_b, mu_c exceed lowbar (b or r)??  
 
 # def brute_force(mu_diff_range=np.linspace(-2, -2, 1), mu_sum_range=np.linspace(-4, 0, 2), sigma_profit_range = np.linspace(1, 2, 10), T=2,  product='man', market='b2c'):
-def brute_force(mu_diff_range=np.linspace(-4, 4, 5), mu_sum_range=np.linspace(-4, 0, 5), sigma_profit_range = np.linspace(.5, 3, 5), k_range =np.linspace(.5, 3, 5), T=3,  product='man', market='b2c'):    
-    mu_b_r=1
-    mu_c_r=3
+def brute_force(mu_diff_range=np.linspace(-3, 3, 3), mu_sum_range=np.linspace(-3, 3, 3), sigma_profit_range = np.linspace(.5, 2, 2), k_range =np.linspace(.5, 2, 2), T=3,  product='man', market='b2c'):    
+    mu_b_r=3
+    mu_c_r=1
     th_name = f"mu_diff{mu_diff_range[0]}to{mu_diff_range[0]}l{len(mu_diff_range)}_mu_sum{mu_sum_range[0]}to{mu_sum_range[-1]}l{len(mu_sum_range)}_B{mu_b_r}_C{mu_c_r}_s{sigma_profit_range[0]}{sigma_profit_range[-1]}_k{k_range[0]}to{k_range[-1]}l{len(sigma_profit_range)}_T{T}_{product}_{market}"
     file_path = f"data/theory/{th_name}.nc"
     if os.path.exists(file_path):
@@ -41,6 +42,7 @@ def brute_force(mu_diff_range=np.linspace(-4, 4, 5), mu_sum_range=np.linspace(-4
             'pivot_ratio': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
             'reach_optimality': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
             'time_to_reach_optimality': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)), np.nan)),
+            'act_seq': (('mu_diff', 'mu_sum', 'sigma_profit', 'k'), np.full((len(mu_diff_range), len(mu_sum_range), len(sigma_profit_range), len(k_range)),  '', dtype='object')), 
             'th_name': ((), th_name),
         }
     )
@@ -58,6 +60,7 @@ def brute_force(mu_diff_range=np.linspace(-4, 4, 5), mu_sum_range=np.linspace(-4
                         th['pivot_ratio'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_pivot_ratio(em)
                         th['reach_optimality'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_reach_optimality(em)
                         th['time_to_reach_optimality'].loc[dict(mu_diff=mu_diff, mu_sum=mu_sum, sigma_profit = sigma_profit, k=k)] = compute_time_to_reach_optimality(em)
+                        th['act_seq'].loc[dict(mu_diff = mu_diff, mu_sum = mu_sum, sigma_profit = sigma_profit, k=k)] = compute_sequence(em)[0]
     th.to_netcdf(f"data/theory/{th.th_name.values}.nc")
 
     plot_theory_given_experiment(th)  # Call the plotting function after running the experiments
@@ -77,7 +80,7 @@ def compute_pivot_ratio(em):
             pivot_market_count += 1
 
     if pivot_market_count == 0:
-        return em.dims['ACT_PRED']+1 # Avoid division by zero
+        return em.dims['ACT_PRED'] * 2 # Avoid division by zero
     return pivot_product_count / pivot_market_count
 
 def compute_reach_optimality(em):
@@ -97,10 +100,30 @@ def compute_time_to_reach_optimality(em):
         if product == 'ai' and market == 'b2b':
             return idx  # Return the first index where the condition is met
 
-    return em.dims['ACT_PRED'] + 1  # Return this value if the condition is never met
+    return em.dims['ACT_PRED'] * 2 # Return this value if the condition is never met
+
+
+def compute_sequence(em, sequence_length=3):
+    actions = em['action'].values
+    actions = [a.replace('pivot_product', 'p') for a in actions]
+    actions = [a.replace('pivot_market', 'm') for a in actions]
+    actions = [a.replace('scale', 's') for a in actions]
+    
+    action_sequences = [''.join(actions[i:i+sequence_length]) for i in range(len(actions) - sequence_length + 1)]
+    # sequence_counts = Counter(action_sequences)
+    
+    # # Sort sequences by frequency
+    # sequences = list(sequence_counts.keys())
+    # frequencies = list(sequence_counts.values())
+    
+    # sorted_indices = np.argsort(frequencies)[::-1]
+    # sorted_sequences = [sequences[i] for i in sorted_indices]
+    # sorted_frequencies = [frequencies[i] for i in sorted_indices]
+    
+    return action_sequences #sorted_sequences, sorted_frequencies
 
 def plot_theory_given_experiment(th):
-    fig, axs = plt.subplots(1, 4, figsize=(20, 5))  # Changed to 1 row and 4 columns
+    fig, axs = plt.subplots(1, 5, figsize=(25, 5))  # Changed to 1 row and 5 columns
     fig.suptitle(th['th_name'].item())
 
     def plot_metrics(ax, x_values, pivot_ratio, reach_optimality, time_to_reach_optimality, x_label, title):
@@ -141,6 +164,23 @@ def plot_theory_given_experiment(th):
     plot_metrics(axs[1], mu_sum, pivot_ratio_mu_sum, reach_optimality_mu_sum, time_to_reach_optimality_mu_sum, 'mu_sum', 'Metrics by mu_sum')
     plot_metrics(axs[2], sigma_profit, pivot_ratio_sigma_profit, reach_optimality_sigma_profit, time_to_reach_optimality_sigma_profit, 'sigma_profit', 'Metrics by sigma_profit')
     plot_metrics(axs[3], k, pivot_ratio_k, reach_optimality_k, time_to_reach_optimality_k, 'k', 'Metrics by k')
+
+    # Plot histogram for action sequences
+    act_seq = th['act_seq'].values.flatten()
+    counter = Counter(act_seq)
+    sorted_sequences = sorted(counter.items(), key=lambda x: x[1], reverse=True)
+    sorted_labels, sorted_values = zip(*sorted_sequences)
+
+    sorted_act_seq = []
+    for label, value in zip(sorted_labels, sorted_values):
+        sorted_act_seq.extend([label] * value)
+
+    # Plotting using the sorted action sequences
+    axs[4].hist(sorted_act_seq, bins=len(sorted_labels), color='gray', edgecolor='black')
+    axs[4].set_xticks(range(len(sorted_labels)))
+    axs[4].set_xlabel('Action Sequences')
+    axs[4].set_ylabel('Frequency')
+    axs[4].set_title('Histogram of Action Sequences')
 
     plt.tight_layout()
     figure_title = th['th_name'].item() + ".png"
