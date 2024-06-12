@@ -42,3 +42,20 @@ req.txt
 *.pyc
 
 .vscode
+
+*.csv
+*.xlsx
+*.pdf
+*.txt
+
+db/*
+*.png
+*.nc
+*.bin
+simulation/stan/idea_exp
+simulation/stan/pivot_market
+simulation/stan/pivot_product
+simulation/stan/pivot_self
+simulation/stan/update_base
+simulation/spandrel/orbit.mov
+spandrel/*
