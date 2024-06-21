@@ -24,7 +24,7 @@ from collections import Counter
 # TODO out: ratio of cells whose mu_p, mu_m exceed lowbar (b or r)??  
 
 # def brute_force(mu_p2m_range=np.linspace(-2, -2, 1), mu_sum_range=np.linspace(-4, 0, 2), sigma_profit_range = np.linspace(1, 2, 10), T=2,  product='man', market='b2c'):
-def brute_force(mu_p2m_range=np.linspace(.3, 3, 5), mu_sum_range=np.linspace(1, 4, 5), sigma_profit_range = np.linspace(.5, 2, 3), k_sigma_range =np.linspace(.5, 2, 3), T=2,  product='man', market='b2c'):    
+def brute_force(mu_p2m_range=np.linspace(.3, 3, 5), mu_sum_range=np.linspace(1, 4, 5), sigma_profit_range = np.linspace(.5, 1, 3), k_sigma_range =np.linspace(.5, 2, 3), T=3,  product='man', market='b2c'):    
     th_name = f"p2m{mu_p2m_range[0]}to{mu_p2m_range[-1]}l{len(mu_p2m_range)}_sum{mu_sum_range[0]}to{mu_sum_range[-1]}l{len(mu_sum_range)}_s{sigma_profit_range[0]}{sigma_profit_range[-1]}_k{k_sigma_range[0]}to{k_sigma_range[-1]}l{len(sigma_profit_range)}_T{T}_{product}_{market}"
     file_path = f"data/theory/{th_name}.nc"
     if os.path.exists(file_path):
@@ -80,7 +80,7 @@ def compute_pivot_ratio(em):
             pivot_market_count += 1
 
     # if pivot_market_count == 0:
-    #     return em.dims['ACT_PRED'] * 2 # Avoid division by zero
+    #     return em.dims['PRED'] * 2 # Avoid division by zero
     return (pivot_product_count+1) / (pivot_market_count + 1)
 
 def compute_reach_optimality(em):
@@ -100,7 +100,7 @@ def compute_time_to_reach_optimality(em):
         if product == 'ai' and market == 'b2b':
             return idx  # Return the first index where the condition is met
 
-    return em.dims['ACT_PRED'] * 2 # Return this value if the condition is never met
+    return em.dims['PRED'] * 2 # Return this value if the condition is never met
 
 
 def compute_sequence(em, sequence_length=3):

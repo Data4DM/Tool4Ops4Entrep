@@ -1,4 +1,3 @@
-# fit_pm.py
 import numpy as np
 import xarray as xr
 import cmdstanpy
@@ -18,24 +17,24 @@ def sample_profit_obs(t, em):
     return mu2profit(em['mu_p_r'].item(), em['mu_m_r'].item(), em['product'][t].item(), em['market'][t].item())
 
 
-def decide_action(profit_obs, low_profit_b, high_profit_b, CR=.5):
+def decide_action(profit_obs, low_profit_b, high_profit_b, CR):
     """Decide the next action based on predicted and observed profit and cost considerations."""
 
-    if CR > 1:  #🐣 pivot_product cost > pivot_market cost
+    if CR > 1:  # pivot_product cost > pivot_market cost (deeptech, 🐣 biotech with core technology)
         if profit_obs > high_profit_b:
             return "scale"
         elif low_profit_b <= profit_obs <= high_profit_b:
-            return "pivot_product"
-        else: 
             return "pivot_market"
+        else: 
+            return "pivot_product" # angie won't abandon prob.comp unless sun rises from the west
 
-    else:  #🦖 pivot_product cost <= pivot_market cost
+    else:  # pivot_product cost <= pivot_market cost (it, 🦖big pharma with rigidity on distribution channel)
         if profit_obs > high_profit_b:
-            return "scale"
+            return "scale" 
         elif low_profit_b <= profit_obs <= high_profit_b:
-            return "pivot_market"
-        else: 
             return "pivot_product"
+        else: 
+            return "pivot_market"
 
 
 def mu2profit(mu_p, mu_m, product, market):
@@ -54,7 +53,7 @@ def predict_observe_update_as_lbs(t, em):
     # PREDICT BAL: B[t]|A[t], L[t]
     for p in em.coords['PD'].values:
         for m in em.coords['MK'].values:
-            em['profit_b'].loc[dict(PD=p, MK=m, ACT_PRED=t)] = mu2profit(em['mu_p_b'][t], em['mu_m_b'][t], p, m)
+            em['profit_b'].loc[dict(PD=p, MK=m, PRED=t)] = mu2profit(em['mu_p_b'][t], em['mu_m_b'][t], p, m)
     
     em['low_profit_b'][t] = em['profit_b'][e2p[em['product'][t].item()], e2m[em['market'][t].item()], t].item() - em['k_sigma'].item() * em['sigma_profit'][t].item()
     em['high_profit_b'][t] = em['profit_b'][e2p[em['product'][t].item()], e2m[em['market'][t].item()], t].item() + em['k_sigma'].item() * em['sigma_profit'][t].item()
@@ -72,10 +71,10 @@ def predict_observe_update_as_lbs(t, em):
     
     if em['action'][t] == "pivot_product":
         # UPDATE A ABC: A[t+1]| A[t], B[t], C[A[t]]            
-        # if t < em.dims['ACT_PRED']-1:
+        # if t < em.dims['PRED']-1:
         em['product'][t+1] = 'man' if em['product'][t].item() == 'ai' else 'ai'
         em['market'][t+1] = em['market'][t].item()
-        
+            
         # UPDATE L LBC: L[t+1]| L[t], B[t], C[A[t]] (store posterior, set next stage prior)
         data = {
             'product': e2p[em.product[t].item()] + 1,
@@ -97,10 +96,10 @@ def predict_observe_update_as_lbs(t, em):
 
     elif em['action'][t] == "pivot_market":
         # UPDATE A ABC: A[t+1]| A[t], B[t], C[A[t]]
-        # if t < em.dims['ACT_PRED']-1:
+        # if t < em.dims['PRED']-1:
         em['market'][t+1] = 'b2b' if em['market'][t].item() == 'b2c' else 'b2c'
         em['product'][t+1] = em['product'][t].item()
-        
+            
         # UPDATE L LBC: L[t+1]| L[t], B[t], C[A[t]] (store posterior, set next stage prior)
         data = {
             'product': e2p[em.product[t].item()] + 1,
@@ -121,14 +120,14 @@ def predict_observe_update_as_lbs(t, em):
         em['sigma_mu_m'][t+1] = em['mu_m_b_prior'][t+1].std()
 
     # use A[t+1] reparameterization structure for L[t]
-    em['profit_post'][t] = mu2profit(em['mu_m_b'][t+1], em['mu_p_b'][t+1], em['product'][t].item(), em['market'][t].item())
-    
+    # em['profit_post'][t] = mu2profit(em['mu_m_b'][t+1], em['mu_p_b'][t+1], em['product'][t].item(), em['market'][t].item())
     em['profit_prior'][t+1] = mu2profit(em['mu_p_b_prior'][t+1], em['mu_m_b_prior'][t+1], em['product'][t+1].item(), em['market'][t+1].item())
     em['sigma_profit'][t+1] = em['profit_prior'][t+1].std() # CHECKED em['sigma_profit'][t+1]**2 (.67) ~  (em['sigma_mu_p'][t+1]**2 + em['sigma_mu_m'][t+1]**2)/4 (.69)
+    
     return em
 
 
-def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='b2c'):
+def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='b2c', CR = 2):
     """
     Record the expected reward from the experiment given initial parameters.
     mu_p_d = (mu_sum * mu_p2m)/ (mu_p2m + 1)
@@ -137,14 +136,14 @@ def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='
     mu_p_d = mu_p_r - mu_p_b (=0) = mu_p_r # belief and goal differ but we treat both as _b
     mu_m_d = mu_m_r - mu_m_b (=0) = mu_m_r
     """
-    coords = {'H': np.arange(1), 'B': np.arange(T+1), 'ACT_PRED': np.arange(T), 'ACT_PVT': np.arange(T), 'PD': ["man", "ai"], 'MK': ["b2c", "b2b"], 'M': np.arange(4000)}
-    em_name = f"p2m-ratio{mu_p2m}_sum{mu_sum}_sigma{sigma_profit}_k-sigma{k_sigma}_exp{T}_{product}_{market}"
+    coords = {'H': np.arange(1), 'B': np.arange(T+1), 'PRED': np.arange(T), 'ACT': np.arange(T), 'PD': ["man", "ai"], 'MK': ["b2c", "b2b"], 'M': np.arange(4000)}
+    em_name = f"p2m-ratio{mu_p2m}_sum{mu_sum}_sigma{sigma_profit}_k-sigma{k_sigma}_exp{T}_CR{CR}_{product}_{market}"
     file_path = f"data/experiment/{em_name}.nc"
 
-    if os.path.exists(file_path):
-        em = xr.open_dataset(file_path)
-        print(f"File {em_name} already exists.")
-        return em
+    # if os.path.exists(file_path):
+    #     em = xr.open_dataset(file_path)
+    #     print(f"File {em_name} already exists.")
+    #     return em
 
     data_vars = {
         'mu_p_d': ('B', np.zeros(T+1)), 
@@ -156,27 +155,25 @@ def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='
         'sigma_mu_m':('B', np.zeros(T+1)),
 
         # PREDICT
-        'market': ('ACT_PRED', np.full(T, '', dtype='object')), #entrant randomly choose (same Eprofit currently (belief comes from future))
-        'product': ('ACT_PRED', np.full(T, '', dtype='object')),
+        'market': ('B', np.full(T+1, '', dtype='object')), #entrant randomly choose (same Eprofit currently (belief comes from future))
+        'product': ('B', np.full(T+1, '', dtype='object')),
 
-        'profit_b': (('PD', 'MK', 'ACT_PRED'), np.zeros((2, 2, T))),
-        'low_profit_b': ('ACT_PRED', np.zeros(T)),
-        'high_profit_b': ('ACT_PRED', np.zeros(T)),
+        'profit_b': (('PD', 'MK', 'PRED'), np.zeros((2, 2, T))),
+        'low_profit_b': ('PRED', np.zeros(T)),
+        'high_profit_b': ('PRED', np.zeros(T)),
 
         # OBSERVE
-        'profit_obs': ('ACT_PRED', np.zeros(T)),
+        'profit_obs': ('PRED', np.zeros(T)),
 
         # UPDATED BIT STATE
-        'profit_prior': (('ACT_PRED', 'M'), np.zeros((T,4000))),
-        'profit_post': (('ACT_PRED', 'M'), np.zeros((T,4000))),
+        'profit_prior': (('B', 'M'), np.zeros((T+1,4000))), # even if no more experiment opp, it updates belief (parameter)
+        # 'profit_post': (('PRED', 'M'), np.zeros((T,4000))),
 
         'mu_p_b_prior': (('B', 'M'), np.zeros((T+1,4000))), # updating belief is expensive - do only after observation
         'mu_m_b_prior': (('B', 'M'), np.zeros((T+1,4000))),
-        # 'mu_p_b_post': (('ACT_PRED', 'M'), np.zeros((T,4000))), # one lag
-        # 'mu_m_b_post': (('ACT_PRED', 'M'), np.zeros((T,4000))),
 
         # UPDATE ATOM STATE
-        'action': ('ACT_PVT', np.full(T, '', dtype='object')),
+        'action': ('ACT', np.full(T, '', dtype='object')),
         
         'mu_p_r': ('H', np.zeros(1)),
         'mu_m_r': ('H', np.zeros(1)), 
@@ -187,7 +184,7 @@ def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='
     em = xr.Dataset(data_vars=data_vars, coords=coords)
     em['profit_r'] = (('PD', 'MK'), np.zeros((len(em.coords['PD']), len(em.coords['MK']))))
 
-    for t in range(em.dims['ACT_PRED']-1):
+    for t in range(em.dims['PRED']): # t=0,1,2
         if t == 0:
             em['mu_p_r'][0] = (mu_sum * mu_p2m)/ (mu_p2m + 1)
             em['mu_m_r'][0] = mu_sum/ (mu_p2m + 1)
@@ -195,7 +192,7 @@ def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='
             em['mu_m_b'][0] = 0 
             em['mu_p_d'][0] = em['mu_p_r'][0]
             em['mu_m_d'][0] = em['mu_m_r'][0]
-            em['CR'][0] = .5 #cost_pivot_product / cost_pivot_market; 🐣CR=2, 🦖CR=.5
+            em['CR'][0] = CR #cost_pivot_product / cost_pivot_market; 🐣CR=2, 🦖CR=.5
 
             em['sigma_mu_p'][0] = sigma_profit * np.sqrt(2)
             em['sigma_mu_m'][0] = sigma_profit * np.sqrt(2)
@@ -222,5 +219,4 @@ def experiment(mu_p2m, mu_sum, sigma_profit, k_sigma, T, product='man', market='
     return em
 
 if __name__ == "__main__":     
-    # Start the experiment
-    em = experiment(mu_p2m = 3, mu_sum = 4, sigma_profit = 1, k_sigma=2,  T=2)
+    em = experiment(mu_p2m = 3, mu_sum = 4, sigma_profit=1, k_sigma=3, T=2, product = 'man', market = 'b2c')

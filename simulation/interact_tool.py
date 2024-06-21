@@ -69,9 +69,12 @@ def plot_layer0_belief(em):
     # plt.show()
     plt.close()
 
+import matplotlib.pyplot as plt
+import numpy as np
+
 def plot_layer1_profit(em):
     cell_colors = {'ai-b2c': 'green', 'man-b2c': 'gray', 'man-b2b': 'purple', 'ai-b2b': 'orange'}
-    ACT_PVT_markers = {'pivot_product': 'B', 'pivot_market': 'M', 'scale': 'S'}
+    ACT_markers = {'pivot_product': 'B', 'pivot_market': 'M', 'scale': 'S'}
 
     # Create subplots
     num_exp = np.where(em['action'].values == "scale")[0][0] + 1 if "scale" in em['action'].values else em['action'].shape[0]
@@ -82,8 +85,8 @@ def plot_layer1_profit(em):
     axs = np.empty((2, num_exp), dtype=object)
     
     for col in range(num_exp):
-        axs[0, col] = fig.add_subplot(gs[0, col * 2:(col + 1) * 2]) # Second row
-        axs[1, col] = fig.add_subplot(gs[1, col * 2:(col + 1) * 2], projection='3d')
+        axs[0, col] = fig.add_subplot(gs[0, col * 2:(col + 1) * 2]) # First row
+        axs[1, col] = fig.add_subplot(gs[1, col * 2:(col + 1) * 2]) # Second row
 
     fig.suptitle(em['em_name'].item())
 
@@ -94,20 +97,19 @@ def plot_layer1_profit(em):
         p = em['product'][t].item()
         m = em['market'][t].item()
         pm_idx = f'{p}-{m}'
-        act_pvt = em['action'][t].item()
+        ACT = em['action'][t].item()
 
         # Posterior distributions
         profit_b_prior = em['profit_prior'][t].values
-        profit_b_posterior = em['profit_post'][t].values
+        # profit_b_posterior = em['profit_post'][t].values
         
         axs[0, t].hist(profit_b_prior, bins=30, alpha=0.1, color=cell_colors[pm_idx], edgecolor='white')
-        axs[0, t].hist(profit_b_posterior, bins=30, alpha=.2, color=cell_colors[pm_idx], edgecolor='white')
+        # axs[0, t].hist(profit_b_posterior, bins=30, alpha=.4, color=cell_colors[pm_idx], edgecolor='white')
         axs[0, t].axvline(x=em['profit_obs'][t].item(), color=cell_colors[pm_idx], linestyle='-', label='observed profit')
-        axs[0, t].axvline(x=profit_b_prior.mean(), color=cell_colors[pm_idx], linestyle='--', label=f'predicted in {p}-{m}')
-        axs[0, t].axvline(x=low_profit_b[t], color=cell_colors[pm_idx], linestyle='-.', label='Low profit bar')
-        axs[0, t].axvline(x=high_profit_b[t], color=cell_colors[pm_idx], linestyle='-.', label='High profit bar')
+        axs[0, t].axvline(x=low_profit_b[t], color=cell_colors[pm_idx], linestyle='--', linewidth=4, label='Low profit bar')
+        axs[0, t].axvline(x=high_profit_b[t], color=cell_colors[pm_idx], linestyle='--', linewidth=4, label='High profit bar')
         
-        axs[0, t].set_title(f'EXPERIMENT {t+1}:\n ENV {pm_idx}, ACTION {act_pvt}->')
+        axs[0, t].set_title(f'EXPERIMENT {t+1}:\n ENV {pm_idx}, ACTION {ACT}      ->')
         axs[0, t].legend(prop={'size':15})
         axs[0, t].set_xlim(-3, 3)
         axs[0, t].set_ylim(0, 500)
@@ -121,44 +123,27 @@ def plot_layer1_profit(em):
         x_positions = np.array([0, 0, 1, 1])  # Example layout
         y_positions = np.array([0, 1, 0, 1])
 
-        # Assuming em['profit_b'] and em['profit_r'] are structured to allow indexing by ACT_PRED, PD, and MK
+        # Assuming em['profit_b'] and em['profit_r'] are structured to allow indexing by PRED, PD, and MK
         for idx, (pd, mk) in enumerate(pd_mk_combinations):
-            z_position_b = em['profit_b'].loc[dict(PD=pd, MK=mk, ACT_PRED=t)]
+            z_position_b = em['profit_b'].loc[dict(PD=pd, MK=mk, PRED=t)]
             z_position_t = em['profit_r'].loc[dict(PD=pd, MK=mk)]
 
             # Determine the color based on PD and MK
             label_index = f'{pd}-{mk}'
             color = cell_colors[label_index]
 
-            ax.quiver(x_positions[idx], y_positions[idx], z_position_b, 
-                    0, 0, z_position_t - z_position_b, 
-                    arrow_length_ratio=0.1, color=color)
-            ax.scatter(x_positions[idx], y_positions[idx], z_position_b, color='black', s=50, facecolors='none')
-            ax.scatter(x_positions[idx], y_positions[idx], z_position_t, color=color, s=50)
-            ax.text(x_positions[idx], y_positions[idx], z_position_b, f'{z_position_b:.2f}', color='black', ha='left', va='bottom', fontsize=10)
-            ax.text(x_positions[idx], y_positions[idx], z_position_t, f'{z_position_t:.2f}', color='black', ha='right', va='top', fontsize=10)
+            # Plotting 2D instead of 3D
+            ax.scatter(x_positions[idx], z_position_b, color='black', s=50, facecolors='none')
+            ax.scatter(x_positions[idx], z_position_t, color=color, s=50)
+            ax.text(x_positions[idx], z_position_t, f'({z_position_b:.2f}, ', color='black', ha='left', va='bottom', fontsize=10)
+            ax.text(x_positions[idx], z_position_t, f'{z_position_t:.2f})', color='black', ha='left', va='bottom', fontsize=10, fontweight='bold')
 
-        colors = np.array([['gray','purple'], ['green', 'orange']]) 
-        x = np.linspace(0, 1, 3)
-        y = np.linspace(0, 1, 3)
-        X, Y = np.meshgrid(x, y)
-        Z = np.zeros_like(X)  # Plane at z=0
-        # Plot each quadrant with different color
-        for i in range(2):
-            for j in range(2):
-                ax.plot_surface(X[i:i+2, j:j+2], Y[i:i+2, j:j+2], Z[i:i+2, j:j+2],
-                                color=colors[i][j], alpha=.3, rstride=1, cstride=1)
-        ax.xaxis.pane.fill = False
-        ax.yaxis.pane.fill = False
-        ax.zaxis.pane.fill = False
         ax.set_facecolor('white')
         ax.grid(False)
         ax.set_xticks([])
         ax.set_yticks([])
-        ax.set_zticks(np.arange(-2, 3, 1))
-        ax.set_xticklabels([])
-        ax.set_yticklabels([])
-        ax.set_zticklabels(['', '', '', '', ''])
+        ax.set_xlim(-1, 2)
+        ax.set_ylim(-2, 3)
         ax.axis('off')
 
     # Save the figure
@@ -220,7 +205,7 @@ if __name__ == "__main__":
     # th = xr.open_dataset("data/th/bB[-0.2  0.   0.2]_cC[-0.2  0.   0.2]_a[0.4]_b0.2_c0.1_s0.1_cash4_E5_man_b2c")
     # plot_th_given_experiment(th)
     
-    em = experiment(mu_p2m = 3, mu_sum = 4, sigma_profit=1, k_sigma=2, T=2, product = 'man', market = 'b2c')
+    em = experiment(mu_p2m = 3, mu_sum = 4, sigma_profit=1, k_sigma=1, T=3, product = 'man', market = 'b2c')
     # em = xr.open_dataset("data/experiment/bB-0.2_cC-0.2_B0.3_C0.3_a0.1_s0.1_T10_man_b2c.nc")
     # plot_layer0_belief(em)
     plot_layer1_profit(em)
