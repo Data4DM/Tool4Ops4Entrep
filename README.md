@@ -1,4 +1,7 @@
-# Ops4Entrep-backend
+# ai cofounder: bayesian brain for entrepreneurial mind
+https://github.com/Data4DM/BayesSD/discussions/234 and https://github.com/Data4DM/BayesSD/discussions/224
+
+# architecture
 ![image](https://github.com/Data4DM/Ops4Entrep-backend/assets/30194633/1e0f0478-5ebd-4bf1-8aad-0b5575650e4c)
 
 ## 1. data ingestion layer
