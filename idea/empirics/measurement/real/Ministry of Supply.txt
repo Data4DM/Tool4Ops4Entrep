@@ -1,0 +1,19 @@
+Ministry of Supply
+
+Nail Stage (2012 - 2013)
+- NSS reasoning: 
+- State: Early startup stage, developing first products (dress shirts), small team of co-founders, outsourced manufacturing, seeking funding
+- Strategy: Value Chain - Collaborate & Execute
+- Analysis: At the nail stage, MoS collaborated with contract manufacturers and other partners to develop and test their initial product ideas. They did not have their own manufacturing capabilities yet. The focus was on executing and iterating on the product through partnerships.
+
+Scale Stage (2013 - 2016)
+- NSS reasoning: 
+- State: Growing revenue and team, expanding product lines (socks, pants), moving some manufacturing in-house, raising VC funding
+- Strategy: Architectural - Compete & Control
+- Analysis: As MoS started scaling, they brought more capabilities in-house, including some manufacturing, to control their intellectual property and compete directly with established brands. They were architecting a new value chain for high-tech men's apparel.
+
+Sail Stage
+Period: Not reached yet by the end of case study
+State: N/A
+Strategy: N/A
+The case study time period is 2012 - 2016, which covers the nail and start of scale stages, but does not depict Ministry of Supply reaching maturity. Based on the evidence, they pursued a value chain strategy during nail, and started to shift towards an architectural strategy during scale. The next likely move would be adopting a disruption strategy to defend against new entrants once they reach sailing stage.

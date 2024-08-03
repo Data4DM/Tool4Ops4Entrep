@@ -1,0 +1,1639 @@
+ I'm going to be talking about how to build a mind from a brain.
+As you maybe could gather if you don't already know what I do and how I do it.
+You might've gathered from the introduction,
+the research that I do lives between multiple fields.
+I identify primarily as a cognitive scientist, but I also work in neuroscience and artificial intelligence.
+Our goal is to try to understand most fundamentally how intelligence arises in the human mind and brain.
+But we do that in what we sometimes call reverse engineering.
+So we want models, theories,but theories expressed as computational models
+that take the form of engineering.
+They have math, but they're also really engineering style models.
+And so that's what we mean by understanding, at least in terms of our science here.
+And that also has a payoff, potentially,
+maybe world changing, maybe or maybe not,
+but we'll see, for building artificial intelligence systems
+which are intelligent in more human-like ways
+and might live in a more valuable, productive, safe
+and just overall positive way in the human world,
+the worlds that we humans have built.
+I'm going to talk about some of the work we've been doing here,
+and I just want to acknowledge at the beginning a number
+of collaborators,
+the ones who are in bold are the ones whose work
+play some particular prominent role.
+The ones who are really in bold, the students,
+Leo or Lionel Wong, Gabriel Grand, Alex Lew,
+and Tyler Brooke-Wilson contributed in a big way
+to the material and the vision of this talk,
+and even many of the slides.
+So I want to particularly highlight them.
+Now, I think to all of us who work in this field
+or who even just are adjacent,
+it's a especially exciting time, really a thrilling time
+and sometimes a scary time to be working at the intersection
+of these fields, right?
+AI is everywhere.
+The field is old, but it's just in the last year or two,
+it's on everybody's front of the conversation.
+
+On the science side, with advances in neuroscience
+and cognitive science, we are starting to be able
+to study intelligence across many different kinds of brains.
+And it's fascinating to us to ask, what is in common?
+What is it about brains in general
+that defines intelligence?
+And of course, we see differences across species,
+and we see something clearly distinctive
+and unique about human intelligence.
+Humans are special. There's a reason why we're here.
+Just, you know, we as neuroscientists
+and cognitive scientists, we study many other animals.
+We study mice, flies, zebrafish, birds,
+macaque monkeys, chimps.
+But there's a reason why we're here in this room
+and the mice and the flies are out in the fields
+or maybe hiding in the corners,
+and the chimps are somewhere, sadly going extinct.
+So I'd like to understand what is unique
+and special about human intelligence in computational terms.
+And on the AI side, many of us are wondering,
+with all the rapid progress in AI, where is it going?
+Will there come a time when AI is not only just chatting
+with us, but actually asking these same questions,
+maybe together with us or on its own?
+If on its own, what are we, are we the mice or the chimps?
+So there's a lot on our minds. Okay?
+One way of thinking about how you get to human intelligence
+from maybe simpler, more basic kinds of brains,
+I want to start with that thesis.
+It's the one that in some sense I think most
+of the public conversation is about,
+but within cognitive science,
+I think it's pretty well acknowledged
+that there's a different picture
+and that's the one that I'm going to focus on in this talk.
+But let me start with this.
+So one idea is to think about what we can abstract away
+from a single neuron.
+Okay? This is from like one of the classic papers
+of Hubel and Wiesel on studying cells
+in primary visual cortex.
+And the idea that there's some basic computational element,
+a kind of inner product of inputs and weights,
+and then a nonlinearity,
+and then a learning element, like some kind
+of learning rule, way of adjusting the weights
+of the neuron in response to minimize some cost function,
+some objective function.
+That's a very basic idea
+and it's very powerful one.
+When you scale it up to very large and deep neural networks.
+This is the famous AlexNet,
+deep convolutional neural network,
+and train it on very large data sets like
+Fei-Fei Li and companies ImageNet,
+you can do amazing things.
+Computer vision experienced the deep learning revolution
+more than 10 years ago when sufficiently deep
+and big networks were trained
+on sufficiently big data sets like ImageNet.
+And then with variations on these architectures such
+as the transformer
+and training that now on all the texts
+that you can find on the internet,
+effectively all the language that humans have produced
+and made public, basically in human history.
+You know, you have things like this
+and I don't even have to tell you what
+that symbol represents because it's everywhere.
+It's probably on many of your phones and laptops, right?
+But I will mention it.
+ChatGPT is the thing that made AI, you know,
+daily on the New York Times
+and all of our news feeds, okay?
+And it's clearly changing the world in many ways.
+So much so that many people are asking, well, maybe,
+you know, either this is the route
+or a route to actually finally having machines
+that are true general forms of AI.
+Certainly ChatGPT
+and similar kinds of large language models
+present to the general public the way AI was always supposed
+to present to us, as computers
+that can do basically anything that computers can do,
+but that you talk to, you ask them to do something
+for you rather than having to program them, right?
+That's every science fiction movie.
+That's what AI is, right?
+Whether it's C3PO or the computer on Star Trek
+or any number of other examples.
+I won't mention HAL, except I guess I just mentioned HAL.
+Okay, so we have AI now
+presenting itself the way it was always supposed to.
+And, you know, these are systems
+which clearly are general
+in that they can do many different things.
+And so many people are asking, you know,
+is this both, on the AI side,
+is this where thinking is going to come from
+if we're actually going to have true human-like AGI?
+Or many people are also speculating,
+maybe this is what happened in actual biology, right?
+That just with enough scale of bigger
+and bigger brains, which certainly has happened
+over evolution, like our brains are the biggest, okay?
+Chimp's, basically the next biggest,
+having a big brain is helpful. Okay.
+Is it just about scale and, you know, is that enough?
+Okay, well, again, as I think we're all familiar with,
+I'm not going to give a whole lecture on ChatGPT,
+but just to give one example of a phenomena
+that I think we're all familiar with,
+if we are paying any attention to these systems.
+They do remarkable kinds of things that look like
+and in some sense are kinds of thinking,
+and yet they're also remarkably fragile.
+So to cite one example, this is a example
+that was on Twitter from my MIT colleague,
+well former MIT colleague, now Stanford, Erik Brynjolfsson,
+something that was spooky to him,
+asking a kind of, you know, intuitive physics example.
+And as you'll see later on in the talk, this is one
+of the areas I like to work on in cognitive science.
+So Erik asks ChatGPT,
+how would you make a stable stack from a book,
+four tennis balls, a nail, a wine glass, a wad of chewed gum
+and five uncooked spaghetti sticks?
+Crazy idea. You can start answering it for yourself.
+Here's ChatGPT's, answer, a systematic recipe.
+Well, first you start off
+by placing the four tennis balls on a flat surface
+in a square arrangement
+with each ball being a corner of the square.
+Then you place the book on top of the tennis balls, ensuring
+that each corner of the book is resting on a tennis ball.
+This will create a stable base
+with the book acting as a platform.
+And it goes on and on and on. It's amazing, right?
+I mean, if you can look at particular cases here
+and you know, it really appears to have,
+and in some sense I would say has some kind of understanding
+of the physical world objects
+and what is likely to happen in certain configurations
+and what can be done with them.
+We can keep going. And this is an example
+from Tyler Brooke-Wilson, one of the students I mentioned,
+a recent graduate of MIT philosophy now at NYU
+as a postdoctoral fellow.
+So Tyler asked ChatGPT to create a series
+of block stacking challenges, kind of like that.
+And you can see it comes up
+with things like the Office Supply Skyscraper,
+the Garden Variety Tower,
+the Artist Ascent, and then asked ChatGPT to solve them.
+And it basically, it's creative,
+it can come up with, it can sort
+of remix the ideas in all sorts of interesting ways.
+It gets the genre from that one example
+and whatever else it's been trained on.
+But if you actually look at the solutions, this is
+where you now start to see some of the puzzling things.
+Some of the ways it's intelligence is fragile.
+So just zooming in on any one,
+and they're all kind of like this.
+The Artist Ascent, so the problem of the Artist Ascent,
+I don't know if anybody else can read it,
+using a paintbrush, a small canvas, no larger than eight
+by 10 inches, a tube of acrylic paint, a pallet,
+a cup of water, construct a tower at least 12 inches tall.
+The structure must stand on its own for at least 45 seconds.
+Okay? So how do you solve that?
+Well open the paint tube
+and use some paint to adhere the brush to the canvas,
+creating a base.
+Stand the pallet vertically against the brush.
+Balance the cup of water on pallet using the remaining paint
+as an adhesive if necessary.
+I mean, it kind of sounds good.
+It's very fluent English
+and it's exploiting various actual physical properties
+and affordances of these objects.
+But if you think of it as a stable stack,
+to be able to do this, it's completely crazy.
+And by the way, when he prompted ChatGPT,
+he, and following other things I did,
+made it very clear in the prompt to say,
+it's okay if you can't solve the problem, be uncertain
+or say you can't solve the problem.
+It's better to be uncertain
+or say you can't solve it than to give a solution,
+which isn't going to work.
+But that doesn't stop ChatGPT from very creatively
+proposing many solutions which just are not going to work.
+So what's going on here?
+I mean, these and many other phenomena
+that many people have written about
+should make us be really be asking
+what is the relation between language and thought?
+A question that many people, including,
+just saw Steve walk in.
+Many people in this room
+have written really insightful things on that question,
+especially at Harvard over the years.
+And from a computational point of view,
+if we think about a cognitive architecture for language,
+what are the relation and the roles of language
+and thinking in that architecture?
+So that's effectively what we are trying
+to work on in this research program, okay?
+Implicit in the idea that ChatGPT
+or a large language model is, you know,
+that has some emergent thinking properties,
+is this sort of picture.
+And in some sense, this is an old idea,
+going back to Shannon, you know,
+the founder of information theory
+and the first statistical models of language.
+The idea that the task of predicting language saying like
+what will be the next word or character
+or the next sequence of characters or words,
+is in some sense kind of intelligence complete,
+whether it's AI or cognition.
+That thinking effectively can be
+operationalized as whatever latent predictive structure is
+there in between the text that's come before
+and the text that's come after. Okay?
+Now, there are some kinds of tasks like the ones here
+where you can see you have to use various kinds
+of common sense knowledge
+or knowledge about the world to complete the pattern, okay?
+But there's also a pretty clear pattern evident
+in the surface form of language.
+And so it might seem sort of plausible that just being able
+to predict the future
+of any sentence in context based on the first part
+of the sentence or the sentences that have come before,
+could be a way to deploy
+and maybe to train a generally intelligent architecture.
+But then when you take any particular computational system,
+like any particular transformer,
+which is a finite architecture trained on a finite data set,
+even very, very big, okay, that's doing,
+especially this the way a large language model works
+or any sort of predictive sequence model
+that's doing auto regressive predictions
+or predicting the next element, token
+or word based on all the others
+and then just repeating that going forward.
+There's no particular reason that should be able
+to solve any problem
+or perform any kind of thinking, even if there's a lot
+of interesting knowledge
+and understanding stored in the latent structure.
+So here are some examples of problems
+for which there's a clear answer, okay?
+And you can compute it, but it's unlikely
+that a auto regressive language model
+is going to compute it.
+Now, there are ways that people
+in the AI community have been sort
+of trying to extend these models,
+like what's sometimes called chain
+of thought or tree of thought.
+If you basically train the model to think step by step,
+which means to generate out not the immediate answer.
+So not just to fill in the blank like to that question,
+but to basically generate intermediate steps
+of computation, then that can help.
+It turns out that, you know, again,
+these are moving targets, but that helps
+for the top problem.
+It doesn't help for the bottom problem.
+But this is one of the things
+that the large language model AI community is trying
+to do in order to get the language models
+to become more general thinking systems.
+There are other things that are really,
+really important in ChatGPT and other such models.
+So-called reinforcement learning from human feedback.
+So tuning them to be predictive not only
+of the next token in language,
+but of the kind of thing
+that people tend to give thumbs up to
+as opposed to thumbs down.
+Okay? What vision this expresses as a scaling path
+to intelligence, again,
+is one that puts language at the center
+and says all the patterns and language, that is enough.
+And from an architectural point of view,
+says that like language is the substrate of thought. Okay?
+Again, as Steve Pinker
+and many others I think have written about.
+There's real problems with that.
+And I'm not going to go into this, but just refer you
+for example to some of Steve's writing on that,
+like The Stuff of Thought.
+Great classic book to get some introduction to that. Okay.
+
+Let me give a few other cognitive
+and neuroscience perspectives though.
+So for example, in the work of my colleague at MIT,
+Ev Fedorenko, she and many others,
+but these are a couple of slides I borrowed from Ev.
+She has studied the language network
+in the human brain using FMRI
+and other kinds of neuroimaging as well
+as other neural recording from humans
+and other neuropsychology
+and just behavioral methods to understand a system
+that again, people have studied for, you know,
+much more than a hundred years with different methods.
+But a network of brain regions shown here in one
+of Ev's slides, that is distinctively involved
+in using language.
+That includes both speaking like I'm doing
+and understanding, like I hope you're doing.
+Also reading and writing
+and you know, you can be blind and learn braille.
+
+Language is language, okay?
+Language is language regardless of
+what language you grew up speaking.
+Even if you learn to speak one
+of these constructed languages
+like a an artificially made up language like Klingon,
+or Dothraki from Game of Thrones.
+If you're a fluent speaker, your language network
+as Ev and colleagues showed,
+is activating in just basically the same way.
+The the large language models,
+these predictive transformers,
+this is some work I played a small role in
+with Martin Schrimpf and Ev and other colleagues.
+Large language models act like,
+this is actually a smallish language model
+by today's standard, a GPT-2 model,
+can provide a reasonably good, or at least state-of-the-art,
+quantitative predictive model
+of responses in the language areas of the human brain
+during language processing tasks.
+So that's interesting, I think, I'm not trying to argue
+that language models don't tell us something about language.
+But as Ev along with colleagues Kyle Mahowald
+and Ivanova, a bunch of us wrote a piece
+which is coming out soon in Trends in Cognitive Science,
+sort of are trying to articulate this modern computational
+and cognitive neuroscience perspective
+on the relation between language and thought.
+So I'd refer you to that piece also for a lot
+of really good perspectives on this.
+And that team played a role in, one of this was one
+of the early studies applying large language models,
+or now we call them small language models.
+These models are actually plausibly something a little bit,
+like the training data these models have
+is a little bit closer to the training data
+that a person might get and they're not bad.
+And at least there are best quantitative predictive models
+of responses in the human brain
+and much better than simpler kinds of language models.
+Okay? But these models, if you remember GPT-2,
+nobody thought that GPT-2 was a general model
+of intelligence, okay?
+It started to capture a lot of syntax
+and some of the like syntax semantics interface.
+So pretty interesting stuff,
+but it certainly didn't capture general intelligence.
+And it also didn't capture all of semantics even.
+But as Ev and colleagues have also shown, right,
+the language network, the part that's actually modeled
+by a small to medium sized neural language model,
+is really just about language.
+So when people are doing other tasks, including things
+that are similar to language in some ways,
+like solving algebraic equations
+or understanding code, other kinds of logical reasoning,
+the language network is not involved in those,
+if you know how to look carefully.
+And similarly, brain damage
+can selectively impair just language and not other forms
+of let's say symbolic thinking.
+So bottom line, language
+and thought are different at the brain.
+But in even I think more compelling perspective comes
+from looking developmentally.
+So how do children grow into intelligence?
+I mean, AI people, going back to Alan Turing,
+certainly in my own AI research,
+we've been very much inspired by thinking about
+how children grow into intelligence.
+And as you know, if you think about it, in the same way
+that human intelligence is unique, human beings
+as learning machines are unique.
+A human child is the only learning machine
+in the known universe that reliably grows
+into full human intelligence starting from much less.
+So let's look at how they learn to think
+and how they learn language, right?
+As again, to cite another distinguished Harvard colleague,
+Elizabeth Spelke, also in psychology,
+this is her book recently published.
+She and many others in the field
+of infant cognition ha have laid out all the ways
+in which human babies, well before they've learned language,
+already have systems for thinking.
+Systems for thinking about physical objects,
+systems for thinking about other agents, their goals
+and plans and how they interact with physical world
+and each other, for example.
+Okay? So clearly developmentally thinking comes first
+and that is crucial.
+We understand as a field
+or we believe you know, this is somewhere
+between a belief and a pretty well supported set of facts,
+but there's still debate, that the knowledge
+that humans have prior
+to learning language is a key part of how we're able
+to learn language from so much less data than one
+of these large language models. Okay?
+The latest models might be trained on a trillion words,
+but a human child might hear,
+people estimate maybe 5 million words a year.
+So maybe something like a hundred million words
+over the first 20 years, okay?
+That's a very, very small corpus
+by today's AI standards, okay?
+Maybe most interestingly in development is the work
+of Susan Goldin-Meadow.
+And I find every time I talk about her work,
+find this incredibly inspiring.
+Susan and her colleagues
+and students have for a long time studied home sign as well
+as a related phenomena like the Nicaraguan sign language.
+Home sign is a phenomenon where children who grow up deaf,
+where they don't get sign language inputs,
+so they basically don't get language input.
+They still reliably
+construct their own communication systems
+that are kind of like proto languages.
+They aren't languages, but they're systems
+of expressing their thoughts, trying to,
+and indeed communicating with the other people around them
+that have many of the kinds of features of language.
+So, you know, this suggests that there's something
+about the human mind that is the creator of language.
+It's not the other way around,
+it's not training in lots of language.
+Language comes from the mind.
+And even in one individual human is able to start
+to create their own language
+if they don't get language input.
+The Nicaraguan sign is an example of a famous case
+where an orphanage that brought together home signers,
+children who grew up
+without really any standard natural language input,
+brought them together in an orphanage
+and they each had their different home signs,
+but they kind of figured out ways to communicate
+with each other, making what some characterize as pigeon
+and then creoles, basically creating a whole new language
+from scratch in just a couple of generations.
+So again, this is just remarkable to me,
+when you want to think about the relation between language
+and thought, that an individual human being
+with no language input starts to find symbolic ways
+to express their thoughts.
+And you put a few of those folks together
+and in basically no time with very little data
+and experience in the grand scheme of things compared to all
+of human culture that produce the internet,
+they create their own whole new language
+and cultures then start to evolve around it.
+So that's, you know, telling us something.
+And again, maybe most strikingly is not just
+to think developmentally but evolutionarily.
+So organisms like the fly
+or the zebrafish that have only a hundred thousand neurons
+or the honeybee has about a million.
+The mouse, some tens of millions,
+other traditionally smart animals like great apes
+or crows, tool users, right?
+None of them have language.
+All of them think in some form.
+Nobody's going to disagree that chimps
+or crows solving tool use, physical problem solving are
+in some ways, of course they're thinking.
+The zebrafishes, I have a special fondness for
+due to some work that I was a very small collaborator
+in work in Flora Ingrid's lab here also at Harvard
+that was led by Andrew Bolton.
+But Flora and others have long studied zebrafish
+and what you can get from its brain, as well as
+in this case, in the project that Andrew looked at behavior.
+Andrew did 3D psychophysics looking at
+how a zebrafish hunts its prey.
+So if you, if you don't know about zebrafish,
+the larval zebrafish are really, really small.
+You need a microscope to study them.
+And they hunt things,
+which are even smaller single cell organisms, paramecia,
+okay?
+The paramecia kind of move in a semi-random way,
+but not completely random.
+And the zebrafish try to track them.
+And what Andrew and colleagues showed is
+that the zebrafish has a kind of predictive model
+of the paramecia.
+It's in a sense, able to make guesses about
+where the paramecium is going
+and bets about how to get there.
+The way you know this is
+that it moves into very discreet set of actions.
+It rotates, it's kind of like a video game controller
+for those of you who play video games.
+It has little flippers
+or fins that it can flap and a tail that it wiggles.
+So it basically moves in a series
+of somewhat discreet motions of going forward in bouts
+and turning, okay?
+And it will reliably track and pursue a paramecium,
+but crucially it doesn't move to where the paramecium is.
+But it moves towards
+where it can predict under an optimal ish, simple
+but optimal statistical predictor of where it's headed.
+So it moves towards where it's headed.
+And if it continues moving towards where it was headed,
+then the zebrafish catches it.
+If it deviates a little bit,
+the zebrafish might give up and go somewhere else.
+That's the basic psychophysics
+that Andrew and others studied.
+So you can see here that
+in brain with basically almost no learning
+and just a hundred thousand neurons,
+you already see the beginnings of what we think of
+as intelligence, which then scales up in all sorts of ways
+with our much bigger brains
+and our much more distinctively human, smarter brains.
+So like the chimps, like the crows,
+we are consummate physical problem solvers.
+Whether it's this 1-year-old doing something,
+solving a problem that probably he never saw demonstrated
+for him. Stacking up cups, not just in the usual ways
+that kids have been known to stack up cups,
+but in this case stacking up cups on the back of a cat.
+It's as if he's decided that his goal is to see, you know,
+like a medieval monk,
+how many cups can he get on the back of a cat?
+He figures out it's about four
+and then he switches to an easier goal, which is,
+let me get the cups to the other side of the cat.
+Okay? My favorite part of the video is
+what you just saw when he reached back for the purple cup,
+a very striking form of object permanence in this 1-year-old
+'cause he hadn't seen or touched that cup
+for at least a minute, if not a lot longer.
+When kids get older, they do more complex things
+as we are familiar with,
+such as this kid here making a big tower out of Legos.
+Or in a very nice example of physical problem solving
+that my colleague Kelsey Allen now works at DeepMind.
+I'll show you some of her work in a little bit.
+She'll be starting as a faculty member at University
+of British Columbia in Vancouver next year.
+This is an example of a kind of thing that she studied
+where this kid here is in an Easter egg hunt.
+You might see the Easter egg in the upper left
+and he can't reach it,
+but he decided, oh, maybe he can use
+that shovel to reach it.
+Probably not a use of the shovel he ever saw demonstrated,
+but he just figured it out.
+Of course when he sees it's not working,
+he switches modes and now he grabs the other end
+of the handle, or the other end of the shovel as a handle,
+and maybe this'll work.
+What do you think?
+Well, he didn't have time to figure it out
+'cause his sister came along
+and, you know, ultimately yeah, it's okay.
+He did okay. Yeah.
+But so these kids are cute
+and sweet, at least some of them,
+but all of them remarkably intelligent. Okay?
+So this kind of common sense understanding of
+and ability to act intelligently
+and plan in the physical world something we inherit
+from evolution.
+But you can see probably distinctively develops in human
+through both biological and cultural evolution.
+And then if we want to talk about the human way of scaling,
+when language comes into the picture,
+when kids are old enough to learn both spoken language
+and then especially to read,
+that's the real singularity, right?
+This is the sense
+in which language models are really capturing, you know,
+language models
+and AI are really capturing something important
+about the human scaling route to intelligence.
+Human intelligence is,
+or you know, the singular achievement is what the knowledge
+that culture builds socially
+and then collectively across generations
+that we can tap into through written language
+and other enduring forms like that,
+as well as oral traditions, and then contribute to.
+You know, why do we come to universities?
+Why have we built universities?
+We're all here for basically this purpose, okay?
+There's a reason why lecturing or conversation, seminars
+and writing papers and reading papers,
+why that is the activity that we have come
+to understand is a singularly good way of sharing
+and building knowledge together.
+So, but we get to that building
+on all the stuff you've seen.
+So what we're trying to understand in our field is
+how do we capture these ideas in computational terms?
+And it starts, I would say,
+and again, I'm reflecting my own view,
+but also the consensus of a lot of people in computation
+and cognitive science as well as in other areas of AI
+that you don't hear as much about in the news,
+you know, for understandable reasons,
+but you should hear more about them.
+So the way we understand it, I would say,
+this is a somewhat opinionated,
+but I think also factually grounded view is
+that the fundamental thing about brains
+that scales up in humans, that language builds on
+and further scales, is not about learning.
+Okay? Human brains are remarkable learning machines,
+but the kinds of intelligence you see
+in much simpler brains is there even before language,
+and even before significant learning.
+The fundamental computational function
+of brains is to make good guesses and good bets
+and to do that with some kind of model of the world.
+Like even that zebrafish has a simple model of the world.
+It's simple and it's much more constrained than the models
+that you and I have or that the chimp or the crow have,
+and much less flexible also.
+But this idea that
+what brains do is effectively build a model
+of the world at multiple grains and scales of abstraction
+and generality,
+and use those to figure out what's there, to make sense
+of their sense data in terms of the world
+and themselves in it.
+And for many animals, there are other agents
+either conspecifics or predators or prey.
+And then to use those models to make good bets about
+how to spend your time,
+I mean your energy and your other resources.
+What to do next or what to think about next.
+This equation here has been proposed,
+it's based on a slide by Max Kleiman Weiner
+from inspiration from Peter Norvig,
+who together with Stuart Russell wrote
+what is probably the canonical book on AI.
+It's called AI: A Modern Approach,
+which is a slightly weird name
+'cause the book was first written in the mid nineties
+and the word modern keeps getting redefined as we all know.
+I'm just curious, raise your hand if you have read
+or at least cracked open this book, okay?
+If you're and you have any interest in AI,
+you all should go pick this book up.
+There's many additions,
+the most recent edition came out just a couple of years ago.
+The reason I recommend and point you to this book is
+because it's amazing how much of the current conversation
+around AI is going on is really just about ChatGPT
+and related like large language models
+and leaves out so much of the basis of the field.
+And many people, especially students coming
+into the field these days, can successfully
+and productively do things that we call AI
+without actually studying most of the basis of the field.
+But what you see when you get there is a set of tools
+that again, have developed over a number of decades
+that are sort of expressed in this fundamental equation.
+It's basically, and sometimes it goes back
+to the classical idea of rationality
+that you might be familiar with in economics
+or any other study of sort of rational decision making.
+Okay? But the idea of an agent, a rational agent
+that chooses actions to maximize their expected utility,
+that's goes back hundreds of years as a way
+to formalize one thing we might mean by rationality.
+And what the field of AI as well
+as computational cognitive science has done,
+is try to characterize the different aspects of the mind,
+different components, different representations
+and algorithms in terms of basically
+how they cash this idea out. Okay.
+And then I think we can think about
+and it's exciting that modern language models
+and other technologies also let us see
+where language might come into the picture.
+So if we have brains that fundamentally evolve
+to do this kind of thing,
+and then language comes into the picture, we learn language
+by basically translating
+or relating it into those representations
+for rational inference and decision making,
+but then also massively amplify and extend them
+because language enables new kinds of world modeling,
+new kinds of inference and planning
+that we weren't able to really conceive of without language.
+So that's, I would say, the roadmap in high level terms
+that we and many others I think have been working on.
+Now you might ask, okay, well,
+how far are we on this roadmap?
+Is it anywhere even close to what we've seen
+with this sort of large scale up neural compute?
+Well, clearly we're not there yet because
+otherwise you'd be reading about that instead of ChatGPT.
+And to some extent why this approach, I think,
+isn't more broadly known is because the people
+who've been pursuing it have actually made quite a lot
+of progress, even though there's quite a long ways to go.
+But we've written up a lot of papers
+and unless you read the literature, you know,
+it's hard to get at that.
+So one thing that we've been trying to do to remedy this
+with a couple of colleagues, Tom Griffiths
+and Nick Chater especially,
+but many others who've contributed chapters
+to this forthcoming book, that date is just the date
+of a Logitech file that I compiled.
+So the book will be coming out later this year
+and it's a really, well if I do say so myself,
+
+I think it's a really nice book.
+(laughing)
+I can partly say that
+because while I helped to conceive of this book
+and did a bunch of work on it, Tom especially,
+Tom Griffiths really led the charge
+and along with Nick Chater and also with me
+and many others who contributed chapters on many topics,
+really trying to convey in a way that's accessible.
+It's more of like a textbook
+or somewhere between a textbook and a research monograph.
+So it's not a popular book,
+but it's one that anybody, anyone here certainly could read,
+to try to get a sense of how this toolkit for,
+let's call it, you know, rational inference
+and decision making for
+what is in some sense maximal expected utility thinking,
+can be used to understand and really reverse engineer
+so many aspects of human cognition.
+I'll just show you a little bit about a couple
+of these things and then come back to language
+because again, though I started with language
+and everybody's talking about language models
+and language is the human singularity,
+it's language building on the common sense representations
+that are much older,
+that is really the heart of this approach.
+So two ideas that we
+and others have developed here for thinking about,
+well in particular, these topics
+of basically intuitive physics and related ideas
+and causal reasoning and intuitive psychology.
+So one is this idea which we sometimes sum up
+as the game engine in your head.
+And it's this idea that some of the same kinds
+of tools that have been developed by the video game industry
+that many of you might be familiar with,
+either because you play games or because you program games
+that fall under the head heading of game engine.
+That these might be actually a way to think
+in engineering terms
+about what Liz Spelke calls core knowledge
+or what are the representations
+and algorithms, the programs that are built into our brain
+and shared maybe with many other animals?
+So game engines, if you're not familiar with them,
+are very fast, or designed to be very fast,
+but approximate ways of creating
+and simulating interactive worlds.
+So that includes graphics, physics,
+maybe modeling other agents,
+anything needed to immerse a player,
+like this is from one of the Zelda games,
+to immerse a player in a perhaps a strange
+and also still oddly familiar world.
+So this is a world where there are various kinds
+of magic spells and physics challenges,
+you can see the player solving.
+They're trying to solve a physical problem,
+kind of like the kid with the shovel, you know,
+to get their Easter egg.
+But in this case they have to like teleport
+and throw this thing
+and it magically sticks to these things.
+And it's sort of a weird variation on physics.
+It's not physically plausible
+and yet you can get it right away.
+You can see it
+and that the software enables this very interactive
+and flexible kind of physical problem solving.
+Okay. There's many other examples
+of ways that these game style physics engines,
+which don't model physics
+necessarily the way a physicist would,
+although they draw in physics,
+but they make all sorts of approximations
+and hacks in order to try to handle a wide range
+of physical scenarios very efficiently.
+The physics engines don't have to be right,
+they just have to look good
+or look good enough over short timescales.
+And in that sense, they also match many
+of the performance characteristics we think
+that the brain cares about.
+Okay, I should say this slide is,
+and these images here are slightly modified
+from a slide from Tomer Ullman, another one
+of your distinguished Harvard colleagues.
+And if you want an introduction to this idea,
+check out Tomer's paper called Mind Games,
+which was a trends in cognitive science paper
+from a few years ago, which is probably one
+of the best introductions to this idea
+if you want to see a written form of it.
+This is another Ullman who is just an illustration of
+
+what we might mean by when we talk about the game engine
+in here in the head.
+We don't mean a simulator that's a training ground
+for some machine learning algorithm,
+which is also a possible way, in a way
+that game game engines have been used a lot in AI,
+but rather a way to capture, in engineering terms,
+what's going on inside this kid's head when he thinks about,
+when he imagines in this situation, seeing the blocks
+and the bird on there,
+much like the situation we thought we were sort
+of putting GPT in before.
+But here he imagines is it stable or not?
+Or what would happen if, for example, I rolled this ball
+and mentally simulates the collisions and the effect
+and thinks, well do I want that or do I not want that?
+Okay, so that's the way this kind
+of engineering framework can be used to capture some aspects
+of early common sense world modeling.
+But where it really becomes a framework
+for intelligence in the sense of making good guesses in bets
+or doing things that maximize expected utility.
+Well you have to be probabilistic
+and not just probabilistic.
+The other key technical idea in the research program
+that we work on is what's called probabilistic programs.
+And this is a toolkit that, you know, kind
+of like neural networks, you know,
+this is a catchall phrase for a set of ideas
+that have evolved over a number of years, even decades,
+that you can think of as combining the best features
+from an engineering standpoint of multiple paradigms
+for understanding intelligence computationally.
+So that includes the idea of doing probabilistic
+or Bayesian inference, working backwards
+to infer the likely causes that explain observed effects,
+for example, but also symbolic programs.
+So doing probabilistic inference on, for example,
+the inputs to programs from the outputs.
+That's important because
+if you want to capture something like intuitive physics,
+it's not enough to just say, well,
+there's some high dimensional Gaussian,
+or maybe there's some weekly non-linear thing.
+Rather, you want to take something
+like a physics engine simulator and use it
+as the heart of your probabilistic model.
+It's describing the causal processes in the world.
+And so you want to be able to do probabilistic inferences
+about what's likely to happen if I do this.
+Or when I see that, what was probably the input?
+How heavy was this thing?
+Or what forces were applied?
+And modern probabilistic programming languages also
+integrate neural networks.
+So while I'm arguing that what we call neural networks,
+namely the computational abstraction
+in artificial neural networks that tries to scale up
+what a single neuron
+or a simple network of neurons might do,
+I'm arguing that is not our best engineering way
+to understand where human intelligence comes from.
+It's a valuable one. And the idea of differentiable systems
+and vectors for distributed representation,
+associative memory for example, that's a very powerful idea.
+And modern probabilistic programming languages let you
+combine all three of these motifs and that's very powerful.
+So just a few examples
+of how we have used this to capture some
+of the common sense intelligence
+that is there before language.
+And then I'll show you a little bit
+how language might build on it.
+So with Tomer and also a number of other colleagues,
+we've built these models,
+which we sort of have sometimes lumped
+under the phrase the intuitive physics engine.
+Which takes the, the physics engine part
+of game engines, wraps it inside a framework
+for probabilistic inference and approximate simulation
+and uses that to model many kinds of common sense judgements
+that a person can make, for example,
+about these block tower scenes.
+So not surprising why I'd be interested in some
+of those tower stack building things
+that people are exploring with language models.
+Okay, so given for example these stacks on the left,
+you might ask how stable is the tower?
+How likely is a tower to fall?
+Or if it falls, which way will it fall?
+Or how far will the blocks fall?
+Or what happens if some
+of the blocks are colored differently
+and the different colors are heavier or lighter?
+So for example, you can see here that if I tell you
+that the gray blocks are 10 times heavier
+than the green blocks, you'll make a different prediction
+for which way they will fall if they fall on on the top
+versus on the left.
+The geometries of the blocks are the same,
+I've just recolored them, but yet your mind's physics engine
+or your whatever mental physics simulator you have
+will make a different prediction
+showing that it's both sensitive to mass,
+but also that I can kind of program it
+by just telling you something,
+like the gray stuff is 10 times heavier
+than the green stuff, okay?
+Or if you see these surprisingly stable scenes,
+can you infer what is likely to be much heavier
+than another to explain why they're not falling over?
+So in each of these cases,
+we can make quantitatively predictive models
+based on this idea.
+I'm not going to go through the details,
+although I'll show you one example
+of a simulator glimpse in a second.
+But the idea of the kinds
+of experiments we do are we give people a number
+of different stimuli controlling certain sources
+of variation, like, you know, how complex is the stack
+or how unstable it might be in different ways,
+controlling for other sorts of confounds.
+And then we measure, for example,
+by asking people on a scale of one to seven,
+or by having to make a two alternative force choice
+and just aggregating a bunch of people,
+or we can look at their reaction times.
+There's many ways to measure graded intuitions
+about stability.
+And on the Y axis here,
+I'm plotting the average stability judgments of a group
+of participants for 50
+or 60 of these different block towers.
+On the X axis, what I'm plotting is a model prediction,
+which is the average of the results of a small number
+of simulations in one
+of these approximate game style physics things.
+Where the system,
+part of the probabilistic simulator here is
+that we have uncertainty about a number
+of things in the scene
+that the visual stimulus does not completely determine.
+So we don't know exactly where the blocks are.
+We can't perfectly solve the inverse graphics problem
+from just a single image.
+We don't exactly know the coefficients of friction.
+We allow for the possibility
+that maybe there could be a force perturbation,
+a little burst of wind,
+or somebody could bump the table.
+Under various sources of uncertainty like that,
+and that's really important,
+we can in infer that some stacks are likely to be more
+
+or less stable, have more or fewer blocks
+or maybe no blocks fall over.
+And there's a very nice correlation in this case
+between the model predictions on the X axis
+and human judgments on the Y axis.
+The same thing extends to a much, in some sense,
+stranger sort of task where like a lot of other experiments
+in psychology, we study the mind effectively
+by giving you something
+that you don't have much experience with.
+If we're trying to understand what do you do
+that you didn't just learn in a very simple way.
+So the question of will this stack of blocks fall over
+is one that many of us have a fair amount
+of experience with.
+If you play games like Jenga, you have a lot of experience.
+But I can show you a similar scene like these tables
+with red and yellow blocks
+and ask you a question, which if you haven't seen me talk
+about this before, you probably never thought about.
+What if you bump one of these tables hard enough
+to knock some of the blocks onto the floor,
+is it more likely to be red or yellow blocks on the floor?
+And people can again make a graded judgment.
+That's what you see on the Y axis.
+And the model can make a graded judgment too.
+And the model is almost as predictive
+of this very strange question as it is predictive
+of the much more familiar task of judging just
+how likely is it to fall. Okay.
+Now how does that work?
+Well it works because again,
+our system isn't training on data.
+Rather it's built a model and it's doing a simulation
+and it does just a small number of very course puppets
+and probabilistic simulations.
+So what do I mean by that? I'll be more concrete now.
+This is a window into one of those simulators,
+simulations applied to one of those scenes.
+And you can see here I've modeled a small bump of the table.
+Here on the same configuration, I've modeled a bigger bump.
+Okay. The simulator probabilistically tries out bumps
+of a few different sizes
+and a few different angles kind of semi randomly.
+And by aggregating the results of just a few simulations,
+you can get a pretty reasonable sense
+to answer the question.
+You also don't have to run the simulations very long, right?
+You can see that after just the first couple of time steps,
+you already know the answer, at least for many
+of the scenes, or you may be uncertain.
+So we only have to run a small number of simulations
+for just a small number of time steps,
+and we could also run them at low resolution,
+and that's enough to capture what's going on there.
+Okay? So that's at least some window into
+how we use these tools to model the guesses
+and the bets that your brain makes.
+We can do similar kinds of things in dynamics tasks,
+like for example, this is work from Kevin Smith
+and colleagues where you have to predict, oh, I kind
+of messed it up by going too fast.
+You have to predict whether this billiard ball
+bouncing around is going to hit the red
+or the green surface first.
+So we can make this a little interactive here.
+So say, ooh, if you think it's going to hit red
+or ah, if you're going to think it's going to hit green.
+Okay, here we go.
+But better go fast 'cause it's about to hit the red.
+Ooh, okay.
+If I hadn't messed it up, you would've said, ooh,
+and then ah, but I messed it up.
+But you can simulate that too, okay?
+And notice that when it's first starting, right,
+it looks like most people are pretty sure
+it's probably going to brush the red
+and then it just barely misses it.
+It takes you a little while
+before you become confident,
+it's usually only about there before, you know,
+you become confident that it's going to hit the green.
+So people are able to simulate, but usually only about one
+or two bounces at most in open things like this.
+And we can capture that by assuming that they do a sort
+of dynamic version of what we were showing, again,
+with some noise or uncertainty in the trajectory of the ball
+and its position and velocity
+and especially uncertainty about bounces,
+because unless you're a really experienced billiards player,
+you're, you're pretty uncertain
+about how to extrapolate bounces, okay?
+And that model, this is just showing that cone
+of uncertainty that comes
+from running these probabilistic simulation.
+It's able, if we just add up the results of a few
+of these simulations, it's able to capture the tendency
+that people tend to say that's probably red,
+ah, then I'm not sure, then it's probably green.
+More quantitatively,
+in this study we had a hundred different scenes.
+I'm showing you four of them here
+and I'm showing you dynamic trajectories,
+the plot first on top people and on the bottom model,
+and showing how the graded confidence changes
+over the scene.
+And you can see quite a lot
+of interesting structure to the data.
+Some scenes people are very confident of one
+and then they switch to the other.
+Sometimes they're just not sure for a long while
+and then there's a sudden resolution.
+Sometimes there's multiple switches
+and it's really striking
+how much this model is able to capture it.
+In work that I was very privileged
+to collaborate on with Ed Vul, who was long ago in my lab,
+he's now at UCSD and Amazon.
+We worked with infant researchers, Erno Teglas
+and Luca Bonatti and others
+to study intuitive physics and infants.
+So 12 month olds were asked to extrapolate,
+were shown scenes
+like these little gumball lottery machines here.
+And they saw the objects bouncing around for a little while,
+and then there was a period of occlusion
+and one of the objects appeared.
+And what was varied across different conditions
+of the experiment was whether there was more
+or less objects of three or one
+of the color that ultimately appeared.
+Where those objects were at the time of occlusion
+and how long the time of occlusion was.
+And a very simple probabilistic physics simulation model is
+able to make different predictions
+as a function of those variables.
+And it captures in a graded
+and fairly compelling quantitative way,
+given the very strong limitations
+of how hard it is to get quantitative behavioral data
+from infants.
+But it captures infants uncertain predictions
+in the sense that, you know, the classic method that Spelke
+and many others have pioneered
+for studying the infant mind is looking at violation
+of expectation or other looking time measures.
+People, and babies too, look longer
+when you show them things that are surprising.
+And looking time here is predicted
+in a quantitative way by inverse probability
+in one of these physics models.
+Even some of the most recent work,
+this is in our lab from Sam Cheyette, Tracy Mills
+and Sam Cheyette.
+We can study how people are able to predict
+in just a simple sequence of a moving dot,
+something that goes well beyond physics
+but can have much more structure, almost various kinds
+of algorithmic or program structure.
+So just the ability to predict
+what's coming next is really quite a powerful way
+to study the minds models
+and how we use 'em to make guesses and bets in the world.
+And these are things that are distinctive to humans as Sam
+and others have shown working with macaque monkeys
+and developed significantly from childhood to adulthood.
+Although human children appear, at least so far,
+to look a lot more like adults than like macaques.
+In work I mentioned before from Kelsey Allen and Kevin Smith
+and colleagues, or I alluded to when I showed you the kid
+with the shovel. For reasons of time,
+I'll basically skip this,
+but I'll just refer you to their PNAS and forthcoming paper.
+But to study how people use tools
+and use their intuitive physics flexibly for tools, Kelsey
+and Kevin came up with this cool video game,
+which we called the "Virtual tools" game.
+And you can see,
+all you do in this game is your goal is always
+to get the red object into the green place,
+the green location, stably.
+And you act by choosing an object, a tool,
+and just dropping it into the scene
+and then physics unfolds and you see what happens.
+Okay? People really like playing this game.
+You can actually play it yourself at the MIT Museum.
+It's part of their new AI exhibit in the new MIT Museum
+in Kendall Square.
+And like a lot of other kinds of physical problem solving,
+but very much unlike
+what's often called reinforcement learning
+and machine learning,
+this is a kind of a reinforcement learning task.
+You just act and you get some feedback
+and then you can act again,
+so you learn from trial and error.
+But across many different levels of this game,
+people learn extremely quickly.
+They learn in, you know, sometimes just two
+or three trials, rarely more than five or 10.
+And we model that by basically putting
+that simulator in the loop
+and having a process which imagines possible ways
+of solving the problem,
+drawing from just a very simple prior to try
+to cause collisions or object interactions.
+Imagine what might happen
+if you come up with a simulation
+with a few tries into your head
+that is likely to solve the problem in the world,
+then you try it out.
+Otherwise you sort of repeat
+and re-sample in a different part of the space.
+And that's able to capture people's curves quite precisely.
+So these are across 20 different levels in the physics game,
+the red and the blue curves.
+The blue curve shows humans cumulative probability
+of success as a function of trials.
+And the red curve shows the model.
+So the model, this idea
+of just trying out a few ideas in your head,
+and then when one of them seems
+to work, try in the real world
+and if that fails, repeat,
+captures both the problems
+that people find harder or easier,
+both their ultimate level of success.
+Sometimes people don't always solve it,
+but also the relative rate of learning,
+how many trials it takes you to figure it out.
+Okay. Mostly that's all I'm going to say
+about intuitive physics.
+And it's mostly all I'm going to say about common sense.
+I want to let save the last few minutes to talk
+about language.
+I'll just point to a whole other line of work,
+which was done in part in collaboration
+with Rebecca Saxe here.
+One of my great friends and MIT colleagues,
+along with a number of others.
+Folks like Julian Jara-Ettinger,
+who was a grad student with me and Laura Schultz,
+and Laura also at MIT played a role
+in a lot of these things.
+If you want a summary of this sort
+of parallel research program of using the idea
+of probabilistic inference on top of programs
+that capture the causal structure of the physical world,
+and in this case has social agents interact with it.
+Check out another really nice Trends
+in Cognitive Science piece by Julian Jara-Ettinger
+and colleagues called the "Naive Utility Calculus."
+This was published back in 2016.
+Julian, I should say by the way,
+is now a faculty member at Yale in psychology.
+And basically, I'll just point you to this,
+it's some of my favorite work that I've been involved in.
+But what we are doing here is we are also using the idea
+of programs, but to describe the world.
+But now it's programs which take as input percept and goals
+
+and plan actions.
+So these are models.
+They also do effectively kind of rational decision making.
+The goals are sources of reward for an agent
+and actions have costs.
+And in this work, the idea is that we are modeling agents
+as making plans, sequences of actions
+to maximize their expected utility, choose actions
+that support their goals and so on,
+given their beliefs about the world.
+But the key is that these are not models of human agents.
+These are models of human agents, models of human agents,
+or perhaps non-human agents too.
+Like for example, in the work of Kiley Hamlin
+and others with the little balls or the classic work
+of Heider and Simmel, or Gerges and Sherif,
+if you know all these really beautiful studies
+going back many years of studying how human adults
+and even babies can make sense
+of little shapes moving around
+if they follow effectively the principles
+of efficient action planning.
+Okay? So in this line of research, what we study is
+with similar kinds of stimuli,
+for example, in the food truck stimuli,
+which Chris Baker and Julian did with Rebecca and me,
+looking at an agent moving around in the world.
+In this case, looking for one
+of several food trucks park on campus in one
+of those two yellow parking spots.
+Could be the Korean truck or the Lebanese truck
+or the Mexican truck,
+parked in different spots on different days.
+But when an agent comes out, goes around the building
+where they see the Lebanese truck
+and turns back to the Korean truck
+and you ask, what is that agent's favorite food,
+Korean, Lebanese or Mexican?
+People infer that actually it's Mexican,
+that's the bar on the right under desire, the M.
+Mexican was her favorite, right?
+Even though that's not the one
+that was actually present at all in the scene.
+But the best way to explain why she moved
+on an efficient path, not to her actual goal,
+but to what she thought might've been there.
+We also ask people what were the agent's initial beliefs?
+And they say, as our model predicts,
+that she probably thought Mexican was there,
+so that was her initial belief and that's what she wanted.
+But that's why she went to the other side to look.
+But the reason she went back is because,
+well, it wasn't there.
+She only discovered that when she got there.
+So this, for example, across many different stimuli, again,
+where we vary in a controlled way,
+the different sort of stimuli,
+is able to quantitatively predict people's inferences
+about agents' desires and beliefs
+and also how they interact.
+Because in scenes like this one, you can only make sense
+of her action if you posit a goal that is not present
+and the false initial belief
+that it was likely to have been present.
+So these are just again, a taste of how this toolkit of,
+in this case, sort of doubly bayesian
+or approximate rational probabilistic inferences
+about other approximately rational agents,
+is able to capture core aspects
+of our common sense world models.
+Now how does language come into this?
+Well, again, I don't really have very much time.
+In fact, I think I'm out of time,
+but I owe it to both the beginning of my talk
+and I hope if you'll give me just another five, six minutes
+to just basically advertise this very nice paper by two
+of the students that I started with
+when I mentioned the original acknowledgements, well,
+it's actually by a number of people,
+but the co-authors are Lio Wong and Gabe Grand.
+And Alex Lew also played a really key role in this work,
+along with some of my faculty colleagues like Jacob Andreas
+and Vikash Mansinghka and Noah Goodman.
+But what you can see in this paper
+and this paper expresses
+when we were working on this paper,
+which you can find on archive,
+it's currently undergoing revision for a couple
+of different publication targets.
+And it's very long and it's being broken into pieces.
+But I urge you to check out at least the first part
+and read more of it if you like.
+When we were working on this paper,
+we called it the white paper
+because it's really a roadmap for a research program.
+It's not a set of research results,
+but it tries to show you the path
+for connecting modern language models
+and the ways in which capturing statistics
+of language can build on and amplify and extend
+and really become much more powerful when you ground them
+in the kinds of common sense knowledge
+that I was showing you via these mechanisms
+of probabilistic programs.
+So in the paper, the idea is to consider all the many ways
+that we use language to inform and structure our thinking,
+whether it's in intuitive physics
+or intuitive psychology or other sorts of domains.
+And also all the ways that language can extend our thinking,
+the ways we can learn new concepts, either explicitly
+by having people explain things to us,
+or implicitly by seeing
+how people use language in certain patterns and sentences
+and even build up whole new intuitive theories
+that mostly come to us from people telling us things.
+We're trying to explain how can you do that
+and how can we use this in some sense to make sense of
+what are the current kinds of intelligence
+that we see in large language models and what's missing
+and what's a more human-like way forward.
+And the key idea in the paper is to combine two things.
+One is this idea of
+what we've called the probabilistic language of thought.
+So this is a paper from the recent concepts book,
+well from 10 years ago,
+recent compared to the older concepts book by Lawrence
+and Margolis.
+But the new concepts book that Noah Goodman,
+Toby Gerstenberg and I wrote, which sort of explains
+how we can use a probabilistic programming language.
+If you want to learn more
+about these probabilistic programming languages
+as reflected in that chapter,
+you could check out the probmods.org web book,
+which is just shown here. This is an example
+of the Probabilistic Programming Language Church.
+But what we show in this web book is
+how you can use this single programming language.
+It's kind of a version of Lisp,
+but in ways that we use Lisp
+to capture the structured probabilistic models
+like for intuitive physics
+or intuitive psychology and so on.
+And we have a single probabilistic programming language
+which can capture basically all the cognitive models
+that you've seen, all these kinds of frameworks
+for guessing and betting,
+or making rational expected utility proximate inferences,
+okay? And suggest that that can provide a unifying substrate
+for all these common sense models.
+And you combine that with the idea that we can see
+in recent large language models,
+which is that they aren't just models of natural language,
+they're also trained on code, source code
+in many different programming languages.
+And source code, as is often pointed out,
+but is I think not fully appreciated.
+Source code, right, is programming languages
+or programs that are designed to be read
+and written by humans
+and not just machine executable or read by machines.
+So while people often point out
+that programming languages are very different
+from natural languages, source code,
+whether it's languages like Python or JavaScript
+or Lisp, is often written in a way
+that is still rather language like.
+Somewhat in its syntax
+in terms of like hierarchical phrase structure,
+but also especially in terms of the way we name variables
+or name functions, as well as of course comment code.
+So in a sense you could say the idea of this paper is a sort
+of source code as a metaphor as the language of thought
+which mixes together natural language
+and programs in a probabilistic programing language.
+And the paper shows how you can use actually, you know,
+effectively a kind of a,
+what is not even a state-of-the-art language model,
+but an early code LLM as it's called,
+the Open AI codex model
+to basically define a probabilistic translation mapping from
+and to, but mostly in this paper from, natural language
+to one of these probabilistic programming languages,
+church in this case, and then applies it to just a number
+of different domains.
+I'll just show you one application just
+to close the loop back to intuitive physics.
+But for example, if you remember this, right.
+So as I was saying here, we use natural language
+to give queries and to describe kinds
+of intuitive physical reasoning
+that maybe you haven't done before.
+So we can basically now make an end-to-end model
+of language conditioned, language informed intuitive physics
+by taking, in this case a 2D physics engine
+that can capture the tabletop physics
+that I showed you before
+and use a code LLM to just capture the idea
+that effectively that we can think about contextual meaning
+and language as a translation from a description
+of a world like a tabletop scene
+that says there's one tall stack of red blocks
+and there are two short stacks of yellow blocks.
+And the question again is,
+if I bump the table hard enough to knock some
+of them on the floor,
+will it be more red or yellow blocks?
+So the model is able to translate
+that into this internal code and run a simulation like this.
+This is not seen, this is imagined.
+So this is a view into the mental simulation
+that the model runs, given that language.
+Or we can describe a more complex scene
+and we can describe it and then we can
+imagine corresponding more complex physical scenes
+and simulate what happens there.
+But basically it's just a modular composition
+of the same things.
+A language system, but putatively,
+like the one in the human brain that translates from
+what we say and hear into some mental language,
+which configures the brain's physics engine in this case,
+runs a small number of these probabilistic simulations.
+And that alone, or well alone or together,
+is enough to give a quantitatively predictive model.
+Much like, not quite,
+but almost as with the same quantitative predictive power
+as you saw before
+when we were just setting up the model for itself.
+So this is just a taste of some of the work
+that is ongoing by the students I mentioned
+and a number of others.
+I should say, by the way, this, this particular paper here
+was done with Leo and Gabe, but the experimental
+and modeling studies were done with Ze Zhang,
+who's shown up there, who's also a student at MIT.
+And you know, we
+and others are pursuing analogous studies like in a theory
+of mind and social cognition domains.
+And you know, I just say mostly stay tuned.
+And the last bit is to say, 'cause I can't help
+but say this just a little bit towards
+where we're going, right?
+Is I do think that there's a long history
+in cognitive science
+and all the related fields, linguistics, philosophy,
+certainly AI, of asking what is meaning, right?
+What does it mean to understand language
+and what is a thought that's conveyed in language?
+And in the engineering sketch I'm showing you,
+there's a step towards what's actually a theory of meaning.
+I mean, if I venture to say that.
+It's just a step and there's a lot to be filled in,
+but an idea that again,
+has a long history in different ways,
+but I think now we're in a position
+to capture it in an engineering sense.
+Which is to think of meaning not in its abstract form,
+but contextualize meaning.
+Like what does a piece
+of language mean in context, a word, a phrase,
+a sentence in the context of the rest of the sentences
+or the other sentences that have come before
+or the other ways you will build up a model
+of the current situation like your perceptual system.
+But something like a joint distribution
+between natural language and code,
+but in a probabilistic programming language of thought.
+It's that joint distribution, which is the key object
+that you can capture in these code LLMs combined
+with probabilistic inference.
+And you put those pieces together
+and you have, at least,
+some of the building blocks needed to unify
+what are traditionally a number
+of different takes on meaning in all these fields.
+So the idea that what is meaning?
+Is it something like informal semantics,
+like compositional logical construction of thought?
+Is it something like distributional word embeddings?
+That's again, not just a modern LLM idea,
+but a very old idea in psychology as well
+as natural language processing.
+Those are two interesting views.
+Two others, like meaning is about grounding in the world
+and the embodiment thesis.
+Or meaning is about pragmatics and context.
+Well, in a sense, the probabilistic programming
+and probabilistic language of thought stuff I showed you
+kind of gives you the more compositional
+and grounded aspects of meaning.
+The code LLM view gives you the distributional,
+statistical aspects of it
+and at least some approximations to the pragmatic
+or contextual aspects of meaning.
+And you put these things together
+and it's, again, it's building blocks for
+how we can really think about what language is really about
+and language use and how language builds on
+and then very much amplifies and extends our thinking.
+So many open questions,
+and I'll just end with some conclusions.
+What is thinking? It's not just a mystery,
+although we are still far from capturing thinking
+in all its forms computationally.
+But the fundamental idea that intelligence is
+about making good guesses and good bets,
+something that is fundamentally also
+about the model that our minds have
+of the world and ourselves in it.
+And then using that in a rational way to guide
+what we do next and what we think about next.
+This is something that we are starting to have tools
+to be able to capture.
+And this gives us a way,
+especially when language comes into the picture,
+to really understand what it is we're all here for, right?
+It's about not just knowledge, but understanding.
+It's about the deep and broad systems
+that we build individually
+and collectively that we build through our own experience
+and through language to sustain
+and grow knowledge in an ever-changing world
+and a world that we're changing.
+So the tools that I've shown you are part of
+what I think are the building blocks to actually try
+to understand this.
+On the technical side,
+there's what you could
+call this neural symbolic probabilistic synthesis
+that modern probabilistic programming languages
+and various kinds of neural networks
+and language models can bring together.
+But you know, we are still very much at the beginning
+of trying to put all these things together.
+So if you're interested in this, if any of this excites
+or inspires you, that's my goal here.
+And I hope you'll consider, you know,
+whether it's collaboratively with us in your own work
+or in whatever way really most inspires you
+to think about how to build this kind
+of intelligence either on the science side
+or on the engineering side,
+but especially to people interested in AI.
+I think this is necessary,
+unless we want to completely offload the AI future
+to a small number of very well-resourced companies
+and individuals.
+If we want to see a future for artificial intelligence
+that is one that is more open
+and democratic, that is one that is more grounded in
+and informing science,
+I think we need tools and a mindset in order to do it.

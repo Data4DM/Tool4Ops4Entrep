@@ -1,0 +1,167 @@
+
+Bayesian Entrepreneurship Conference 
+Working Reading List*
+*Updating: Additions Not Only Welcomed But Encouraged! 
+
+1 Introduction & What is Bayesian Entrepreneurship
+Agrawal, A., Gans, J. S., & Stern, S. (2021). Enabling entrepreneurial choice. Management Science, 67(9), 5510-5524.
+Astebro, T., Chen, J., & Thompson, P. (2011). Stars and misfits: Self-employment and labor market frictions. Management Science, 57(11), 1999-2017.
+Bhide, A. (1994). How entrepreneurs craft strategies that work. Harvard Business Review, 72(1994), 03.
+Camuffo, A., Cordova, A., Gambardella, A. & Spina, C. (2020). A Scientific Approach to Entrepreneurial Decision-Making: Evidence from a Randomized Control Trial. Management Science, 66(2), 564-586.
+Camuffo, A., Gambardella, A., Messinese, D., Novelli, E., Paolucci, E. & Spina, C. (2024). A Scientific Approach to Entrepreneurial Decision Making: Large Scale Replication and Extension. Strategic Management Journal. 
+Ehrig, T. & Schmidt, J. (2022). Theory-Based Learning and Experimentation: How Strategists Can Systematically Generate Knowledge at the Edge Between the Known and the Unknown. Strategic Management Journal, 43(7), 1287-1318.
+Eisenmann, T.R., Ries, E., & Dillard, S. (2012). Hypothesis-driven entrepreneurship: The lean startup. Harvard Business School Entrepreneurial Management Case, (812-095).
+Evans, D. S., & Jovanovic, B. (1989). An estimated model of entrepreneurial choice under liquidity constraints. Journal of Political Economy, 97(4), 808-827.
+Felin, T., & Zenger, T.R. (2009). Entrepreneurs as theorists: On the origins of collective beliefs and novel strategies. Strategic Entrepreneurship Journal, 3(2), 127-146.
+Gans, J.S., Stern, S. & Wu, J. (2019). Foundations of Entrepreneurial Strategy. Strategic Management Journal, 40(5), 736-756.
+Hamilton, B. H. (2000). Does entrepreneurship pay? An empirical analysis of the returns to self-employment. Journal of Political Economy, 108(3), 604-631.
+Hsieh, T. (2010). Zappos’s CEO on Going to Extremes for Customers. Harvard Business Review, 88(7-8), 41-45.
+Hurst, E., & Lusardi, A. (2004). Liquidity constraints, household wealth, and entrepreneurship. Journal of Political Economy, 112(2), 319-347.
+Imbens/Wooldridge, Lecture Notes 7, NBER, Summer ’07: Bayesian Inference.
+Jakobsen, K. (2023). Bayesian updating in complex environments: A guide for the perplexed entrepreneur. Journal of Business Venturing Insights, 15, e00218.
+Kerr, W.R., Nanda, R., & Rhodes-Kropf, M. (2014). Entrepreneurship as experimentation. Journal of Economic Perspectives, 28(3), 25-48.
+Koning, R., Hasan, S. & Chatterji, A. (2022). Experimentation and Startup Performance: Evidence from A/B Testing. Management Science, 68(9): 6434-6453.
+Lazear, E.P. (2004). Balanced skills and entrepreneurship. American Economic Review, 94(2), 208-211.
+Liedtka, J. (2018). Why design thinking works. Harvard Business Review, 96(5), 72-79.
+Lindholm-Dahlstrand, A ˚ ., Andersson, M., & Carlsson, B. (2019). Entrepreneurial experimentation: a key function in systems of innovation. Small Business Economics, 53, 591-610.
+Masters, B., & Thiel, P. (2014). Zero to One: notes on start ups, or how to build the future. Random House.
+Manso, G. (2016). Experimentation and the Returns to Entrepreneurship. The Review of Financial Studies, 29(9), 2319-2340.
+Minniti, M., & Bygrave, W. (2001). A dynamic model of entrepreneurial learning. Entrepreneurship theory and practice, 25(3), 5-16.
+Murray, F. and Tripsas, M. (2004). The exploratory processes of entrepreneurial firms: The role of purposeful experimentation", Baum, J.A.C. and McGahan, A.M. (Ed.) Business Strategy over the Industry Lifecycle (Advances in Strategic Management, Vol. 21), Emerald Group Publishing Limited.
+Nanda, R. & Rhodes-Kropf, M. (2016). Financing entrepreneurial experimentation. Innovation Policy and the Economy, 16(1), pp.1-23.
+Osterwalder, A., & Pigneur, Y. (2010). Business Model Generation: A Handbook for Visionaries, Game Changers, and Challengers. John Wiley & Sons.
+Ries, E. (2011). The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses. Crown Business.
+Rosenberg, N. (1992). Economic experiments. Industrial and Corporate change, 1(1), 181203.
+Stevenson, H. H. (1983). A perspective on entrepreneurship (Vol. 13). Cambridge, MA: Harvard Business School.
+Sull, D.N. (2004) Disciplined Entrepreneurship. MIT Sloan Management Rev. 46(1):71.
+Van den Steen, Eric. 2004. "Rational Overoptimism (and Other Biases)." American Economic Review, 94 (4): 1141-1151.
+Van den Steen, E. (2005). Organizational beliefs and managerial vision. Journal of Law, Economics, and organization, 21(1), 256-283.
+Van den Steen, E. (2011). Overconfidence by Bayesian-rational agents. Management Science, 57(5), 884-896.
+Zellweger, T., & Zenger, T. (2023). Entrepreneurs as scientists: A pragmatist approach to producing value out of uncertainty. Academy of Management Review, 48(3), 379-408.
+
+2 The Role of Priors
+Priors are Heterogeneous
+Aumann, R. (1976). Agreeing to disagree. The Annals of Statistics, 4(6), 1236-1239.
+Geanakoplos, J., & Polemarchakis, H. (1982). We can't disagree forever. Journal of Economic Theory, 28(1), 192-200.
+Harsanyi, J.C. (1967/68). Games with incomplete information played by "Bayesian" players, I-III. Part I. The basic model. Management Science, 14(3), 159-182.
+Samuelson, L. (2004). Modeling knowledge in economic analysis. Journal of Economic Literature, 42(2), 367–403.
+Van den Steen, E. (2004). Rational overoptimism (and other biases). American Economic Review, 94(4), 1141-1151.
+Yildiz, M., (2000), Essays on Sequential Bargaining, PhD Dissertation, Stanford.
+
+Entrepreneurs have Relatively Optimistic Priors
+Dushnitsky, G. (2010). Entrepreneurial optimism in the market for technological inventions. Organization Science, 21(1), 150-167.
+Engelberg, J., Guzman, J., Lu, R. and W. Mullins. (2023) Partisan Entrepreneurship. NBER WP.
+Fraser, S., & Greene, F.J. (2006). The effects of experience on entrepreneurial optimism and uncertainty. Economica, 73(290), 169-192.
+Gans, J.S. (2023). Experimental Choice and Disruptive Technologies. Management Science, 69(11), pp.7044-7058.
+Hmieleski, K.M., & Baron, R.A. (2009). Entrepreneurs’ optimism and new venture performance: A social cognitive perspective. Academy of Management Journal, 52(3), 473-488.
+Kartik, N., F. Xu Lee, and W. Suen (2021). Information Validates the Prior: A Theorem on Bayesian Updating and Applications. American Economic Review: Insights, 3 (2): 165-82.
+Landier, A., & Thesmar, D. (2008). Financial contracting with optimistic entrepreneurs. The Review of Financial Studies, 22(1), 117-150.
+Robson, Arthur J., and Larry Samuelson (2011). The evolutionary foundations of preferences. Handbook of Social Economics 1, North-Holland: 221-310.
+Van den Steen, E. (2005). Organizational beliefs and managerial vision. Journal of Law, Economics, and Organization, 21(1), 256-283.
+
+Priors Matter for Experimentation Incentives
+Agarwal, R., Bacco, F., Camuffo, A., Coali, A., Gambardella, A., Msangi, H., ...& Wormald, A. (2023). Does a Theory-of-Value Add Value? Evidence from a Randomized Control Trial with Tanzanian Entrepreneurs. Evidence from a Randomized Control Trial with Tanzanian Entrepreneurs.
+Agrawal, A., Gans, J. S., & Stern, S. (2021). Enabling Entrepreneurial Choice. Management Science, 67(9), 5510-5524. 
+Bergemann, D., & Morris, S. (2019). Information design: A unified perspective. Journal of Economic Literature, 57(1), 44-95.
+Blackwell, D., 1953. Equivalent comparisons of experiments. The Annals of Mathematical Statistics, pp.265-272.
+Kamenica, E., & Gentzkow, M. (2011). Bayesian persuasion. American Economic Review, 101(6), 2590-2615.
+
+
+How Are Priors Formed
+Acs, Z. J., Stam, E., Audretsch, D. B., & O’Connor, A. (2017). The lineages of the entrepreneurial ecosystem approach. Small Business Economics, 49, 1-10. 
+Amabile, T.M. (1997). Motivating creativity in organizations: On doing what you love and loving what you do. California Management Review, 40(1), 39-58.
+Åstebro, Thomas and Dahlin K. (2005). Opportunity Knocks. Research Policy, Volume 34, Issue 9,1404-1418.
+Baron, R.A. (1998). Cognitive mechanisms in entrepreneurship: Why and when entrepreneurs think differently than other people. Journal of Business Venturing, 13(4), 275-294.
+Baum, J.R., Frese, M., & Baron, R.A. (Eds.). (2014). The psychology of entrepreneurship. Psychology Press. 
+Baum, J.R., & Locke, E.A. (2004). The relationship of entrepreneurial traits, skill, and motivation to subsequent venture growth. Journal of Applied Psychology, 89(4), 587.
+Blume, B.D., & Covin, J.G. (2011). Attributions to intuition in the venture founding process: Do entrepreneurs actually use intuition or just say that they do? Journal of Business Venturing, 26(1), 137-151.
+Camuffo, A., Gambardella, A., & Garcia-Fontes, W. (2023a). Experimentation and the returns to entrepreneurship. Research Policy, 52(1), 104123.
+Carroll, G. R. & Sorensen, J.B. (2021) Making Great Strategy: Arguing for Organizational Advantage. Columbia University Press, New York.
+Cohen, S., Fehder, D.C., Hochberg, Y.V., & Murray, F. (2019). The design of startup accelerators. Research Policy, 48(7), 1781-1797.
+Delgado, M., Porter, M.E., & Stern, S. (2010). Clusters and entrepreneurship. Journal of Economic Geography, 10(4), 495-518.
+Eesley, C.E., & Roberts, E.B. (2012). Are you experienced or are you talented?: When does innate talent versus experience explain entrepreneurial performance?. Strategic Entrepreneurship Journal, 6(3), 207-219.
+Ehrig, T., & Schmidt, S. (2022). Toward a theory of entrepreneurial behavior. Entrepreneurship Theory and Practice, 46(1), 125-150.
+Felin, T. & Holweg, M. (2024). Theory is All You Need: AI, Human Cognition, and Decision Making. Working Paper.
+Felin, T., & Zenger, T.R. (2009). Entrepreneurs as theorists: On the origins of collective beliefs and novel strategies. Strategic Entrepreneurship Journal, 3(2), 127-146.
+Felin, T. & Zenger, T.R. (2017). The Theory-Based View: Economic Actors as Theorists. Strategy Science, 2(4), 258-271. 
+Frese, M., & Gielnik, M.M. (2014). The psychology of entrepreneurship. Annual Review of Organizational Psychology and Organizational Behavior, 1, 413-438.
+Gans, J.S., Stern, S., & Wu, J. (2021). Foundations of entrepreneurial strategy. Strategic Management Journal, 42(4), 673-695.
+Gimeno, J., Folta, T.B., Cooper, A.C., & Woo, C.Y. (1997). Survival of the fittest? Entrepreneurial human capital and the persistence of underperforming firms. Administrative Science Quarterly, 750-783.
+Guzman, J., Oh, J.J., & Sen, A. (2020). What motivates innovative entrepreneurs? Evidence from a global field experiment. Management Science, 66(10), 4808-4819.
+Jaynes, E.T. (1968). Prior probabilities. IEEE Transactions on Systems Science and Cybernetics, 4(3), 227-241.
+Kass, R.E., & Wasserman, L. (1996). The selection of prior distributions by formal rules. Journal of the American Statistical Association, 91(435), 1343-1370.
+Karni, E. & Vierø, M.L. (2017). Awareness of Unawareness: A Theory of Decision Making in the Face of Ignorance. Journal of Economic Theory, 168(C), 301-328.
+Karni, E. (2022). A Theory-Based Decision Model. Journal of Economic Theory, 201, 105444.
+Lazear, E.P. (2004). Balanced skills and entrepreneurship. American Economic Review, 94(2), 208-211.
+Martin, B.C., McNally, J.J., & Kay, M.J. (2013). Examining the formation of human capital in entrepreneurship: A meta-analysis of entrepreneurship education outcomes. Journal of business venturing, 28(2), 211-224.
+Patvardhan, S.D., & Ramachandran, V. (2020). Imagination in entrepreneurship: A review and framework for future research. Journal of Business Venturing Insights, 13, e00165.
+Pearl, J. (2009). Causality: Models, Reasoning, and Inference. Cambridge University Press.
+Roach, M., & Sauermann, H. (2015). Founder or joiner? The role of preferences and context in shaping different entrepreneurial interests. Management Science, 61(9), 2160-2184.
+Shane, S. (2000). Prior knowledge and the discovery of entrepreneurial opportunities. Organization Science, 11(4), 448-469.
+Shane, S.A. (2003). A general theory of entrepreneurship: The individual-opportunity nexus. Edward Elgar Publishing.
+Stuart, T.E., & Sorenson, O. (2005). Social networks and entrepreneurship. Handbook of Entrepreneurship Research, 233-252.
+Tartari, V., & Stern, S. (2021). The impact of research institutions on the quantity and quality of entrepreneurship. Strategic Entrepreneurship Journal, 15(1), 122-142.
+Unger, J.M., Rauch, A., Frese, M., & Rosenbusch, N. (2011). Human capital and entrepreneurial success: A meta-analytical review. Journal of Business Venturing, 26(3), 341-358.
+Van de Ven, A.H., Polley, D.E., Garud, R., & Venkataraman, S. (2007). The Innovation Journey. Oxford University Press.
+
+3 Entrepreneurial Learning and Experimentation
+Bailey, E., Fehder, D., Floyd, E., Hochberg, Y. and D. Lee. (2023). Learning to Quit? A Multi-Year Field Experiment with Innovation Driven Entrepreneurs. Working Paper.
+Camuffo, A., Gambardella, A. & Pignataro, A. (2023a). Theory-Driven Strategic Management Decisions. CEPR Discussion paper n. 17664-3.
+Camuffo, A., Gambardella, A. & Messinese, D. (2023b). “Bayesianism and Unforeseen Events: Empirical Evidence from Two Field Experiments”. Academy of Management Proceedings 2023.
+Chen, J.S., Elfenbein, D., Posen, H. and Ming Zhu Wang.(2024). Programs of Experimentation and Pivoting for (Overconfident) Entrepreneurs. AMR, 49, 80–106
+Contigiani, A. (2023). Experimentation and appropriability in early-stage ventures: Evidence from the US software industry. Strategic Management Journal, 44(9), 2128–2174.
+Contigiani, A., & Young-Hyman, T. (2022). Experimentation, planning, and structure in early-stage ventures: Evidence from pitch decks. Strategic Entrepreneurship Journal, 16(3), 425–459.
+Felin, T. & Zenger, T.R. (2017). The Theory-Based View: Economic Actors as Theorists. Strategy Science, 2(4), 258-271.
+Gans, J.S. (2023). Experimental Choice and Disruptive Technologies. Management Science, 69(11), pp.7044-7058.
+Karni, E. & Vierø, M.L. (2013). ”Reverse Bayesianism”: A Choice-Based Theory of Growing Awareness. American Economic Review, 103(7), 2790-2810.
+Karni, E. & Vierø, M.L. (2017). Awareness of Unawareness: A Theory of Decision Making in the Face of Ignorance. Journal of Economic Theory, 168(C), 301-328.
+Karni, E. (2022). A Theory-Based Decision Model. Journal of Economic Theory, 201, 105444.
+Mullainathan, S., & Rambachan, A. (2023). From Predictive Algorithms to Automatic Generation of Anomalies. Available at SSRN 4443738.
+Ortoleva, P. (2012). Modeling the Change of Paradigm: Non-Bayesian Reactions to Unexpected News. American Economic Review, 102(6), 2410–2436.
+Wright, N.L., Grodal, S. and Huang, L. (2023). “International Exposure and Entrepreneurial Pivoting.” Working Paper.
+Wright, N.L., (2023). “Learning foreign demand: Evidence from a digital product platform.” Working Paper.
+
+4 Entrepreneurial Persuasion and Choice
+Agrawal, A., Catalini, C., & Goldfarb, A. (2021). Economic Policy for Artificial Intelligence. Innovation Policy and the Economy, 19, 139-159.Burke, M.A. (2008). Pricing strategies: A marketing approach. Journal of Business Economics and Management, 9(3), 173-188.
+Alonso, R. and Cˆamara, O. (2016). Bayesian persuasion with heterogeneous priors. Journal of Economic Theory, 165, 672–706.
+Andrews, I., & Shapiro, J. M. (2021). A model of scientific communication. Econometrica, 89(5), 2117-2142.
+Ball, I. & Espín-Sánchez, J.A., 2022. Experimental persuasion. mimeo., MIT.
+Calvert, R.L. (1985). The value of biased information: A rational choice model of political advice. Journal of Politics, 47(2), 530-555.
+Chavda, Ankur and Gans, Joshua S. and Stern, Scott (2024) Theory-Driven Entrepreneurial Search. Strategy Science.
+Che, Y.-K., & Mierendorff, K. (2019). Optimal Design of Experiments in the Presence of Network-Induced Spillovers. Review of Economic Studies, 86(5), 2133-2160.
+Damiano, E., Li, H., & Suen, W. (2020). Credible Persuasion. Theoretical Economics, 15(3), 1221-1261.
+Dworczak, P. and Martini, G. (2018). The Simple Economics of Optimal Persuasion. Journal of Political Economy. https://doi.org/10.1086/701813
+Gans, J.S. (2022). A Theory of Visionary Disruption. Working Paper, NBER.
+Gans, J. (2023). On the design of entrepreneurial experiments. Journal of Business Venturing Insights, 11, e00145.
+Haghtalab, N., Immorlica, N., Lucier, B., Mobius, M. & Mohan, D., (2021). Persuading with anecdotes, Working Paper, (No. w28661). National Bureau of Economic Research.
+Jakobsen, A.M. (2021). An axiomatic model of persuasion. Econometrica, 89(5), 20812116.
+Kamenica, E., & Gentzkow, M. (2011). Bayesian Persuasion. American Economic Review, 101(6), 2590-2615.
+Kamenica, E. (2019). Bayesian Persuasion and Information Design. Annual Review of Economics, 11, 249-272.
+Moore, G.A. (2014). Crossing the Chasm: Marketing and Selling Disruptive Products to Mainstream Customers. Harper Business.
+Ries, E. (2011). The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses. Crown Publishing Group.
+Suen, W. (2004). The self-perpetuation of biased beliefs. Economic Journal, 114(495), 377-396.
+
+5 Bayesian Entrepreneurship and Pedagogy 
+Agarwal, R., Bacco, F., Camuffo, A., Coali, A., Gambardella, A., Msangi, H., ...& Wormald, A. (2023). Does a Theory-of-Value Add Value? Evidence from a Randomized Control Trial with Tanzanian Entrepreneurs. Evidence from a Randomized Control Trial with Tanzanian Entrepreneurs.
+Camuffo, A., Gambardella, A., & Garcia-Fontes, W. (2020). The Scientific Approach to Entrepreneurship: Experimentation, Iteration, and Focus. MIT Sloan Management Review, 61(2), 83-89.
+Camuffo, A., Gambardella, A. & Pignataro, A. (2023a). Theory-Driven Strategic Management Decisions. CEPR Discussion paper n. 17664-3.
+Camuffo, A., Gambardella, A. & Messinese, D. (2023b). “Bayesianism and Unforeseen Events: Empirical Evidence from Two Field Experiments”. Academy of Management Proceedings 2023.
+Camuffo, A., Gambardella, A., Messinese, D., Novelli, E., Paolucci, E. & Spina, C. (2024). A Scientific Approach to Entrepreneurial Decision Making: Large Scale Replication and Extension. Strategic Management Journal.
+Cao, R., Koning, R., Nanda, R. (2023). Sampling Bias in Entrepreneurial Experiments. Management Science. 
+Ehrig, T., & Schmidt, S. (2022). Toward a Theory of Entrepreneurial Behavior. Entrepreneurship Theory and Practice, 46(1), 125-150.
+Felin, T., & Zenger, T.R. (2017). The Theory of the Firm: An Overview of the Economic Mainstream. Research Policy, 46(1), 261-264.
+Gans, J.S., Scott, E., & Stern, S. (2018). The Strategy of Entrepreneurial Experimentation. Strategic Management Journal, 39(12), 3185-3202.
+Gans, J.S., Hsu, D.H., & Stern, S. (2019). Strategy for Startups. Harvard Business Review, 97(3), 44-53.
+Gans, J.S., Scott, E., & Stern, S. (2024). Entrepreneurship, Choice and Strategy. W.W. Norton. 
+Karni, E. & Vierø, M.L. (2013). ”Reverse Bayesianism”: A Choice-Based Theory of Growing Awareness. American Economic Review, 103(7), 2790-2810.
+Karni, E. & Vierø, M.L. (2017). Awareness of Unawareness: A Theory of Decision Making in the Face of Ignorance. Journal of Economic Theory, 168(C), 301-328.
+Karni, E. (2022). A Theory-Based Decision Model. Journal of Economic Theory, 201, 105444.
+Murray, F.E., & Tripsas, M. (2004). The Exploratory Processes of Entrepreneurial Firms: The Role of Purposeful Experimentation. In Baum, J.A.C., & McGahan, A.M. (Eds.), Business Strategy over the Industry Lifecycle. Advances in Strategic Management, 21, 45-75.
+Nanda, R., & Rhodes-Kropf, M. (2016). Financing Entrepreneurial Experimentation. Innovation Policy and the Economy. Volume 16:1-23. 
+Ortoleva, P. (2012). Modeling the Change of Paradigm: Non-Bayesian Reactions to Unexpected News. American Economic Review, 102(6), 2410–2436.
+Cohen, S., Fehder, D.C., Hochberg, Y.V., & Murray, F. (2019). The Design of Startup Accelerators. Research Policy, 48(7), 1781-1797.
+Koning, R., Hasan, S., & Chatterji, A. (2022). Experimentation and start-up performance: Evidence from A/B testing. Management Science, 68(9), 6434-6453.
+Ries, E. (2011). The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses. Crown Publishing Group.
+Yang, MJ., Christensen, M., Bloom, N., Sadun, R., and J. Rivkin. A Scientific Approach to Business Strategy. Working Paper.
+Wright, N.L. (2023). “Helping to grow on a shoestring? The role of strategy for global startups.” Working Paper.
+Zellweger, T.M., & Zenger, T.R. (2023). Entrepreneurs as Scientists: A Pragmatist Approach to Producing Value out of Uncertainty. Academy of Management Review, 48(3), 379-408.

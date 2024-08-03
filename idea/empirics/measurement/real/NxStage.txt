@@ -1,0 +1,19 @@
+NxStage.txt
+Based on the information provided in the EntrepreneurialStrategy.txt, Fine22_OMEntrep.pdf, and NxStage case study, here are the key points for each stage:
+
+Nail Stage (1998 - 2002):
+- NSS reasoning: 
+- State: Early prototyping and experimentation. Seeking FDA approval. Focus on developing the System One technology and value proposition. Small team of founders and engineers. Limited initial capabilities and processes. Bootstrapping financing. 
+- Strategy: Intellectual Property - Focused on developing proprietary technology and obtaining patents. Controlled core technology. Collaborated with suppliers for components. 
+
+Scale Stage (2002 - 2009): 
+- NSS reasoning: 
+- State: Received FDA approval in 2002. Began commercializing System One. Growing revenue but operating at a loss. Building out operations and supply chain. Acquired Medisystems in 2007 to gain capabilities. Taking on debt financing.  
+- Strategy: Value Chain - Shifted focus to scaling through partnerships with distributors like DaVita. Leveraged capabilities from acquisition. Collaborated with suppliers. Executed on supply chain and manufacturing.
+
+Sail Stage (2009 - Present):
+- NSS reasoning: 
+- State: Mature company with established product line, operations, and partnerships. Profitable. Focus on incremental innovation and optimization. 
+- Strategy: Architectural - Competes directly with in-center dialysis providers. Controls key interface between patients, care providers, and payers. Has established presence to influence industry.
+
+In summary, the startup progressed from an intellectual property strategy focused on proprietary technology development during nail stage, to a value chain strategy leveraging partnerships for scale up, to ultimately an architectural strategy competing in the industry with an established offering and network. The strategy evolved as the state of the company matured.

@@ -2,7 +2,7 @@ import os
 import openai
 
 # Set up your OpenAI API key
-openai.api_key = 'sk-proj-2VsK6fjGF9tSJI8uigVfT3BlbkFJa0yrYGzeHlJsGEnIEv1N'
+openai.api_key = 'your key'
 
 def process_paper(paper_content):
     prompt = (f"Imagine you're the author of this paper. Please choose multiple hypotheses (among UE1,2,3,4, UI1,2,3,4) "

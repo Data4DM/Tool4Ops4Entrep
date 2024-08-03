@@ -42,20 +42,26 @@ req.txt
 *.pyc
 
 .vscode
-
 *.csv
 *.xlsx
 *.pdf
-*.txt
+*.cfg
+*.docx
+*.doc
+*.key
+
 
 db/*
 *.png
 *.nc
 *.bin
-simulation/stan/idea_exp
-simulation/stan/pivot_market
-simulation/stan/pivot_product
-simulation/stan/pivot_self
-simulation/stan/update_base
-simulation/spandrel/orbit.mov
+product/program/pivoting/data
+product/program/pivoting/_test
+automate/auto(review(lit))/lib
+automate/auto(review(lit))/bin
+automate/auto(review(lit))/rag
+automate/auto(review(lit))/share
+idea/theory/3entrep_learning/BEconf_reference/others/
+.obsidian
+collaborate/*
 spandrel/*

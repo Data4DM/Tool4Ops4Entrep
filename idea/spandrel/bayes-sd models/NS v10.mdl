@@ -1,0 +1,1017 @@
+{UTF-8}
+MVP=
+	0
+	~	
+	~		|
+
+Minimum Fraction of Cash for Early Product Design=
+	IF THEN ELSE
+	  (Value Proposition<MVP,
+	   Minimum Nominal Fraction of Cash for Early Product Design*Share of Product Quality in Value Proposition\
+		,
+	   Product Design Drain/Cash to Experiment
+	  )
+	~	dmnl
+	~		|
+
+Minimum Nominal Fraction of Cash for Early Product Design=
+	0.1
+	~	dmnl
+	~		|
+
+Fraction of Cash for Ops Investment=
+	MAX(0, MIN(1-Minimum Fraction of Cash for Early Product Design, Function Value))
+	~	dmnl [0,1,0.01]
+	~	Time to begin investing in operational capabilities
+		VECTOR ELM MAP(Polynomial Coefficients[n0], INTEGER(Time))
+		
+		IF THEN ELSE
+		  (Time < Spending Period,
+		   MAX(0, MIN(1, Function Value)),
+		   1-MIN(1, Product Design Drain/Cash to Experiment)
+		  )
+	|
+
+Maximum Time to Invest Minimum Fraction of Cash in Product Design=
+	5
+	~	Month
+	~		|
+
+Tn[n]=
+	cos((k[n]-1)*arccos(x))
+	~	dmnl
+	~		|
+
+x=
+	Time/(FINAL TIME-INITIAL TIME)
+	~	dmnl
+	~	MIN(1,(Time-INITIAL TIME)/Spending Period)
+	|
+
+Fraction of Cash to Increase Product Design=
+	1-Fraction of Cash for Ops Investment
+	~	dmnl
+	~	Current fraction of cash used to improve product design
+	|
+
+End CAGR= INTEG (
+	CAGR Increase,
+		0)
+	~	dmnl
+	~		|
+
+CAGR Increase=
+	IF THEN ELSE(Time=FINAL TIME-TIME STEP, CAGR/TIME STEP, 0)
+	~	dmnl/Month
+	~		|
+
+Function Value=
+	SUM(Polynomial Coefficients[n!]*Tn[n!])
+	~	dmnl
+	~		|
+
+n:
+	n0, n1, n2, n3, n4, n5, n6, n7, n8, n9, 
+	n10, n11, n12, n13, n14, n15, n16, n17, n18, n19,
+	n20, n21, n22, n23, n24, n25, n26, n27, n28, n29
+	~	
+	~		|
+
+Polynomial Coefficients[n]=
+	0
+	~	dmnl
+	~		|
+
+k[n]=
+	1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+	11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+	21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+	~	dmnl
+	~		|
+
+Initial trend=
+	0
+	~	dmnl/Month
+	~		|
+
+Revenue trend=
+	TREND(Revenue, TIME STEP, Initial trend)
+	~	dmnl/Month
+	~		|
+
+Value Proposition=
+	(Share of Product Quality in Value Proposition*Product Quality^CES r + (1-Share of Product Quality in Value Proposition
+	)*Process Quality^CES r)^(1/CES r)
+	~	dmnl
+	~		|
+
+CAGR=
+	MAX(0, IF THEN ELSE(Revenue trend<=0, 0, ((Cumulative Revenue/Initial Investment)^(1\
+		/((FINAL TIME-INITIAL TIME)/Months in a year))-1)*100)
+	)
+	~	dmnl
+	~		|
+
+Cumulative Revenue= INTEG (
+	Revenue Increase,
+		0)
+	~	$
+	~		|
+
+Months in a year=
+	12
+	~	months
+	~		|
+
+Revenue Increase=
+	Revenue
+	~	$/Month
+	~		|
+
+Expanded X 1=
+	MAX(0, MIN(1, Input-Expand Scale 1*(1-2*P1 1-2*(P2 1-1))))
+	~	dmnl
+	~		|
+
+P2 0 0=
+	MIN(1, SW Product Quality)
+	~	dmnl [0,1,0.1]
+	~		|
+
+P2 1=
+	MIN(1, SW Process Quality)
+	~	dmnl [0,1,0.1]
+	~		|
+
+In=
+	1/(FINAL TIME-INITIAL TIME)
+	~	1/Month
+	~		|
+
+P1 0 0=
+	SW Product Quality-P2 0 0
+	~	dmnl [0,1,0.1]
+	~		|
+
+P1 1=
+	SW Process Quality-P2 1
+	~	dmnl [0,1,0.1]
+	~		|
+
+Expanded X 0 0=
+	MAX(0, MIN(1, Input-Expand Scale 0 0*(1-2*P1 0 0-2*(P2 0 0-1))))
+	~	dmnl
+	~		|
+
+Expand Scale 1=
+	SIN(Input*(2-P1 1-(1-P2 1))*3.14159)/Scale Process Quality
+	~	dmnl
+	~		|
+
+Expand Scale 0 0=
+	SIN(Input*(2-P1 0 0-(1-P2 0 0))*3.14159)/Scale Product Quality
+	~	dmnl
+	~		|
+
+Input= INTEG (
+	In,
+		0)
+	~	1
+	~		|
+
+Process Quality 0=
+	MAX(3*(1-Expanded X 1)^2*Expanded X 1*P1 1+3*(1-Expanded X 1)*Expanded X 1^2*P2 1+Expanded X 1\
+		^3, Min Quality)
+	~	dmnl
+	~		|
+
+Product Quality 0=
+	MAX(3*(1-Expanded X 0 0)^2*Expanded X 0 0*P1 0 0+3*(1-Expanded X 0 0)*Expanded X 0 0\
+		^2*P2 0 0+Expanded X 0 0^3, Min Quality)
+	~	dmnl
+	~		|
+
+Process Quality=
+	MAX(3*(1-Expanded X)^2*Expanded X*P1+3*(1-Expanded X)*Expanded X^2*P2+Expanded X^3, \
+		Min Quality)
+	~	dmnl
+	~		|
+
+Product Quality=
+	MAX(3*(1-Expanded X 0)^2*Expanded X 0*P1 0+3*(1-Expanded X 0)*Expanded X 0^2*P2 0+Expanded X 0\
+		^3, Min Quality)
+	~	dmnl
+	~		|
+
+Min Quality=
+	1e-20
+	~	dmnl
+	~		|
+
+P2 0=
+	MIN(1, SW Product Quality)
+	~	dmnl [0,1,0.1]
+	~		|
+
+Expand Scale 0=
+	SIN(Product Quality Input*(2-P1 0-(1-P2 0))*3.14159)/Scale Product Quality
+	~	dmnl
+	~		|
+
+Product Quality Input=
+	MIN(1, Product Design*Product Quality Yield/Reference Product Design)
+	~	1
+	~		|
+
+Scale Product Quality=
+	10
+	~	dmnl [0.1,100,0.1]
+	~	Higher number means shallow curve
+	|
+
+P1 0=
+	SW Product Quality-P2 0
+	~	dmnl [0,1,0.1]
+	~		|
+
+Expanded X 0=
+	MAX(0, MIN(1, Product Quality Input-Expand Scale 0*(1-2*P1 0-2*(P2 0-1))))
+	~	dmnl
+	~		|
+
+SW Product Quality=
+	1
+	~	dmnl [0,2,1]
+	~	0 - convex, 1 - s-shaped, 2 - concave
+	|
+
+Process Quality Input=
+	MIN(1, Operational Capabilities*Process Quality Yield/Reference Ops)
+	~	1
+	~		|
+
+P1=
+	SW Process Quality-P2
+	~	dmnl [0,1,0.1]
+	~		|
+
+Expand Scale=
+	SIN(Process Quality Input*(2-P1-(1-P2))*3.14159)/Scale Process Quality
+	~	dmnl
+	~		|
+
+Scale Process Quality=
+	10
+	~	dmnl [0.1,100,0.1]
+	~	Higher number means shallow curve
+	|
+
+SW Process Quality=
+	1
+	~	dmnl [0,2,1]
+	~	0 - convex, 1 - s-shaped, 2 - concave
+	|
+
+Expanded X=
+	MAX(0, MIN(1, Process Quality Input-Expand Scale*(1-2*P1-2*(P2-1))))
+	~	dmnl
+	~		|
+
+P2=
+	MIN(1, SW Process Quality)
+	~	dmnl [0,1,0.1]
+	~		|
+
+Product Design= INTEG (
+	Product Design Spending-Product Design Drain,
+		Initial Product Design Quality)
+	~	$
+	~	Composite Product Design features, as represented by functions, appeal etc.
+	|
+
+Ops Spending=
+	Cash to Experiment*(1-Fraction of Cash to Increase Product Design)
+	~	$/Month
+	~		|
+
+Revenue=
+	Price*Quantity of Production
+	~	$/Month
+	~		|
+
+Product Design Spending=
+	Cash to Experiment*Fraction of Cash to Increase Product Design
+	~	$/Month
+	~		|
+
+Cash to Experiment=
+	IF THEN ELSE(Time<Spending Period, Initial Investment/Spending Period, 0)+Revenue*Fraction of Revenue to Experiment
+	~	$/Month
+	~	Total cash available to either improve design features or acquire \
+		operational capabilities
+	|
+
+Fraction of Revenue to Experiment=
+	0.5
+	~	dmnl
+	~		|
+
+Operational Capabilities= INTEG (
+	Ops Spending-Capabilities Erosion,
+		Initial Operational Capabilities)
+	~	$
+	~	Composite Operational Capabilities as represented by maturity of \
+		manufacturing processes, value of supply chain partners etc.
+	|
+
+Quantity of Production=
+	Factor Productivity*(Operational Capabilities/Dollar)^Production power
+	~	widgets/Month
+	~	Production of goods.
+	|
+
+Process Quality Yield=
+	1
+	~	dmnl [0,1,0.01]
+	~		|
+
+Product Quality Yield=
+	1
+	~	dmnl [0,1,0.01]
+	~		|
+
+Reference Ops=
+	100000
+	~	$ [0,500000,1000]
+	~	Ops required by the market
+	|
+
+Price=
+	EXP(-Steepness of the Price curve*(1-MIN(1,Value Proposition)))*Reference Price
+	~	$/widget
+	~	Price for unit of goods
+	|
+
+Factor Productivity=
+	5
+	~	widgets/Month
+	~	Productivity of 1 unit of operational capability
+	|
+
+Reference Price=
+	500
+	~	$/widget
+	~	Full price of a unit of goods
+	|
+
+Production power=
+	0.5
+	~	dmnl [0,1,0.01]
+	~		|
+
+Spending Period=
+	30
+	~	Month
+	~		|
+
+Dollar=
+	1
+	~	$
+	~	Dummy to correct for unit errors
+	|
+
+CES r=
+	-1
+	~	dmnl [-10,0.01,0.01]
+	~	r=1 -- perfect substitutes, r=0 -- Cobb-Douglas, r=-Inf -- perfect \
+		complements
+	|
+
+Share of Product Quality in Value Proposition=
+	0.9
+	~	dmnl [0,1,0.01]
+	~		|
+
+Steepness of the Price curve=
+	10
+	~	dmnl [0,10,0.1]
+	~		|
+
+Reference Product Design=
+	100000
+	~	$ [0,500000,1000]
+	~	Product Design Features required by the market
+	|
+
+Average Capabilities Relevance Time=
+	120
+	~	Month
+	~	Average duration of relevance for operational capabilities
+	|
+
+Average Design Competitiveness Time=
+	12
+	~	Month
+	~	Average duration of relevance for product design
+	|
+
+Capabilities Erosion=
+	MIN((Operational Capabilities-Initial Operational Capabilities)/TIME STEP, (Operational Capabilities\
+		-Initial Operational Capabilities
+	)/Average Capabilities Relevance Time+Product Design Drain*Capabilities and Product Design Correlation\
+		)
+	~	$/Month
+	~	Reduction in operational capabilities due to depreciation or loss of \
+		relevance
+	|
+
+Product Design Drain=
+	(Product Design)/Average Design Competitiveness Time
+	~	$/Month
+	~	Reduction in product design features due to obsolescence
+	|
+
+Capabilities and Product Design Correlation=
+	0.5
+	~	dmnl [0,1,0.01]
+	~	Correlation between product design and relevant features. Higher number \
+		means stronger drain of ops when features retire.
+	|
+
+Initial Investment=
+	350000
+	~	$ [0,1e+06,10000]
+	~	Initial external investment available
+	|
+
+Initial Operational Capabilities=
+	100
+	~	$
+	~	Initial operational capabilities as represented by "garage facilities" of \
+		founders
+	|
+
+Initial Product Design Quality=
+	100
+	~	$ [?,?,0.01]
+	~	Initial features as represented by innovative idea
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 120
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Main model
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,Product Design,749,358,71,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Operational Capabilities,1596,358,71,40,3,131,0,8,0,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+10,3,Fraction of Cash to Increase Product Design,1173,608,96,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,3,40,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(846,665)|
+12,5,48,1033,358,10,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+1,6,8,5,4,0,0,22,0,0,0,-1--1--1,,1|(977,358)|
+1,7,8,1,100,0,0,22,0,0,0,-1--1--1,,1|(867,358)|
+11,8,0,923,358,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Product Design Drain,923,391,66,24,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,10,48,1304,358,10,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+1,11,13,10,4,0,0,22,0,0,0,-1--1--1,,1|(1363,358)|
+1,12,13,2,100,0,0,22,0,0,0,-1--1--1,,1|(1476,358)|
+11,13,0,1420,358,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,Capabilities Erosion,1420,391,59,24,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,3,42,1,0,45,0,3,64,0,255-0-0,|||0-0-0,1|(1480,668)|
+1,16,1,9,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(845,434)|
+10,17,Average Design Competitiveness Time,1033,263,85,35,8,131,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+1,18,17,8,1,0,45,0,3,64,0,255-0-0,|||0-0-0,1|(930,281)|
+10,19,Average Capabilities Relevance Time,1304,263,85,35,8,131,0,10,0,0,0,0,0-0-0,0-0-0,|12|B|0-0-255,0,0,0,0,0,0
+1,20,19,13,1,0,45,0,3,64,0,255-0-0,|||0-0-0,1|(1420,298)|
+1,21,2,14,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(1551,420)|
+10,22,Initial Investment,985,883,56,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,23,Initial Product Design Quality,749,465,74,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,24,Initial Operational Capabilities,1596,465,88,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,25,Time,1274,710,38,14,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,26,Capabilities and Product Design Correlation,1280,508,81,35,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+1,27,26,14,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1384,451)|
+10,28,TIME STEP,1236,403,68,14,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,29,24,14,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1478,486)|
+1,30,9,14,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1081,456)|
+1,31,28,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,32,Reference Product Design,884,114,79,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,33,Steepness of the Price curve,439,138,85,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,Share of Product Quality in Value Proposition,1105,54,85,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Value Proposition,1173,148,59,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,34,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,37,CES r,1261,50,30,14,8,3,0,10,-1,0,0,0,0-0-0,0-0-0,|12||0-0-255,0,0,0,0,0,0
+1,38,37,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+11,39,0,586,358,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,40,Product Design Spending,586,394,78,26,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+11,41,0,1768,358,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,42,Ops Spending,1768,381,71,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,43,Dollar,1543,38,31,14,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+1,44,41,2,4,0,0,22,0,0,0,-1--1--1,,1|(1713,358)|
+1,45,39,1,4,0,0,22,0,0,0,-1--1--1,,1|(636,358)|
+10,46,Spending Period,1023,724,50,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,Quantity of Production,1686,69,56,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,48,Factor Productivity,1771,213,61,24,8,131,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+1,49,48,47,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+10,50,Reference Price,599,276,53,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,51,Production power,1639,214,56,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,51,47,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+1,53,43,47,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,54,2,47,1,0,0,0,0,64,0,-1--1--1,,1|(1560,213)|
+10,55,Price,548,185,28,14,8,3,0,10,0,0,0,0,0-0-0,0-0-0,|12||0-0-255,0,0,0,0,0,0
+1,56,50,55,0,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(0,0)|
+10,57,Reference Ops,1379,86,74,14,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+1,58,33,55,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,59,35,55,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(853,66)|
+1,60,23,1,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,61,24,2,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,62,Product Quality Yield,729,146,63,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Process Quality Yield,1508,115,63,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Cash to Experiment,1173,760,58,24,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+10,65,Fraction of Revenue to Experiment,1330,881,58,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,66,65,64,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+1,67,22,64,0,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(0,0)|
+10,68,Revenue,1173,893,45,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,55,68,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(555,791)|
+1,70,47,68,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1874,680)|
+1,71,68,64,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+12,72,48,495,358,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,73,39,72,100,0,0,22,0,0,0,-1--1--1,,1|(541,358)|
+12,74,48,1873,358,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,41,74,100,0,0,22,0,0,0,-1--1--1,,1|(1819,358)|
+1,76,64,40,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(695,696)|
+1,77,64,42,1,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(1705,659)|
+10,78,Process Quality,1326,160,43,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,Product Quality,1021,160,41,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,80,79,35,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1075,143)|
+12,81,0,839,220,78,23,8,199,0,18,-1,0,0,0,-1--1--1,0-0-0,||BI|255-128-0,0,0,0,0,0,0
+Bezier Function for Product
+1,82,1,81,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(768,269)|
+1,83,62,81,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+1,84,32,81,0,0,45,0,3,64,0,255-0-0,|||0-0-0,1|(0,0)|
+10,85,Expanded X 0,1021,194,68,24,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,86,85,79,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,87,P1 0,1021,194,35,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,88,87,79,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,89,P2 0,1021,194,35,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,90,89,79,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,91,Expanded X,1330,198,73,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,92,91,78,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,93,P1,1330,198,26,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,94,93,78,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,95,P2,1330,198,26,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,96,95,78,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+12,97,0,1466,223,78,23,8,199,0,18,-1,0,0,0,-1--1--1,0-0-0,||BI|255-128-0,0,0,0,0,0,0
+Bezier Function for Process
+1,98,63,97,0,0,43,0,2,192,0,-1--1--1,|||0-0-0,1|(0,0)|
+1,99,57,97,0,0,45,0,3,192,0,255-0-0,|||0-0-0,1|(0,0)|
+1,100,2,97,1,0,0,0,0,64,0,-1--1--1,,1|(1525,263)|
+1,101,78,35,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(1263,144)|
+1,102,81,79,1,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(923,171)|
+1,103,97,78,1,0,0,0,0,64,0,-1--1--1,,1|(1385,173)|
+10,104,Min Quality,1021,194,66,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,105,104,79,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,106,Min Quality,1326,208,66,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,107,106,78,0,1,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,108,46,64,0,0,43,0,2,64,0,-1--1--1,|||0-0-0,1|(0,0)|
+10,109,Fraction of Cash for Ops Investment,1460,604,101,24,8,130,0,3,0,0,0,0,128-128-128,0-0-0,||B|0-128-0,0,0,0,0,0,0
+1,110,109,3,1,0,0,0,0,64,0,-1--1--1,,1|(1343,620)|
+1,111,25,64,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Dashboard
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+12,1,0,308,199,268,173,3,188,0,8,1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+Combined
+12,2,0,1265,41,74,24,8,7,0,8,-1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+Safety > speed (scale it)
+10,3,Capabilities and Product Design Correlation,1586,591,114,35,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+12,4,0,308,544,268,173,3,188,0,8,1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+Relative_Price
+12,5,0,850,188,260,111,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+GRAPH
+10,6,Reference Product Design,1220,589,94,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+12,7,0,844,544,268,173,3,188,0,8,1,0,0,0,0-0-0,0-0-0,|12||0-0-0,0,0,0,0,0,0
+Bezier
+10,8,Steepness of the Price curve,1215,331,85,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Share of Product Quality in Value Proposition,1596,331,85,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,CES r,1393,330,30,14,8,3,0,10,-1,0,0,0,0-0-0,0-0-0,|12||0-0-255,0,0,0,0,0,0
+10,11,Initial Investment,1389,680,56,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,12,Reference Ops,1213,506,74,14,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,13,Spending Period,1590,673,50,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Product Quality Yield,1389,585,63,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,Process Quality Yield,1380,508,63,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Average Design Competitiveness Time,1221,421,85,35,8,131,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,17,Average Capabilities Relevance Time,1419,418,85,35,8,131,0,10,0,0,0,0,0-0-0,0-0-0,|12|B|0-0-255,0,0,0,0,0,0
+10,18,Reference Price,1210,683,53,24,8,3,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-0-255,0,0,0,0,0,0
+10,19,Scale Process Quality,1199,218,78,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,20,Scale Product Quality,1383,215,76,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,21,SW Process Quality,1201,135,61,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,SW Product Quality,1384,133,60,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Fraction of Cash for Ops Investment,1616,478,101,24,8,130,0,3,0,0,0,0,128-128-128,0-0-0,||B|0-128-0,0,0,0,0,0,0
+10,24,Revenue,1604,414,56,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Bezier curves
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,P1,1084,375,15,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,P2,1088,468,15,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Process Quality,1166,561,43,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,1,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,5,2,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,6,Expand Scale,1399,393,69,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Scale Process Quality,1449,301,73,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,7,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,9,Expanded X,1348,494,61,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,10,6,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,11,9,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,12,1,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,13,1,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,14,2,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,15,2,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,16,SW Process Quality,936,426,61,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,18,16,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,19,2,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,20,Operational Capabilities,1396,164,71,40,3,130,0,11,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,21,Process Quality Input,1184,253,64,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,20,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,23,21,9,1,0,0,0,0,64,0,-1--1--1,,1|(1191,405)|
+1,24,21,6,1,0,0,0,0,64,0,-1--1--1,,1|(1279,368)|
+10,25,Reference Ops,1005,205,58,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,26,25,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,27,Process Quality Yield,1168,109,69,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,28,27,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,29,P1 0,318,380,24,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,P2 0,321,473,24,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Product Quality,400,566,41,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,29,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,33,30,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,34,Expand Scale 0,633,398,40,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Scale Product Quality,683,306,71,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,35,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,37,Expanded X 0,581,499,69,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,34,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,39,37,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,40,29,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,41,29,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,42,30,37,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,30,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,44,SW Product Quality,170,431,60,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,45,44,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,44,30,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,47,30,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,48,Product Quality Input,418,258,64,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,48,37,1,0,0,0,0,64,0,-1--1--1,,1|(425,410)|
+1,50,48,34,1,0,0,0,0,64,0,-1--1--1,,1|(513,373)|
+10,51,Product Design,694,161,60,35,3,130,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,52,51,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,53,Reference Product Design,234,170,85,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,54,53,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,55,Product Quality Yield,489,118,69,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,56,55,48,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,57,Min Quality,781,583,55,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,57,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,59,57,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Quality curves
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,P1 1,1064,378,24,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,P2 1,1068,470,24,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Process Quality 0,1146,564,44,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,1,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,5,2,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,6,Expand Scale 1,1379,395,40,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Expanded X 1,1328,496,69,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,6,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,9,7,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,10,1,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,11,1,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,12,2,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,13,2,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,14,2,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,P1 0 0,298,383,31,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,P2 0 0,301,475,31,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Product Quality 0,380,569,44,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,15,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,19,16,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,20,Expand Scale 0 0,613,400,70,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Expanded X 0 0,561,501,61,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,20,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,23,21,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,24,15,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,15,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,26,16,21,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,27,16,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,28,16,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,29,Min Quality,766,620,66,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,30,29,17,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,31,29,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,32,Scale Process Quality,1473,300,78,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+10,33,Scale Product Quality,739,308,76,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,34,33,20,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,35,32,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,36,Input,928,71,50,25,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,37,48,720,71,13,10,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,40,36,4,0,0,22,0,0,0,-1--1--1,,1|(844,71)|
+1,39,40,37,100,0,0,22,0,0,0,-1--1--1,,1|(764,71)|
+11,40,0,804,71,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,41,In,804,95,11,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,42,FINAL TIME,906,165,69,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,43,INITIAL TIME,728,163,75,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,44,43,41,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,45,42,41,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,36,21,1,0,0,0,0,64,0,-1--1--1,,1|(633,254)|
+1,47,36,20,1,0,0,0,0,64,0,-1--1--1,,1|(695,259)|
+1,48,36,7,1,0,0,0,0,64,0,-1--1--1,,1|(1154,203)|
+1,49,36,6,1,0,0,0,0,64,0,-1--1--1,,1|(1181,110)|
+10,50,SW Product Quality,153,448,66,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,51,50,15,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,52,50,16,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,53,SW Process Quality,911,440,68,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,54,53,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,55,53,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Performance
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,110,0
+10,1,CAGR,819,338,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Cumulative Revenue,783,223,64,25,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,570,220,13,10,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(688,220)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(613,220)|
+11,6,0,650,220,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Revenue Increase,650,254,45,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Revenue,535,310,56,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(568,258)|
+10,10,Initial Investment,696,453,61,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,11,2,1,1,0,0,0,0,64,0,-1--1--1,,1|(824,271)|
+10,12,Months in a year,996,348,59,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,INITIAL TIME,840,495,75,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,14,13,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,FINAL TIME,989,451,69,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,16,15,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,17,12,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,18,10,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,19,Revenue trend,715,298,73,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,8,19,1,0,0,0,0,64,0,-1--1--1,,1|(606,310)|
+10,21,TIME STEP,689,370,68,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,||B|128-128-128,0,0,0,0,0,0
+1,22,21,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,23,19,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,24,Initial trend,546,369,55,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,26,End CAGR,1100,190,50,25,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,27,48,910,191,13,10,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,30,26,4,0,0,22,0,0,0,-1--1--1,,1|(1021,191)|
+1,29,30,27,100,0,0,22,0,0,0,-1--1--1,,1|(950,191)|
+11,30,0,986,191,8,10,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,31,CAGR Increase,986,225,44,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,1,31,1,0,0,0,0,64,0,-1--1--1,,1|(900,301)|
+10,33,Time,1184,263,38,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,34,33,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,35,FINAL TIME,978,303,70,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,35,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,37,TIME STEP,1123,306,68,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,38,37,31,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Chebyshev Polynomial
+$192-192-192,0,Arial|12|B|0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,5,0
+10,1,Fraction of Cash for Ops Investment,844,453,100,24,8,131,0,2,0,0,0,0,0-0-0,0-0-0,||B|0-128-0,0,0,0,0,0,0
+10,2,Tn,545,311,15,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,x,444,258,9,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,3,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,5,k,395,310,9,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,6,5,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,7,Function Value,684,374,75,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Polynomial Coefficients,454,418,60,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,2,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,10,8,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,11,INITIAL TIME,273,189,75,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,12,Time,613,218,38,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,13,11,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,14,12,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,Spending Period,614,135,55,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,FINAL TIME,444,295,70,14,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,Cash to Experiment,1116,558,64,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,Product Design Drain,1274,555,71,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,19,FINAL TIME,438,166,70,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,20,19,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,21,7,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,22,Minimum Nominal Fraction of Cash for Early Product Design,1244,214,128,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Share of Product Quality in Value Proposition,1275,415,91,35,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,24,23,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,22,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,26,Minimum Fraction of Cash for Early Product Design,978,368,114,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,28,Time,883,245,38,14,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,29,18,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,30,17,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,31,Maximum Time to Invest Minimum Fraction of Cash in Product Design,1303,315,131,35,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,MVP,1108,115,25,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Value Proposition,971,123,65,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,34,33,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,35,32,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:GRAPH Revenue_and_Production
+:TITLE Revenue and Production
+:NO-LEGEND 5
+:SCALE
+:VAR Revenue
+:DATASET *1
+:LINE-WIDTH 2
+:SCALE
+:VAR Quantity of Production
+:DATASET *1
+:LINE-WIDTH 2
+
+:GRAPH Design_and_Ops
+:TITLE Product Design and Ops Capabilites
+:NO-LEGEND 6
+:SCALE
+:VAR Product Design
+:Y-MAX 100000
+:DATASET *1
+:LINE-WIDTH 2
+:VAR Operational Capabilities
+:DATASET *1
+:LINE-WIDTH 2
+
+:GRAPH Operational_Capabilities
+:TITLE Operational Capabilities
+:NO-LEGEND 5
+:SCALE
+:VAR Operational Capabilities
+:DATASET *1
+:LINE-WIDTH 2
+
+:GRAPH Fraction_of_Cash_to_Incr
+:TITLE Fraction of Cash to Design
+:NO-LEGEND 5
+:SCALE
+:VAR Fraction of Cash to Increase Product Design
+:Y-MIN 0
+:Y-MAX 1
+:DATASET *1
+:LINE-WIDTH 2
+
+:TABLE GRAPH
+:TITLE GRAPH
+:PRETTYNUM
+:X-MIN 120
+:X-MAX 120
+:FIRST-CELLWIDTH 35
+:CELLWIDTH 14
+:FONT Times New Roman|12||0-0-0
+:VAR Revenue
+:DATASET *1
+:VAR Operational Capabilities Investment Fraction
+:DATASET *1
+:VAR Time to Begin Ops Investment
+:DATASET *1
+
+:GRAPH Combined
+:TITLE Revenue
+:NO-LEGEND 6
+:SCALE
+:VAR Revenue
+:DATASET *1
+:LINE-WIDTH 2
+
+:GRAPH Relative_Price
+:TITLE Relative_Price
+:SOFT-BOUNDS
+:NO-LEGEND 6
+:SCALE
+:VAR Product Quality
+:Y-MIN 0
+:Y-MAX 1
+:DATASET *1
+:LINE-WIDTH 2
+:VAR Process Quality
+:Y-MIN 0
+:Y-MAX 1
+:DATASET *1
+:LINE-WIDTH 2
+:VAR Value Proposition
+:Y-MIN 0
+:Y-MAX 1
+:DATASET *1
+:LINE-WIDTH 2
+
+:GRAPH Bezier
+:TITLE Bezier
+:NO-LEGEND 6
+:SCALE
+:VAR Process Quality 0
+:DATASET *1
+:LINE-WIDTH 2
+:VAR Product Quality 0
+:DATASET *1
+:LINE-WIDTH 2
+:L<%^E!@
+4:Time
+5:Average Capabilities Relevance Time
+6:n0
+6:n1
+6:n10
+6:n11
+6:n12
+6:n13
+6:n14
+6:n15
+6:n16
+6:n17
+6:n18
+6:n19
+6:n2
+6:n20
+6:n21
+6:n22
+6:n23
+6:n24
+6:n25
+6:n26
+6:n27
+6:n28
+6:n29
+6:n3
+6:n4
+6:n5
+6:n6
+6:n7
+6:n8
+6:n9
+9:chebyshev
+19:5,0
+24:0
+25:117.375
+26:117.375
+22:$,Dollar,Dollars,$s
+22:Day,Days
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:widget,widgets
+22:Year,Years
+11:optimize.voc
+12:optimize.vpd
+18:NS basic v12.vsc
+20:NS basic v12.lst
+15:0,0,0,0,0,0
+27:2,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Lucida Grande|12||0-0-0|0-0-0|-1--1--1|0-0-0|192-192-192|-1--1--1
